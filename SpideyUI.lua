@@ -1488,414 +1488,626 @@ function Assets.Resolve(name)
     return content
 end
 
-Sprite.Palette = {
-    k = Color3.fromRGB(24, 20, 30), w = Color3.fromRGB(255, 255, 255), r = Color3.fromRGB(229, 37, 33),
-    s = Color3.fromRGB(252, 216, 168), y = Color3.fromRGB(252, 208, 0), Y = Color3.fromRGB(196, 132, 0),
-    q = Color3.fromRGB(248, 184, 0), Q = Color3.fromRGB(184, 104, 0), o = Color3.fromRGB(255, 140, 26),
-    g = Color3.fromRGB(67, 176, 71), G = Color3.fromRGB(38, 116, 44), l = Color3.fromRGB(150, 226, 122),
-    n = Color3.fromRGB(154, 160, 166), N = Color3.fromRGB(46, 46, 58), B = Color3.fromRGB(200, 86, 28),
-    m = Color3.fromRGB(90, 42, 14), b = Color3.fromRGB(4, 156, 216),
-    p = Color3.fromRGB(156, 92, 220), P = Color3.fromRGB(96, 44, 150),
-}
-
-Sprite.Art = {
-    pumpkin = {
-        ".....mm.....", "....kmGk....", "..kkkkkkkk..", ".koooBBooook",
-        "kooyyooyyook", "koyyyooyyyok", "koooooooooBk", "kooyoyyoyook",
-        "koooyyyyoook", ".kooooBoook.", "..kkkkkkkk..", "............",
-    },
-    bat = {
-        "............", "............", "k..........k", "kk...kk...kk",
-        "kpk.kppk.kpk", "kppkpyypkppk", "kppppppppppk", ".kppppppppk.",
-        "..kpk..kpk..", "...k....k...", "............", "............",
-    },
-    spider = {
-        "............", "............", "k...kkkk...k", ".k.knnnnk.k.",
-        "..knynnynk..", "kkknnnnnnkkk", "..knnnnnnk..", ".k.knnnnk.k.",
-        "k...kkkk...k", "............", "............", "............",
-    },
-    candy = {
-        "............", ".....kk.....", "....kwwk....", "....kwwk....",
-        "...kooook...", "...kooook...", "..kooooook..", "..kyyyyyyk..",
-        ".kyyyyyyyyk.", ".kyyyyyyyyk.", "..kkkkkkkk..", "............",
-    },
-    mushroom = {
-        "....kkkk....", "..kkrrwwkk..", ".krrrrwwwrk.", ".kwwrrwwrrk.",
-        "kwwwwrrrrrrk", "kwwwwrrrwwrk", "krwwrrrwwwwk", "krrrrrrwwwrk",
-        "kkkkkkkkkkkk", ".kssksskssk.", ".kssksskssk.", "..kkkkkkkk..",
-    },
-    star = {
-        ".....kk.....", "....kyyk....", "....kyyk....", "kkkkkyykkkkk",
-        "kyyyyyyyyyyk", ".kyykyykyyk.", "..kykyykyk..", "...kyyyyk...",
-        "..kyyyyyyk..", "..kyykkyyk..", ".kyyk..kyyk.", ".kkk....kkk.",
-    },
-    coin = {
-        "....kkkk....", "...kyyyyk...", "..kyywwyyk..", "..kywyyYyk..",
-        ".kywyyyYyyk.", ".kywyyyYyyk.", ".kywyyyYyyk.", ".kywyyyYyyk.",
-        "..kyyyyYyk..", "..kyyYYYyk..", "...kyyyyk...", "....kkkk....",
-    },
-    qblock = {
-        "kkkkkkkkkkkk", "kqqqqqqqqqqk", "kqkqqqqqqkQk", "kqqqwwwwqqQk",
-        "kqqwwQQwwqQk", "kqqQQqqwwqQk", "kqqqqqwwQqQk", "kqqqqwwQqqQk",
-        "kqqqqQQqqqQk", "kqkqqwwqqkQk", "kqQQQQQQQQQk", "kkkkkkkkkkkk",
-    },
-    brick = {
-        "BBBBBmBBBBBm", "BBBBBmBBBBBm", "mmmmmmmmmmmm", "BBmBBBBBmBBB",
-        "BBmBBBBBmBBB", "mmmmmmmmmmmm", "BBBBBmBBBBBm", "BBBBBmBBBBBm",
-        "mmmmmmmmmmmm", "BBmBBBBBmBBB", "BBmBBBBBmBBB", "mmmmmmmmmmmm",
-    },
-    pipe = {
-        "kkkkkkkkkkkk", "klgggggggGGk", "klgggggggGGk", "klgggggggGGk",
-        "kkkkkkkkkkkk", ".klggggggGk.", ".klggggggGk.", ".klggggggGk.",
-        ".klggggggGk.", ".klggggggGk.", ".klggggggGk.", ".kkkkkkkkkk.",
-    },
-    flower = {
-        "...kkkkkk...", "..krrrrrrk..", ".krryyyyrrk.", ".kryywwyyrk.",
-        ".krryyyyrrk.", "..krrrrrrk..", "...kkggkk...", ".kgk.gg.kgk.",
-        ".kggkggkggk.", "..kggggggk..", "...kkggkk...", ".....kk.....",
-    },
-    shell = {
-        "....kkkk....", "..kkggggkk..", ".kggGGGGggk.", ".kgGggggGgk.",
-        "kggGggggGggk", "kggGGGGGGggk", "kggggggggggk", "kwwwwwwwwwwk",
-        "kwkwwkkwwkwk", ".kyyyyyyyyk.", "..kyyyyyyk..", "...kkkkkk...",
-    },
-    boo = {
-        "....kkkk....", "..kkwwwwkk..", ".kwwwwwwwwk.", ".kwwkwwkwwk.",
-        "kwwwkwwkwwwk", "kwwwwwwwwwwk", "kwwkrrrrkwwk", "kwwwkrrkwwwk",
-        "kwwwwkkwwwwk", "kwwwwwwwwwwk", "kwwwkwwkwwwk", "kkk.kkkk.kkk",
-    },
-    flag = {
-        ".yy.........", ".yy.........", "..nkkkkkkk..", "..nkgggggk..",
-        "..nkggwggk..", "..nkgwwwgk..", "..nkggggk...", "..nkgggk....",
-        "..nkkkk.....", "..n.........", "..n.........", "kkkkk.......",
-    },
-    key = {
-        "...kkkk.....", "..kyyyyk....", ".kyykkyyk...", ".kyk..kyk...",
-        ".kyykkyyk...", "..kyyyyk....", "...kyyk.....", "...kyyk.....",
-        "...kyykk....", "...kyyyyk...", "...kyykk....", "...kkkk.....",
-    },
-    gear = {
-        "....kkkk....", ".kk.knnk.kk.", ".knkknnkknk.", "..knnnnnnk..",
-        "kkknnkknnkkk", "knnnk..knnnk", "knnnk..knnnk", "kkknnkknnkkk",
-        "..knnnnnnk..", ".knkknnkknk.", ".kk.knnk.kk.", "....kkkk....",
-    },
-    heart = {
-        "............", ".kkk....kkk.", "kwrrrkkrrrrk", "kwrrrrrrrrrk",
-        "krrrrrrrrrrk", ".krrrrrrrrk.", "..krrrrrrk..", "...krrrrk...",
-        "....krrk....", ".....kk.....", "............", "............",
-    },
-    bomb = {
-        "........o.y.", ".......n.o..", "......n.....", "...kkkkkk...",
-        "..kNNNNNNk..", ".kNwwNNNNNk.", ".kNwNNwNwNk.", ".kNNNNwNwNk.",
-        ".kNNNNNNNNk.", "..kNNNNNNk..", "..kyykkyyk..", "..kkk..kkk..",
-    },
-    used = {
-        "kkkkkkkkkkkk", "kBBBBBBBBBBk", "kBmBBBBBBmBk", "kBBBBBBBBBBk",
-        "kBBBBBBBBBBk", "kBBBBBBBBBBk", "kBBBBBBBBBBk", "kBBBBBBBBBBk",
-        "kBBBBBBBBBBk", "kBmBBBBBBmBk", "kBBBBBBBBBBk", "kkkkkkkkkkkk",
-    },
-    castle = {
-        "....B..B....", "....BBBB....", "....BkkB....", "B.B.BBBB.B.B",
-        "BBBBBBBBBBBB", "BBBBBBBBBBBB", "mmmmmmmmmmmm", "BBBBBkkBBBBB",
-        "BBBBkkkkBBBB", "mmmmkkkkmmmm", "BBBBkkkkBBBB", "BBBBkkkkBBBB",
-    },
-}
-
-Sprite.Alias = {
-    house = "castle", home = "castle", user = "oneup", player = "oneup", globe = "pipe", map = "pipe",
-    teleport = "pipe", eye = "boo", visuals = "boo", swords = "flower", combat = "flower", target = "bomb",
-    crosshair = "bomb", shield = "shell", zap = "star", settings = "gear", ["sliders-horizontal"] = "gear",
-    bell = "coin", shop = "coin", code = "qblock", info = "qblock", key = "key", play = "flag",
-    quest = "flag", heart = "heart", cookie = "mushroom", ["trash-2"] = "bomb", terminal = "brick",
-    ["refresh-cw"] = "pipe", link = "pipe", copy = "brick", check = "star", save = "qblock",
-    download = "qblock", upload = "qblock", search = "boo", misc = "qblock", troll = "shell",
-}
-
-Sprite.Swaps = {
-    oneup = { base = "mushroom", swap = { r = "g" } },
-    spidey = { base = "spider", swap = { n = "k", N = "k", y = "r" } },
-}
-
-Sprite.Templates = {}
-
-function Sprite.Resolve(name)
-    name = tostring(name or "qblock"):lower():gsub("^lucide%-", "")
-    name = Sprite.Alias[name] or name
-    if Sprite.Art[name] or Sprite.Swaps[name] then
-        return name
-    end
-    return "qblock"
-end
-
--- 2D overdraw-aware greedy rectangle meshing: base colors bridge across detail pixels painted on higher ZIndex layers
-function Sprite.Template(name)
-    if Sprite.Templates[name] then
-        return Sprite.Templates[name]
-    end
-    local swap = Sprite.Swaps[name]
-    local rows = Sprite.Art[swap and swap.base or name]
-    local recolor = swap and swap.swap or {}
-    local height, width = #rows, #rows[1]
-    local holder = Draw.New("Frame", { Name = "Sprite", BackgroundTransparency = 1 })
-    local freq, colors = {}, {}
-    for y = 1, height do
-        local line = rows[y]
-        for x = 1, width do
-            local ch = line:sub(x, x)
-            if ch ~= "." then
-                if not freq[ch] then
-                    freq[ch] = 0
-                    table.insert(colors, ch)
-                end
-                freq[ch] += 1
-            end
-        end
-    end
-    table.sort(colors, function(a, b)
-        if (a == "k") ~= (b == "k") then
-            return a == "k"
-        end
-        if freq[a] ~= freq[b] then
-            return freq[a] > freq[b]
-        end
-        return a < b
-    end)
-    local order = {}
-    for idx, ch in ipairs(colors) do
-        order[ch] = idx
-    end
-    local painted = {}
-    for layerIdx, col in ipairs(colors) do
-        local fill = Sprite.Palette[recolor[col] or col] or Sprite.Palette.k
-        for y = 1, height do
-            local line = rows[y]
-            for x = 1, width do
-                local cellIdx = (y - 1) * width + x
-                if line:sub(x, x) == col and painted[cellIdx] ~= col then
-                    local stopX = x
-                    while stopX < width do
-                        local nextCh = line:sub(stopX + 1, stopX + 1)
-                        if nextCh == col or (order[nextCh] and order[nextCh] > layerIdx) then
-                            stopX += 1
-                        else
-                            break
-                        end
-                    end
-                    while stopX > x and line:sub(stopX, stopX) ~= col do
-                        stopX -= 1
-                    end
-                    local stopY = y
-                    while stopY < height do
-                        local nextLine = rows[stopY + 1]
-                        local okRow = true
-                        for cx = x, stopX do
-                            local nextCh = nextLine:sub(cx, cx)
-                            if nextCh ~= col and not (order[nextCh] and order[nextCh] > layerIdx) then
-                                okRow = false
-                                break
-                            end
-                        end
-                        if not okRow then
-                            break
-                        end
-                        stopY += 1
-                    end
-                    while stopY > y do
-                        local checkLine = rows[stopY]
-                        local hasCol = false
-                        for cx = x, stopX do
-                            if checkLine:sub(cx, cx) == col and painted[(stopY - 1) * width + cx] ~= col then
-                                hasCol = true
-                                break
-                            end
-                        end
-                        if hasCol then
-                            break
-                        end
-                        stopY -= 1
-                    end
-                    for cy = y, stopY do
-                        local base = (cy - 1) * width
-                        for cx = x, stopX do
-                            painted[base + cx] = col
-                        end
-                    end
-                    Draw.New("Frame", {
-                        BackgroundColor3 = fill,
-                        Position = UDim2.fromScale((x - 1) / width, (y - 1) / height),
-                        Size = UDim2.fromScale((stopX - x + 1) / width, (stopY - y + 1) / height),
-                        ZIndex = layerIdx,
-                        Parent = holder,
-                    })
-                end
-            end
-        end
-    end
-    Sprite.Templates[name] = holder
-    return holder
-end
-
---@param size Width in px (multiples of 12 align cleanly to the 12x12 grid)
+-- 8-bit pixel-art sprite data removed. Sprite.New now renders a lucide.dev
+-- icon (or rbxassetid / crisp vector chrome) through Icons.Create, preserving all
+-- existing call sites: tab/section icons, notifications, the intro scene, emblem
+-- and float fallbacks, and coin particles.
 function Sprite.New(parent, name, size)
-    local key = Sprite.Resolve(name)
-    local image = Assets.Resolve(tostring(name):lower()) or Assets.Resolve(key)
-    local sprite
-    if image then
-        sprite = Draw.New("ImageLabel", { BackgroundTransparency = 1, Image = image, ScaleType = Enum.ScaleType.Fit, ResampleMode = Enum.ResamplerMode.Pixelated })
-    else
-        sprite = Sprite.Template(key):Clone()
-    end
-    sprite.Size = UDim2.fromOffset(size, size)
-    sprite.Parent = parent
-    return sprite
+    return Icons.Create(parent, name, size)
 end
 
--- Spidey Hub Native Sprite + Crisp Vector SVG Icon Engine (Zero Emoji)
-local ExtraSprites = {
-    sword = {
-        ".........kkk", "........kwwk", ".......kwwwk", "......kwwwk.",
-        ".....kwwwk..", ".kk.kwwwk...", "kyykwwwk....", ".kyyyyk.....",
-        "..kyykll....", ".kmmkyk.....", "kmmk.kk.....", "kkk.........",
-    },
-    crosshair = {
-        "....kkkk....", "..kkrrrrkk..", ".kr..kk..rk.", ".kr..rr..rk.",
-        "krr.krrk.rrk", "kkkkryyrkkkk", "kkkkryyrkkkk", "krr.krrk.rrk",
-        ".kr..rr..rk.", ".kr..kk..rk.", "..kkrrrrkk..", "....kkkk....",
-    },
-    crown = {
-        "............", ".kk..kk..kk.", "kyykkyykkyyk", "kyyyyyyyyyyk",
-        "kyrrybbyrryk", "kyyyyyyyyyyk", "kyyyyyyyyyyk", ".kyyyyyyyyk.",
-        ".kYYYYYYYYk.", ".kkkkkkkkkk.", "............", "............",
-    },
-    gem = {
-        "............", "...kkkkkk...", "..kbbbbbbk..", ".kbwwbbbbbk.",
-        "kbwwbbbbbbbk", "kbbbbbbbbbbk", ".kbbbbbbbbk.", "..kbbbbbbk..",
-        "...kbbbbk...", "....kbbk....", ".....kk.....", "............",
-    },
-    dice = {
-        ".kkkkkkkkkk.", "kwwwwwwwwwwk", "kwkkwwwwkkwk", "kwkkwwwwkkwk",
-        "kwwwwwwwwwwk", "kwwwwkkwwwwk", "kwwwwkkwwwwk", "kwwwwwwwwwwk",
-        "kwkkwwwwkkwk", "kwkkwwwwkkwk", "kwwwwwwwwwwk", ".kkkkkkkkkk.",
-    },
-    paw = {
-        "............", ".kk..kk..kk.", "kmmkkmk.kmmk", "kmmkkmk.kmmk",
-        ".kk..kk..kk.", "...kkkkkk...", "..kmmmmmmk..", ".kmmssssmmk.",
-        ".kmssssssmk.", ".kmmmmmmmmk.", "..kkkkkkkk..", "............",
-    },
-    egg = {
-        "....kkkk....", "...kwwwwk...", "..kwwggwwk..", ".kwwggggwwk.",
-        ".kwwwwwwwwk.", "kwwggwwggwwk", "kwwggwwggwwk", "kwwwwwwwwwwk",
-        ".kwwwwwwwwk.", ".kwwggggwwk.", "..kkwwwwkk..", "....kkkk....",
-    },
-    hammer = {
-        "..kkkkkkkk..", ".knnnnnnnnk.", ".knwwnnnnnk.", ".knnnnnnnnk.",
-        "..kkkkmmkk..", ".....kmmk...", ".....kmmk...", ".....kmmk...",
-        ".....kmmk...", ".....kmmk...", ".....kmmk...", ".....kkkk...",
-    },
-    car = {
-        "............", "...kkkkkk...", "..krrrrrrk..", ".krrbbbbwwk.",
-        "krrrrrrrrrrk", "krrrrrrrryyk", "kkkkkkkkkkkk", ".knnkkkkknn.",
-        ".knwk..knwk.", "..kk....kk..", "............", "............",
-    },
-    chest = {
-        ".kkkkkkkkkk.", "kBBBBBBBBBBk", "kByyyyyyyyBk", "kBBBBBBBBBBk",
-        "kkkkkyykkkkk", "kBBBkyykBBBk", "kBBBkyykBBBk", "kBBBBBBBBBBk",
-        "kBmmmmmmmmBk", "kBBBBBBBBBBk", ".kkkkkkkkkk.", "............",
-    },
-    lightning = {
-        "......kkkk..", ".....kyyyk..", "....kyyyk...", "...kyyyk....",
-        "..kyyyyykkkk", ".kyyyyyyyyyk", "....kkkkkyyk", "....kyyykyk.",
-        "...kyyyk....", "..kyyyk.....", ".kyyk.......", ".kkk........",
-    },
-    magnet = {
-        ".kkkk..kkkk.", "krrrrk.krrrk", "krwwrk.krwrk", "knnnnk.knnnk",
-        "knnnnk.knnnk", "krrrrk.krrrk", "krrrrkkrrrrk", ".krrrrrrrrk.",
-        ".krrrrrrrrk.", "..kkkkkkkk..", "............", "............",
-    },
-    skull = {
-        "...kkkkkk...", "..kwwwwwwk..", ".kwwwwwwwwk.", "kwwkkwwkkwwk",
-        "kwwkkwwkkwwk", "kwwwwwwwwwwk", ".kwwwkkwwwk.", "..kwwwwwwk..",
-        "..kwkwkwkwk.", "...kkkkkk...", "............", "............",
-    },
-    feather = {
-        "........kkk.", "......kkwwwk", ".....kwwwwwk", "....kwwbbwwk",
-        "...kwwbbwwk.", "..kwwbbwwk..", "..kwbbwwk...", ".kwwbwwk....",
-        ".kwbwwk.....", ".kyyyk......", "kyyk........", "kkk.........",
-    },
-    trophy = {
-        ".kkkkkkkkkk.", "kyyyyyyyyyyk", "kykkyyyykkyk", "kykkywwykkyk",
-        ".kyyyyyyyyk.", "..kyyyyyyk..", "...kyyyyk...", "....kyyk....",
-        "....kyyk....", "..kkyyyykk..", ".kkkkkkkkkk.", "............",
-    },
+Icons.Lucide = {
+    activity = 7733655755,
+    airplay = 7733655834,
+    alarm_check = 7733655912,
+    alarm_clock = 7733656100,
+    alarm_clock_off = 7733656003,
+    alarm_minus = 7733656164,
+    alarm_plus = 7733658066,
+    album = 7733658133,
+    alert_circle = 7733658271,
+    alert_octagon = 7733658335,
+    alert_triangle = 7733658504,
+    align_center = 7733909776,
+    align_center_horizontal = 8997380477,
+    align_center_vertical = 8997380737,
+    align_end_horizontal = 8997380820,
+    align_end_vertical = 8997380907,
+    align_horizonal_distribute_center = 8997381028,
+    align_horizonal_distribute_end = 8997381144,
+    align_horizonal_distribute_start = 8997381290,
+    align_horizontal_justify_center = 8997381461,
+    align_horizontal_justify_end = 8997381549,
+    align_horizontal_justify_start = 8997381652,
+    align_horizontal_space_around = 8997381738,
+    align_horizontal_space_between = 8997381854,
+    align_justify = 7733661326,
+    align_left = 7733911357,
+    align_right = 7733663582,
+    align_start_horizontal = 8997381965,
+    align_start_vertical = 8997382085,
+    align_vertical_distribute_center = 8997382212,
+    align_vertical_distribute_end = 8997382326,
+    align_vertical_distribute_start = 8997382428,
+    align_vertical_justify_center = 8997382502,
+    align_vertical_justify_end = 8997382584,
+    align_vertical_justify_start = 8997382639,
+    align_vertical_space_around = 8997382708,
+    align_vertical_space_between = 8997382793,
+    anchor = 7733911490,
+    aperture = 7733666258,
+    archive = 7733911621,
+    arrow_big_down = 7733668653,
+    arrow_big_left = 7733911731,
+    arrow_big_right = 7733671493,
+    arrow_big_up = 7733671663,
+    arrow_down = 7733672933,
+    arrow_down_circle = 7733671763,
+    arrow_down_left = 7733672282,
+    arrow_down_right = 7733672831,
+    arrow_left = 7733673136,
+    arrow_left_circle = 7733673056,
+    arrow_left_right = 8997382869,
+    arrow_right = 7733673345,
+    arrow_right_circle = 7733673229,
+    arrow_up = 7733673717,
+    arrow_up_circle = 7733673466,
+    arrow_up_left = 7733673539,
+    arrow_up_right = 7733673646,
+    asterisk = 7733673800,
+    at_sign = 7733673907,
+    award = 7733673987,
+    axe = 7733674079,
+    banknote = 7733674153,
+    bar_chart = 7733674319,
+    bar_chart_2 = 7733674239,
+    battery = 7733674820,
+    battery_charging = 7733674402,
+    battery_full = 7733674503,
+    battery_low = 7733674589,
+    battery_medium = 7733674731,
+    beaker = 7733674922,
+    bell = 7733911828,
+    bell_minus = 7733675028,
+    bell_off = 7733675107,
+    bell_plus = 7733675181,
+    bell_ring = 7733675275,
+    bike = 7733678330,
+    binary = 7733678388,
+    bluetooth = 7733687147,
+    bluetooth_connected = 7734110952,
+    bluetooth_off = 7733914252,
+    bluetooth_searching = 7733914320,
+    bold = 7733687211,
+    book = 7733914390,
+    book_open = 7733687281,
+    bookmark = 7733692043,
+    bookmark_minus = 7733689754,
+    bookmark_plus = 7734111084,
+    bot = 7733916988,
+    box = 7733917120,
+    box_select = 7733696665,
+    briefcase = 7733919017,
+    brush = 7733701455,
+    bug = 7733701545,
+    building = 7733701625,
+    bus = 7733701715,
+    calculator = 7733919105,
+    calendar = 7733919198,
+    camera = 7733708692,
+    camera_off = 7733919260,
+    car = 7733708835,
+    carrot = 8997382987,
+    cast = 7733919326,
+    cd = 7734110220,
+    charge = 8997383136,
+    check = 7733715400,
+    check_circle = 7733919427,
+    check_circle_2 = 7733710700,
+    check_square = 7733919526,
+    chevron_down = 7733717447,
+    chevron_first = 8997383275,
+    chevron_last = 8997383390,
+    chevron_left = 7733717651,
+    chevron_right = 7733717755,
+    chevron_up = 7733919605,
+    chevrons_down = 7733720604,
+    chevrons_down_up = 7733720483,
+    chevrons_left = 7733720701,
+    chevrons_right = 7733919682,
+    chevrons_up = 7733723433,
+    chevrons_up_down = 7733723321,
+    chrome = 7733919783,
+    circle = 7733919881,
+    circle_slashed = 8997383530,
+    clipboard = 7733734762,
+    clipboard_check = 7733919947,
+    clipboard_copy = 7733920037,
+    clipboard_list = 7733920117,
+    clipboard_x = 7733734668,
+    clock = 7733734848,
+    clock_1 = 8997383694,
+    clock_10 = 8997383876,
+    clock_11 = 8997384034,
+    clock_12 = 8997384150,
+    clock_2 = 8997384295,
+    clock_3 = 8997384456,
+    clock_4 = 8997384603,
+    clock_5 = 8997384798,
+    clock_6 = 8997384977,
+    clock_7 = 8997385147,
+    clock_8 = 8997385352,
+    clock_9 = 8997385485,
+    cloud = 7733746980,
+    cloud_drizzle = 7733920226,
+    cloud_fog = 7733920317,
+    cloud_hail = 7733920444,
+    cloud_lightning = 7733741741,
+    cloud_moon = 7733920519,
+    cloud_off = 7733745572,
+    cloud_rain = 7733746651,
+    cloud_rain_wind = 7733746456,
+    cloud_snow = 7733746798,
+    cloud_sun = 7733746880,
+    cloudy = 7733747106,
+    clover = 7733747233,
+    code = 7733749837,
+    code_2 = 7733920644,
+    codepen = 7733920768,
+    codesandbox = 7733752575,
+    coffee = 7733752630,
+    coins = 7743866529,
+    columns = 7733757178,
+    command = 7733924046,
+    compass = 7733924216,
+    contact = 7743866666,
+    contrast = 7733764005,
+    cookie = 8997385628,
+    copy = 7733764083,
+    copyleft = 7733764196,
+    copyright = 7733764275,
+    corner_down_left = 7733764327,
+    corner_down_right = 7733764385,
+    corner_left_down = 7733764448,
+    corner_left_up = 7733764536,
+    corner_right_down = 7733764605,
+    corner_right_up = 7733764680,
+    corner_up_left = 7733764800,
+    corner_up_right = 7733764915,
+    cpu = 7733765045,
+    crop = 7733765140,
+    cross = 7733765224,
+    crosshair = 7733765307,
+    crown = 7733765398,
+    currency = 7733765592,
+    database = 7743866778,
+    delete = 7733768142,
+    divide = 7733769365,
+    divide_circle = 7733769152,
+    divide_square = 7733769261,
+    dollar_sign = 7733770599,
+    download = 7733770755,
+    download_cloud = 7733770689,
+    dribbble = 7733770843,
+    droplet = 7733770982,
+    droplets = 7733771078,
+    drumstick = 8997385789,
+    edit = 7733771472,
+    edit_2 = 7733771217,
+    edit_3 = 7733771361,
+    egg = 8997385940,
+    electricity = 7733771628,
+    electricity_off = 7733771563,
+    equal = 7733771811,
+    equal_not = 7733771726,
+    euro = 7733771891,
+    expand = 7733771982,
+    external_link = 7743866903,
+    eye = 7733774602,
+    eye_off = 7733774495,
+    fast_forward = 7743867090,
+    feather = 7733777166,
+    figma = 7743867310,
+    file = 7733793319,
+    file_check = 7733779668,
+    file_check_2 = 7733779610,
+    file_code = 7733779730,
+    file_digit = 7733935829,
+    file_input = 7733935917,
+    file_minus = 7733936115,
+    file_minus_2 = 7733936010,
+    file_output = 7733788742,
+    file_plus = 7733788885,
+    file_plus_2 = 7733788816,
+    file_search = 7733788966,
+    file_text = 7733789088,
+    file_x = 7733938136,
+    file_x_2 = 7743867554,
+    files = 7743867811,
+    film = 7733942579,
+    filter = 7733798407,
+    flag = 7733798691,
+    flag_triangle_left = 7733798509,
+    flag_triangle_right = 7733798634,
+    flame = 7733798747,
+    flashlight = 7733798851,
+    flashlight_off = 7733798799,
+    flask_conical = 7733798901,
+    flask_round = 7733798957,
+    folder = 7733799185,
+    folder_minus = 7733799022,
+    folder_open = 8997386062,
+    folder_plus = 7733799092,
+    form_input = 7733799275,
+    forward = 7733799371,
+    framer = 7733799486,
+    frown = 7733799591,
+    function_square = 7733799682,
+    gamepad = 7733799901,
+    gamepad_2 = 7733799795,
+    gauge = 7733799969,
+    gavel = 7733800044,
+    gem = 7733942651,
+    ghost = 7743868000,
+    gift = 7733946818,
+    gift_card = 7733945018,
+    git_branch = 7733949149,
+    git_branch_plus = 7743868200,
+    git_commit = 7743868360,
+    git_merge = 7733952195,
+    git_pull_request = 7733952287,
+    github = 7733954058,
+    gitlab = 7733954246,
+    glasses = 7733954403,
+    globe = 7733954760,
+    globe_2 = 7733954611,
+    grab = 7733954884,
+    graduation_cap = 7733955058,
+    grid = 7733955179,
+    grip_horizontal = 7733955302,
+    grip_vertical = 7733955410,
+    hammer = 7733955511,
+    hand = 7733955740,
+    hand_metal = 7733955664,
+    hard_drive = 7733955793,
+    hard_hat = 7733955850,
+    hash = 7733955906,
+    haze = 7733955969,
+    headphones = 7733956063,
+    heart = 7733956134,
+    help_circle = 7733956210,
+    hexagon = 7743868527,
+    highlighter = 7743868648,
+    history = 7733960880,
+    home = 7733960981,
+    image = 7733964126,
+    image_minus = 7733963797,
+    image_off = 7733963907,
+    image_plus = 7733964016,
+    import = 7733964240,
+    inbox = 7733964370,
+    indent = 7733964452,
+    indian_rupee = 7733964536,
+    infinity = 7733964640,
+    info = 7733964719,
+    inspect = 7733964808,
+    italic = 7733964917,
+    jersey_pound = 7733965029,
+    key = 7733965118,
+    landmark = 7733965184,
+    languages = 7733965249,
+    laptop = 7733965386,
+    laptop_2 = 7733965313,
+    lasso = 7733967892,
+    lasso_select = 7743868832,
+    layers = 7743868936,
+    layout = 7733970543,
+    layout_dashboard = 7733970318,
+    layout_grid = 7733970390,
+    layout_list = 7733970442,
+    layout_template = 7733970494,
+    library = 7743869054,
+    life_buoy = 7733973479,
+    lightbulb = 7733975185,
+    lightbulb_off = 7733975123,
+    link = 7733978098,
+    link_2 = 7743869163,
+    link_2_off = 7733975283,
+    list = 7743869612,
+    list_checks = 7743869317,
+    list_minus = 7733980795,
+    list_ordered = 7743869411,
+    list_plus = 7733984995,
+    list_x = 7743869517,
+    loader = 7733992358,
+    loader_2 = 7733989869,
+    locate = 7733992469,
+    locate_fixed = 7733992424,
+    lock = 7733992528,
+    log_in = 7733992604,
+    log_out = 7733992677,
+    mail = 7733992732,
+    map = 7733992829,
+    map_pin = 7733992789,
+    maximize = 7733992982,
+    maximize_2 = 7733992901,
+    megaphone = 7733993049,
+    meh = 7733993147,
+    menu = 7733993211,
+    message_circle = 7733993311,
+    message_square = 7733993369,
+    mic = 7743869805,
+    mic_off = 7743869714,
+    minimize = 7733997941,
+    minimize_2 = 7733997870,
+    minus = 7734000129,
+    minus_circle = 7733998053,
+    minus_square = 7743869899,
+    monitor = 7734002839,
+    monitor_off = 7734000184,
+    monitor_speaker = 7743869988,
+    moon = 7743870134,
+    more_horizontal = 7734006080,
+    more_vertical = 7734006187,
+    mountain = 7734008868,
+    mountain_snow = 7743870286,
+    mouse_pointer = 7743870392,
+    mouse_pointer_2 = 7734010405,
+    mouse_pointer_click = 7734010488,
+    move = 7743870731,
+    move_diagonal = 7743870505,
+    move_diagonal_2 = 7734013178,
+    move_horizontal = 7734016210,
+    move_vertical = 7743870608,
+    music = 7734020554,
+    navigation = 7734020989,
+    navigation_2 = 7734020942,
+    network = 7734021047,
+    no_entry = 7734021118,
+    octagon = 7734021165,
+    on_charge = 7734021231,
+    option = 7734021300,
+    outdent = 7734021384,
+    package = 7734021469,
+    package_check = 8997386143,
+    package_minus = 8997386266,
+    package_plus = 8997386355,
+    package_search = 8997386448,
+    package_x = 8997386545,
+    palette = 7734021595,
+    paperclip = 7734021680,
+    pause = 7734021897,
+    pause_circle = 7734021767,
+    pause_octagon = 7734021827,
+    pen_tool = 7734022041,
+    pencil = 7734022107,
+    percent = 7743870852,
+    person_standing = 7743871002,
+    phone = 7734032056,
+    phone_call = 7734027264,
+    phone_forwarded = 7734027345,
+    phone_incoming = 7743871120,
+    phone_missed = 7734029465,
+    phone_off = 7734029534,
+    phone_outgoing = 7743871253,
+    pie_chart = 7734034378,
+    piggy_bank = 7734034513,
+    pin = 8997386648,
+    pipette = 7743871384,
+    plane = 7734037723,
+    play = 7743871480,
+    play_circle = 7734037784,
+    plus = 7734042071,
+    plus_circle = 7734040271,
+    plus_square = 7734040369,
+    pocket = 7734042139,
+    podcast = 7734042234,
+    pointer = 7734042307,
+    pound_sterling = 7734042354,
+    power = 7734042493,
+    power_off = 7734042423,
+    printer = 7734042580,
+    qr_code = 7743871575,
+    quote = 7734045100,
+    radio = 7743871662,
+    radio_receiver = 7734045155,
+    redo = 7743871739,
+    refresh_ccw = 7734050715,
+    refresh_cw = 7734051052,
+    regex = 7734051188,
+    repeat = 7734051454,
+    repeat_1 = 7734051342,
+    reply = 7734051594,
+    reply_all = 7734051524,
+    rewind = 7734051670,
+    rocking_chair = 7734051769,
+    rotate_ccw = 7734051861,
+    rotate_cw = 7734051957,
+    rss = 7734052075,
+    ruler = 7734052157,
+    russian_ruble = 7734052248,
+    save = 7734052335,
+    scale = 7734052454,
+    scan = 8997386861,
+    scan_line = 8997386772,
+    scissors = 7734052570,
+    screen_share = 7734052814,
+    screen_share_off = 7734052653,
+    search = 7734052925,
+    send = 7734053039,
+    separator_horizontal = 7734053146,
+    separator_vertical = 7734053213,
+    server = 7734053426,
+    server_crash = 7734053281,
+    server_off = 7734053361,
+    settings = 7734053495,
+    settings_2 = 8997386997,
+    share = 7734053697,
+    share_2 = 7734053595,
+    sheet = 7743871876,
+    shield = 7734056608,
+    shield_alert = 7734056326,
+    shield_check = 7734056411,
+    shield_close = 7734056470,
+    shield_off = 7734056540,
+    shirt = 7734056672,
+    shopping_bag = 7734056747,
+    shopping_cart = 7734056813,
+    shovel = 7734056878,
+    shrink = 7734056971,
+    shuffle = 7734057059,
+    sidebar = 7734058260,
+    sidebar_close = 7734058092,
+    sidebar_open = 7734058165,
+    sigma = 7734058345,
+    signal = 8997387546,
+    signal_high = 8997387110,
+    signal_low = 8997387189,
+    signal_medium = 8997387319,
+    signal_zero = 8997387434,
+    skip_back = 7734058404,
+    skip_forward = 7734058495,
+    skull = 7734058599,
+    slash = 8997387644,
+    sliders = 7734058803,
+    smartphone = 7734058979,
+    smartphone_charging = 7734058894,
+    smile = 7734059095,
+    snowflake = 7734059180,
+    sort_asc = 7734060715,
+    sort_desc = 7743871973,
+    speaker = 7734063416,
+    sprout = 7743872071,
+    square = 7743872181,
+    star = 7734068321,
+    star_half = 7734068258,
+    stop_circle = 7734068379,
+    stretch_horizontal = 8997387754,
+    stretch_vertical = 8997387862,
+    strikethrough = 7734068425,
+    subscript = 8997387937,
+    sun = 7734068495,
+    sunrise = 7743872365,
+    sunset = 7734070982,
+    superscript = 8997388036,
+    swiss_franc = 7734071038,
+    switch_camera = 7743872492,
+    table = 7734073253,
+    tablet = 7743872620,
+    tag = 7734075797,
+    target = 7743872758,
+    tent = 7734078943,
+    terminal = 7743872929,
+    terminal_square = 7734079055,
+    text_cursor = 8997388195,
+    text_cursor_input = 8997388094,
+    thermometer = 7734084149,
+    thermometer_snowflake = 7743873074,
+    thermometer_sun = 7734084018,
+    thumbs_down = 7734084236,
+    thumbs_up = 7743873212,
+    ticket = 7734086558,
+    timer = 7743873443,
+    timer_off = 8997388325,
+    timer_reset = 7743873336,
+    toggle_left = 7734091286,
+    toggle_right = 7743873539,
+    tornado = 7743873633,
+    trash = 7743873871,
+    trash_2 = 7743873772,
+    trello = 7743873996,
+    trending_down = 7743874143,
+    trending_up = 7743874262,
+    triangle = 7743874367,
+    truck = 7743874482,
+    tv = 7743874674,
+    tv_2 = 7743874599,
+    type = 7743874740,
+    umbrella = 7743874820,
+    underline = 7743874904,
+    undo = 7743874974,
+    unlink = 7743875149,
+    unlink_2 = 7743875069,
+    unlock = 7743875263,
+    upload = 7743875428,
+    upload_cloud = 7743875358,
+    user = 7743875962,
+    user_check = 7743875503,
+    user_minus = 7743875629,
+    user_plus = 7743875759,
+    user_x = 7743875879,
+    users = 7743876054,
+    verified = 7743876142,
+    vibrate = 7743876302,
+    video = 7743876610,
+    video_off = 7743876466,
+    view = 7743876754,
+    voicemail = 7743876916,
+    volume = 7743877487,
+    volume_1 = 7743877081,
+    volume_2 = 7743877250,
+    volume_x = 7743877381,
+    wallet = 7743877573,
+    wand = 8997388430,
+    watch = 7743877668,
+    webcam = 7743877896,
+    wifi = 7743878148,
+    wifi_off = 7743878056,
+    wind = 7743878264,
+    wrap_text = 8997388548,
+    wrench = 7743878358,
+    x = 7743878857,
+    x_circle = 7743878496,
+    x_octagon = 7743878618,
+    x_square = 7743878737,
+    zoom_in = 7743878977,
+    zoom_out = 7743879082,
 }
 
-for spriteName, grid in pairs(ExtraSprites) do
-    Sprite.Art[spriteName] = grid
-end
-
-Sprite.Swaps.blueshell = { base = "shell", swap = { g = "b", G = "P" } }
-Sprite.Swaps.iceflower = { base = "flower", swap = { r = "b", y = "w" } }
-Sprite.Swaps.goldmushroom = { base = "mushroom", swap = { r = "y", w = "q" } }
-
-local ExtraAliases = {
-    main = "mushroom", home = "castle", general = "qblock", hub = "star",
-    combat = "sword", sword = "sword", swords = "sword", weapon = "sword", knife = "sword",
-    aimbot = "crosshair", aim = "crosshair", sniper = "crosshair", target = "crosshair", crosshair = "crosshair", gun = "crosshair",
-    visuals = "boo", esp = "boo", eye = "boo", camera = "boo", radar = "crosshair",
-    player = "feather", user = "oneup", users = "oneup", movement = "feather", speed = "lightning",
-    zap = "lightning", bolt = "lightning", fly = "feather", jump = "feather", run = "lightning",
-    shield = "shell", defense = "shell", god = "star", armor = "blueshell", safe = "shell",
-    teleport = "pipe", warp = "pipe", compass = "pipe", map = "pipe", globe = "pipe",
-    auto = "star", farm = "star", sparkles = "star", wand = "star", bot = "gear",
-    coin = "coin", money = "coin", cash = "coin", shop = "coin", bag = "chest", cart = "chest",
-    gem = "gem", diamond = "gem", crown = "crown", vip = "crown", rank = "trophy", trophy = "trophy",
-    gift = "chest", crate = "chest", chest = "chest", box = "qblock", package = "qblock", airdrop = "chest",
-    loot = "magnet", magnet = "magnet", collect = "magnet",
-    pet = "paw", paw = "paw", animal = "paw", mount = "paw",
-    egg = "egg", hatch = "egg",
-    dice = "dice", roll = "dice", luck = "star", spin = "dice",
-    hammer = "hammer", forge = "hammer", craft = "hammer", build = "brick", pickaxe = "hammer",
-    car = "car", vehicle = "car", drive = "car", race = "flag",
-    skull = "skull", kill = "skull", murder = "skull", danger = "bomb", bomb = "bomb",
-    heart = "heart", health = "heart", heal = "oneup",
-    key = "key", lock = "key", unlock = "key",
-    flag = "flag", quest = "flag", play = "flag",
-    settings = "gear", cog = "gear", sliders = "gear", config = "qblock",
-    palette = "flower", theme = "flower",
-    info = "qblock", bell = "coin", warning = "bomb", alert = "bomb",
-    check = "star", save = "qblock", refresh = "pipe", trash = "bomb",
-    search = "boo", terminal = "brick", code = "qblock", chart = "trophy", stats = "trophy",
+Icons.LucideAlias = {
+    bat = "moon",
+    bomb = "alert_triangle",
+    boo = "ghost",
+    candy = "cookie",
+    chest = "package",
+    coin = "coins",
+    lightning = "cloud_lightning",
+    mushroom = "home",
+    pumpkin = "ghost",
+    qblock = "box",
+    sliders_horizontal = "sliders",
+    spidey = "bug",
+    spider = "bug",
+    trophy = "award",
+    used = "box",
 }
-
-for aliasKey, targetSprite in pairs(ExtraAliases) do
-    Sprite.Alias[aliasKey] = targetSprite
-end
 
 Icons.Rules = {
     { "aimbot|silent|sniper|crosshair|shoot|gun|ยิง|ปืน|เล็ง", "crosshair" },
-    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "sword" },
-    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง|เรดาร์", "boo" },
-    { "teleport|warp|island|location|place|spawn|zone|map|วาร์ป|เกาะ|สถานที่|แมพ", "pipe" },
-    { "pet|animal|mount|ride|สัตว์|ขี่", "paw" },
+    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "axe" },
+    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง|เรดาร์", "ghost" },
+    { "teleport|warp|island|location|place|spawn|zone|map|วาร์ป|เกาะ|สถานที่|แมพ", "map_pin" },
+    { "pet|animal|mount|ride|สัตว์|ขี่", "heart" },
     { "egg|hatch|ไข่|สุ่มไข่", "egg" },
-    { "dice|roll|spin|gacha|ลูกเต๋า|ทอย|สุ่ม", "dice" },
+    { "dice|roll|spin|gacha|ลูกเต๋า|ทอย|สุ่ม", "shuffle" },
     { "forge|craft|upgrade|mine|dig|ตีบวก|หลอม|ขุด|อัพเกรด", "hammer" },
-    { "build|pyramid|brick|สร้าง|พีระมิด", "brick" },
+    { "build|pyramid|brick|สร้าง|พีระมิด", "box" },
     { "car|vehicle|drive|race|drift|รถ|ขับ|แข่ง", "car" },
-    { "shop|buy|sell|merchant|market|store|trade|coin|cash|money|ร้าน|ซื้อ|ขาย|เงิน", "coin" },
-    { "loot|magnet|collect|grab|ดูด|เก็บ", "magnet" },
-    { "airdrop|crate|chest|drop|gift|กล่อง|แอร์ดรอป", "chest" },
-    { "speed|dash|bolt|zap|ความเร็ว|พุ่ง", "lightning" },
+    { "shop|buy|sell|merchant|market|store|trade|coin|cash|money|ร้าน|ซื้อ|ขาย|เงิน", "coins" },
+    { "loot|magnet|collect|grab|ดูด|เก็บ", "grab" },
+    { "airdrop|crate|chest|drop|gift|กล่อง|แอร์ดรอป", "package" },
+    { "speed|dash|bolt|zap|ความเร็ว|พุ่ง", "cloud_lightning" },
     { "player|movement|walk|jump|fly|noclip|stamina|ผู้เล่น|วิ่ง|กระโดด|บิน", "feather" },
-    { "defense|shield|god|anti|safe|guard|bypass|ป้องกัน|อมตะ|กันแบน", "shell" },
+    { "defense|shield|god|anti|safe|guard|bypass|ป้องกัน|อมตะ|กันแบน", "shield" },
     { "rank|vip|king|boss|crown|ยศ", "crown" },
-    { "stat|status|leaderboard|score|trophy|สถานะ|อันดับ|คะแนน", "trophy" },
+    { "stat|status|leaderboard|score|trophy|สถานะ|อันดับ|คะแนน", "award" },
     { "quest|mission|flag|start|เควส|ภารกิจ", "flag" },
-    { "theme|color|palette|style|ธีม|สี", "flower" },
-    { "setting|config|ui|menu|keybind|language|ตั้งค่า|เมนู|ภาษา", "gear" },
+    { "theme|color|palette|style|ธีม|สี", "palette" },
+    { "setting|config|ui|menu|keybind|language|ตั้งค่า|เมนู|ภาษา", "settings" },
     { "auto|farm|grind|loop|bot|ออโต้|ฟาร์ม|บอท", "star" },
-    { "main|home|general|hub|หลัก|ทั่วไป", "mushroom" },
+    { "main|home|general|hub|หลัก|ทั่วไป", "home" },
 }
+
 
 -- Crisp SVG-style geometric vector primitives for UI chrome (search, close, check, chevrons, plus, minus, grip)
 local function DrawVectorLine(parent, pos, size, rot, token)
@@ -1991,7 +2203,7 @@ function Icons.FromTitle(titleSpec, defaultSprite)
             end
         end
     end
-    return defaultSprite or "qblock"
+    return defaultSprite or "circle"
 end
 
 function Icons.Vector(parent, vectorName, size, colorToken)
@@ -2028,12 +2240,52 @@ function Icons.Create(parent, iconSpec, size, colorToken, fallbackTitle)
         return img
     end
     local key = Icons.NormalizeKey(iconSpec)
+    local lucideId = Icons.Lucide[key] or Icons.Lucide[Icons.LucideAlias[key]]
+    if lucideId then
+        local img = Draw.New("ImageLabel", {
+            Name = "Icon",
+            BackgroundTransparency = 1,
+            Image = "rbxassetid://" .. lucideId,
+            ScaleType = Enum.ScaleType.Fit,
+            Size = UDim2.fromOffset(size, size),
+            Parent = parent,
+        })
+        if colorToken then
+            Theme.Bind(img, { ImageColor3 = colorToken })
+        end
+        return img
+    end
     if Icons.Vectors[key] then
         return Icons.Vector(parent, key, size, colorToken)
     end
-    local spriteName = (key ~= "" and Sprite.Resolve(key)) or Icons.FromTitle(fallbackTitle or iconSpec, "qblock")
-    local spriteSize = math.max(12, math.floor((size + 2) / 2) * 2)
-    return Sprite.New(parent, spriteName, spriteSize)
+    local titleKey = Icons.NormalizeKey(Icons.FromTitle(fallbackTitle or iconSpec, "circle"))
+    local titleLucide = Icons.Lucide[titleKey] or Icons.Lucide[Icons.LucideAlias[titleKey]]
+    if titleLucide then
+        local img = Draw.New("ImageLabel", {
+            Name = "Icon",
+            BackgroundTransparency = 1,
+            Image = "rbxassetid://" .. titleLucide,
+            ScaleType = Enum.ScaleType.Fit,
+            Size = UDim2.fromOffset(size, size),
+            Parent = parent,
+        })
+        if colorToken then
+            Theme.Bind(img, { ImageColor3 = colorToken })
+        end
+        return img
+    end
+    local fallback = Draw.New("ImageLabel", {
+        Name = "Icon",
+        BackgroundTransparency = 1,
+        Image = "rbxassetid://" .. (Icons.Lucide.circle or 7733919881),
+        ScaleType = Enum.ScaleType.Fit,
+        Size = UDim2.fromOffset(size, size),
+        Parent = parent,
+    })
+    if colorToken then
+        Theme.Bind(fallback, { ImageColor3 = colorToken })
+    end
+    return fallback
 end
 
 function Icons.Badge(parent, iconSpec, size, colorToken, fallbackTitle)
@@ -6652,7 +6904,7 @@ function Window:SetScale(scale)
 end
 
 function Tab.New(window, name, icon, description)
-    local resolvedIcon = (icon and icon ~= "") and icon or Icons.FromTitle(name, "qblock")
+    local resolvedIcon = (icon and icon ~= "") and icon or Icons.FromTitle(name, "circle")
     local tab = setmetatable({ Window = window, Name = name, Icon = resolvedIcon, Description = description, Groupboxes = {} }, Tab)
     tab:BuildButton()
     tab:BuildPage()
@@ -6842,7 +7094,7 @@ function Groupbox:BuildHeader(card, info)
     local bar = Draw.Box("TextButton", { Name = "Header", Size = UDim2.new(1, 0, 0, height), Parent = card }, "PanelHeader", nil, radius)
     self.HeaderPatch = Draw.Box("Frame", { Position = UDim2.new(0, 0, 1, -radius), Size = UDim2.new(1, 0, 0, radius), Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "PanelHeader")
     self.HeaderDivider = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 2), ZIndex = 2, Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "Outline")
-    local iconSpec = (info.Icon and info.Icon ~= "") and info.Icon or Icons.FromTitle(info.Name, "qblock")
+    local iconSpec = (info.Icon and info.Icon ~= "") and info.Icon or Icons.FromTitle(info.Name, "circle")
     local icon = Icons.Create(bar, iconSpec, 20, nil, info.Name)
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Position = UDim2.new(0, 10, 0.5, -1)
@@ -6898,8 +7150,6 @@ end
 function Float.Build()
     local size = State.Touch and 56 or 48
     local button = Draw.New("TextButton", { Name = "Float", Text = "", AutoButtonColor = false, BackgroundTransparency = 1, Position = UDim2.new(0, 18, 0.45, 0), Size = UDim2.fromOffset(size, size), ZIndex = Config.Layer.Float, Visible = State.Touch, Parent = State.Gui })
-    local shadow = Draw.Box("Frame", { Position = UDim2.fromOffset(4, 4), Size = UDim2.fromScale(1, 1), BackgroundTransparency = 0.55, Parent = button }, "Shadow", nil, 4)
-    shadow.ZIndex = 1
     local slot = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 2, Parent = button })
     Float.Button, Float.Slot, Float.Size = button, slot, size
     Anim.Tween(slot, { Position = UDim2.fromOffset(0, -3) }, 0.9, "Sine", -1, true)
@@ -7080,7 +7330,7 @@ function Particles.SetEnabled(enabled)
     end
 end
 
-Notify.Icons = { Info = "qblock", Success = "star", Warning = "bomb", Error = "bomb", Coin = "coin", Power = "mushroom" }
+Notify.Icons = { Info = "info", Success = "check_circle", Warning = "alert_triangle", Error = "alert_octagon", Coin = "coins", Power = "flame" }
 
 function Notify.Build()
     local width = State.Touch and Config.Notify.TouchWidth or Config.Notify.Width
@@ -7097,7 +7347,7 @@ function Notify.Push(title, content, duration, kind)
     local card = Draw.New("TextButton", { Text = "", AutoButtonColor = false, BackgroundTransparency = 1, Position = UDim2.fromOffset(width + 60, 0), Size = UDim2.fromOffset(width, height), Parent = holder })
     Draw.Box("Frame", { Position = UDim2.fromOffset(4, 4), Size = UDim2.fromScale(1, 1), Parent = card }, "Shadow", nil, 12)
     local face = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), ClipsDescendants = true, Parent = card }, "Panel", "Outline", 12, 2)
-    local icon = Sprite.New(face, Notify.Icons[kind or "Coin"] or "coin", 36)
+    local icon = Sprite.New(face, Notify.Icons[kind or "Coin"] or "coins", 36)
     icon.Position = UDim2.fromOffset(12, 11)
     Draw.Text({ Position = UDim2.fromOffset(58, 9), Size = UDim2.new(1, -68, 0, 18), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Group"), "Text", title or "Spidey Hub")
     Draw.Text({ Text = text, TextWrapped = true, TextYAlignment = Enum.TextYAlignment.Top, Position = UDim2.fromOffset(58, 29), Size = UDim2.new(1, -68, 0, textHeight), Parent = face }, "Desc", Util.TextSize("Desc") + 1, "SubText")
