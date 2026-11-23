@@ -25,8 +25,8 @@ local Config = {
     AssetDir = "spideyhub/assets",
     ConfigRoot = "spideyhub/configs",
     DefaultAssets = {
-        logo = "",
-        logo_halloween = "",
+        logo = "https://cdn.discordapp.com/attachments/1557688744147034162/1574396868169830593/20261123_191038.png?ex=6b057ed8&is=6b042d58&hm=eb1c3da0a3a4582b3a28109612f35a090c86384f2375958db71e810f4e91af3f&",
+        logo_halloween = "https://cdn.discordapp.com/attachments/1557688744147034162/1574396868169830593/20261123_191038.png?ex=6b057ed8&is=6b042d58&hm=eb1c3da0a3a4582b3a28109612f35a090c86384f2375958db71e810f4e91af3f&",
     },
     SeasonTheme = "Overworld",
     FontDir = "spideyhub/fonts",
@@ -6932,7 +6932,20 @@ function Float.Render()
         return
     end
     if not Float.Sprite then
-        Float.Sprite = Sprite.New(Float.Slot, "qblock", Float.Size)
+        local size = Float.Size or 48
+        local holder = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), Parent = Float.Slot })
+        local picture = Draw.New("ImageLabel", { Name = "Logo", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(1, 1), ScaleType = Enum.ScaleType.Fit, ResampleMode = Enum.ResamplerMode.Pixelated, Visible = false, Parent = holder })
+        local fallback = Sprite.New(holder, "spidey", size)
+        fallback.AnchorPoint = Vector2.new(0.5, 0.5)
+        fallback.Position = UDim2.fromScale(0.5, 0.5)
+        fallback.Visible = false
+        Theme.OnRender(holder, function()
+            local content = Assets.Resolve("logo")
+            picture.Image = content or ""
+            picture.Visible = content ~= nil
+            fallback.Visible = content == nil
+        end)
+        Float.Sprite = holder
         Float.Sprite.Name = "Block"
     end
 end
