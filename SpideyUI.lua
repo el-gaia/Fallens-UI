@@ -1,4 +1,4 @@
--- Spidey Hub UI · standalone build 2026-10-14
+-- FALLENS UI · standalone build 2026-11-23
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
@@ -20,21 +20,20 @@ local Library = {
 }
 
 local Config = {
-    GuiAttribute = "SpideyHubUI",
-    Root = "spideyhub",
-    AssetDir = "spideyhub/assets",
-    ConfigRoot = "spideyhub/configs",
+    GuiAttribute = "FALLENSUI",
+    Root = "fallens",
+    AssetDir = "fallens/assets",
+    ConfigRoot = "fallens/configs",
     DefaultAssets = {
-        logo = "https://cdn.discordapp.com/attachments/1557688744147034162/1574396868169830593/20261123_191038.png?ex=6b057ed8&is=6b042d58&hm=eb1c3da0a3a4582b3a28109612f35a090c86384f2375958db71e810f4e91af3f&",
-        logo_halloween = "https://cdn.discordapp.com/attachments/1557688744147034162/1574396868169830593/20261123_191038.png?ex=6b057ed8&is=6b042d58&hm=eb1c3da0a3a4582b3a28109612f35a090c86384f2375958db71e810f4e91af3f&",
+        logo = "https://cdn.discordapp.com/attachments/1557688744147034162/1574424970082394112/rn_image_picker_lib_temp_48f24650-a5a9-45d2-90b5-0a54859c29a3.png?ex=6b059904&is=6b044784&hm=0807d117c227b3d76645a13af3c015a4a83e1c5f1fa416381068d2283587416b&",
     },
-    SeasonTheme = "Overworld",
-    FontDir = "spideyhub/fonts",
+    SeasonTheme = "Halloween",
+    FontDir = "fallens/fonts",
     HttpTimeout = 8,
     FontTimeout = 20,
     PreloadTimeout = 5,
     ThaiFont = {
-        Family = "SpideyKanit",
+        Family = "FallensKanit",
         Source = "https://raw.githubusercontent.com/google/fonts/main/ofl/kanit/Kanit-%s.ttf",
         Weights = { [400] = "Regular", [500] = "Medium", [600] = "SemiBold" },
     },
@@ -89,7 +88,7 @@ local Config = {
         [Enum.UserInputType.MouseButton2] = "MB2",
         [Enum.UserInputType.MouseButton3] = "MB3",
     },
-    TitleColors = { "Accent", "Blue", "Coin", "Blue" },
+    TitleColors = { "Accent", "Coin", "Good", "Blue" },
 }
 
 local function rgb(hex)
@@ -123,7 +122,7 @@ local Themes = {
         SidebarText = "FCF2E6", SidebarMuted = "E2C4B0", TabActive = "FAF4E9", TabActiveText = "B84034",
         Panel = "FAF6EE", PanelHeader = "F1E7D4", Element = "FFFCF6", Hover = "EEE2CA",
         Outline = "3E384A", Shadow = "7880A0", Text = "3A3028", SubText = "76685A", Muted = "A09484", Track = "DED4C4",
-        Cloud = "FFFFFF", CloudAlpha = 0.25, Accent = "D64C40", AccentDark = "A0342C", Grass = "74B45C", GrassDark = "4E8840", Brick = "A46042", BrickDark = "683A28", Decor = { "Clouds" },
+        Accent = "D64C40", AccentDark = "A0342C",
         Particle = { "✦", false, "F6D878" },
     }),
     Halloween = Palette({
@@ -131,8 +130,8 @@ local Themes = {
         SidebarText = "FFF1E2", SidebarMuted = "C9A9D8", TabActive = "F28A2E", TabActiveText = "1E1024",
         Panel = "241830", PanelHeader = "301F40", Element = "2E2140", Hover = "3C2A52",
         Outline = "0B0610", Shadow = "0B0610", Text = "FFF1E2", SubText = "D7BFD9", Muted = "9C85A8", Track = "4A3460",
-        Cloud = "B98CFF", CloudAlpha = 0.85, Accent = "F28A2E", AccentDark = "B85E14", Grass = "7A3FA8", GrassDark = "4E2470", Brick = "4A2E60", BrickDark = "1E1028", Decor = { "Halloween", "✦", "FFB347" },
-        Glow = "F28A2E", Fog = "8E5CD0", Logo = "logo_halloween",
+        Accent = "F28A2E", AccentDark = "B85E14", Decor = { "Halloween", "✦", "FFB347" },
+        Glow = "F28A2E", Fog = "8E5CD0",
         Particle = { { "✦", "✦", "•", "✧" }, false, "FFB347" },
     }),
     Light = Palette({
@@ -140,7 +139,7 @@ local Themes = {
         SidebarText = "4A3F35", SidebarMuted = "9B8E7E", TabActive = "D64C40", TabActiveText = "FFFFFF",
         Panel = "FFFFFF", PanelHeader = "F6F1E8", Element = "FBF9F5", Hover = "F0E8DA",
         Outline = "4A4458", Shadow = "CFC7BA", Text = "3A3028", SubText = "7C6E60", Muted = "ABA092", Track = "E6DED2",
-        Cloud = "C8D8EC", CloudAlpha = 0, Accent = "D64C40", AccentDark = "A0342C", Grass = "8CC47A", GrassDark = "62A052", Brick = "D8B48E", BrickDark = "AE8A64", Decor = { "Clouds" },
+        Accent = "D64C40", AccentDark = "A0342C",
         Particle = { "•", false, "D64C40" },
     }),
     Dark = Palette({
@@ -148,7 +147,7 @@ local Themes = {
         SidebarText = "E8E6F0", SidebarMuted = "8D8A9C", TabActive = "D64C40", TabActiveText = "FFFFFF",
         Panel = "2A2B34", PanelHeader = "31323C", Element = "353743", Hover = "3E404D",
         Outline = "0E0E12", Shadow = "0E0E12", Text = "ECEAF4", SubText = "A9A6B8", Muted = "7B788C", Track = "454756",
-        Cloud = "FFFFFF", CloudAlpha = 0.9, Accent = "E0584C", AccentDark = "A83A30", Grass = "5A5C6E", GrassDark = "3E3F4C", Brick = "2E2F39", BrickDark = "17181E", Decor = { "Stars", "✦", "F0C448" },
+        Accent = "E0584C", AccentDark = "A83A30", Decor = { "Stars", "✦", "F0C448" },
         Particle = { "✦", false, "F0C448" },
     }),
     Underground = Palette({
@@ -156,7 +155,7 @@ local Themes = {
         SidebarText = "ECF0FF", SidebarMuted = "98A8E0", TabActive = "F0C448", TabActiveText = "1E1B2E",
         Panel = "1F2749", PanelHeader = "27305A", Element = "2C3666", Hover = "36417A",
         Outline = "05060F", Shadow = "05060F", Text = "F2F4FF", SubText = "AEB6E2", Muted = "7C86B8", Track = "3C4780",
-        Cloud = "96AAFF", CloudAlpha = 0.8, Accent = "5B8CF0", AccentDark = "3A62C0", Grass = "3A5BC8", GrassDark = "2A469E", Brick = "2F4AA8", BrickDark = "142058", Decor = { "Stars", "✦", "8FA8FF" },
+        Accent = "5B8CF0", AccentDark = "3A62C0", Decor = { "Stars", "✦", "8FA8FF" },
         Particle = { "✦", false, "8FA8FF" },
     }),
     Castle = Palette({
@@ -164,7 +163,7 @@ local Themes = {
         SidebarText = "FFF1E6", SidebarMuted = "C8B0A4", TabActive = "E8703A", TabActiveText = "FFFFFF",
         Panel = "2B2323", PanelHeader = "352B2B", Element = "3D3232", Hover = "4A3D3D",
         Outline = "0A0707", Shadow = "0A0707", Text = "FFF1E6", SubText = "D9BFB0", Muted = "9F8579", Track = "524242",
-        Cloud = "FF8A50", CloudAlpha = 0.85, Accent = "E8703A", AccentDark = "B04A1E", Grass = "FF7A2E", GrassDark = "C8481A", Brick = "5A5050", BrickDark = "2A2222", Decor = { "Stars", "•", "FF8A3C" },
+        Accent = "E8703A", AccentDark = "B04A1E", Decor = { "Stars", "•", "FF8A3C" },
         Particle = { "•", false, "FF8A3C" },
     }),
     ["Ghost House"] = Palette({
@@ -172,7 +171,7 @@ local Themes = {
         SidebarText = "E6F2EE", SidebarMuted = "8FB0A8", TabActive = "B8E0D2", TabActiveText = "1C2126",
         Panel = "242C31", PanelHeader = "2B353B", Element = "303B42", Hover = "39454D",
         Outline = "0B0E10", Shadow = "0B0E10", Text = "EAF4F1", SubText = "A3BDB6", Muted = "71898A", Track = "3E4B52",
-        Cloud = "CFF5E7", CloudAlpha = 0.85, Accent = "4FB89C", AccentDark = "348A72", Grass = "6B5040", GrassDark = "4A362A", Brick = "5A4334", BrickDark = "2E2219", Decor = { "Stars", "•", "B8F0DC" },
+        Accent = "4FB89C", AccentDark = "348A72", Decor = { "Stars", "•", "B8F0DC" },
         Particle = { "•", false, "9FE8D0" },
     }),
     ["Star Road"] = Palette({
@@ -180,7 +179,7 @@ local Themes = {
         SidebarText = "FFF7FF", SidebarMuted = "CDB9F2", TabActive = "F0C448", TabActiveText = "26144A",
         Panel = "251749", PanelHeader = "2E1D5A", Element = "34225F", Hover = "412A72",
         Outline = "07030F", Shadow = "07030F", Text = "FFF7FF", SubText = "CDB9F2", Muted = "9580C4", Track = "4A3480",
-        Cloud = "FFE680", CloudAlpha = 0.8, Accent = "E85CA8", AccentDark = "B03C7E", Grass = "F0C448", GrassDark = "BA8C28", Brick = "5A38A8", BrickDark = "2A1858", Decor = { "Stars", "★", "FFD95A" },
+        Accent = "E85CA8", AccentDark = "B03C7E", Decor = { "Stars", "★", "FFD95A" },
         Particle = { "★", false, "FFD95A" },
     }),
     Desert = Palette({
@@ -188,7 +187,7 @@ local Themes = {
         SidebarText = "FFF6E8", SidebarMuted = "EED4B2", TabActive = "FFF8EC", TabActiveText = "B0502C",
         Panel = "FFF9EE", PanelHeader = "F4E6CC", Element = "FFFCF6", Hover = "F0DFC0",
         Outline = "5A4632", Shadow = "C2A07A", Text = "4A3828", SubText = "86705A", Muted = "B09A80", Track = "E6D6BC",
-        Cloud = "FFFFFF", CloudAlpha = 0.3, Accent = "C8643A", AccentDark = "964626", Grass = "EACB8C", GrassDark = "C9A866", Brick = "C08A5A", BrickDark = "8A5E38", Decor = { "Clouds" },
+        Accent = "C8643A", AccentDark = "964626",
         Particle = { "•", false, "C9964E" },
     }),
     ["Ice Land"] = Palette({
@@ -196,7 +195,7 @@ local Themes = {
         SidebarText = "F4FAFF", SidebarMuted = "CFE3F2", TabActive = "F6FBFF", TabActiveText = "3A78A8",
         Panel = "F8FCFF", PanelHeader = "E6F0F8", Element = "FFFFFF", Hover = "DCEAF5",
         Outline = "3E4F63", Shadow = "A6BACE", Text = "2E3D4D", SubText = "62788E", Muted = "95A8BA", Track = "D4E1EC",
-        Cloud = "FFFFFF", CloudAlpha = 0.2, Accent = "3A8AC8", AccentDark = "2A6698", Grass = "FFFFFF", GrassDark = "CFE3F2", Brick = "7FA8CC", BrickDark = "4F7699", Decor = { "Clouds" },
+        Accent = "3A8AC8", AccentDark = "2A6698",
         Particle = { "❄", true, "FFFFFF" },
     }),
     Jungle = Palette({
@@ -204,7 +203,7 @@ local Themes = {
         SidebarText = "EEF7EA", SidebarMuted = "A3C29C", TabActive = "F0C84A", TabActiveText = "1F2A1F",
         Panel = "26382A", PanelHeader = "2E4332", Element = "334A37", Hover = "3D5641",
         Outline = "0C120D", Shadow = "0C120D", Text = "EEF6EA", SubText = "AFC6A8", Muted = "7E957A", Track = "445C47",
-        Cloud = "D8F5C8", CloudAlpha = 0.85, Accent = "E08A3A", AccentDark = "A86024", Grass = "5AAE4E", GrassDark = "3A7A34", Brick = "5A4A32", BrickDark = "30261A", Decor = { "Stars", "•", "D8F07A" },
+        Accent = "E08A3A", AccentDark = "A86024", Decor = { "Stars", "•", "D8F07A" },
         Particle = { "•", false, "D8F07A" },
     }),
     ["Sky World"] = Palette({
@@ -212,14 +211,13 @@ local Themes = {
         SidebarText = "FFFFFF", SidebarMuted = "E3EBFA", TabActive = "FFFFFF", TabActiveText = "4A6FB5",
         Panel = "FFFFFF", PanelHeader = "EEF3FC", Element = "FFFFFF", Hover = "E4ECFA",
         Outline = "46506A", Shadow = "B6C2DA", Text = "333C52", SubText = "6A7590", Muted = "9AA4BC", Track = "DCE3F0",
-        Cloud = "FFFFFF", CloudAlpha = 0.1, Accent = "4A6FB5", AccentDark = "34528A", Grass = "FFFFFF", GrassDark = "DCE6F8", Brick = "C4D4F0", BrickDark = "98AED8", Decor = { "Clouds" },
+        Accent = "4A6FB5", AccentDark = "34528A",
         Particle = { "✦", false, "FFFFFF" },
     }),
     Shared = Palette({
         Accent = "D64C40", AccentDark = "A0342C", OnAccent = "FFFFFF", Danger = "D64C40", DangerDark = "A0342C",
         Blue = "468AC4", BlueDark = "326496", Good = "60AA62", GoodDark = "427E46",
         Coin = "F0C448", CoinDark = "BA8C28", Risky = "E28046", RiskyDark = "A8562C",
-        Brick = "A46042", BrickDark = "683A28", Grass = "74B45C", GrassDark = "4E8840",
         Knob = "FFFFFF", Ink = "2E2838", White = "FFFFFF", Black = "000000",
     }),
 }
@@ -556,7 +554,7 @@ function Util.Try(callback, ...)
     end
     local ok, message = pcall(callback, ...)
     if not ok then
-        warn("[Spidey Hub] " .. tostring(message))
+        warn("[FALLENS] " .. tostring(message))
     end
     return ok, message
 end
@@ -850,20 +848,6 @@ function Anim.Pop(scale, from)
     return Anim.Tween(scale, { Scale = 1 }, Config.Tween.Pop, "Back")
 end
 
---@param rise Vertical bounce height in px (Spidey block bump)
-function Anim.Bump(frame, rise)
-    if frame:GetAttribute("Bumping") then
-        return
-    end
-    frame:SetAttribute("Bumping", true)
-    local base = frame.Position
-    local tween = Anim.Tween(frame, { Position = base - UDim2.fromOffset(0, rise or 6) }, 0.09, "Out", 0, true)
-    tween.Completed:Once(function()
-        frame.Position = base
-        frame:SetAttribute("Bumping", nil)
-    end)
-end
-
 function Anim.Shake(frame)
     local base = frame.Position
     task.spawn(function()
@@ -893,22 +877,6 @@ function Anim.Fade(root, alpha, duration)
             Anim.Tween(inst, { Transparency = alpha }, duration)
         end
     end
-end
-
---@param origin UDim2 spawn position inside parent
-function Anim.CoinPop(parent, origin, size)
-    local coin = Sprite.New(parent, "coin", size or 20)
-    coin.AnchorPoint = Vector2.new(0.5, 1)
-    coin.Position = origin
-    coin.ZIndex = 5
-    local rise = Anim.Tween(coin, { Position = origin - UDim2.fromOffset(0, 42) }, 0.35, "Out")
-    Anim.Tween(coin, { Size = UDim2.fromOffset(2, coin.Size.Y.Offset) }, 0.12, "Sine", 3, true)
-    rise.Completed:Once(function()
-        Anim.Fade(coin, 1, 0.18)
-        task.delay(0.2, function()
-            coin:Destroy()
-        end)
-    end)
 end
 
 function Theme.Apply(name)
@@ -1013,7 +981,7 @@ Lang.Strings = {
     Watermark = { EN = "Watermark", TH = "วอเตอร์มาร์ก" },
     WatermarkDesc = { EN = "Hub name, FPS, ping and play time", TH = "ชื่อฮับ FPS ปิง และเวลาที่เล่น" },
     FloatButton = { EN = "Mobile button", TH = "ปุ่มลอยมือถือ" },
-    FloatDesc = { EN = "Floating block that opens the menu", TH = "กล่อง ? ลอยสำหรับเปิดปิดเมนู" },
+    FloatDesc = { EN = "Floating logo button that opens the menu", TH = "ปุ่มโลโก้ลอยสำหรับเปิดปิดเมนู" },
     Configs = { EN = "Configs", TH = "คอนฟิก" },
     ConfigName = { EN = "Config name", TH = "ชื่อคอนฟิก" },
     SavedConfigs = { EN = "Saved configs", TH = "คอนฟิกที่บันทึกไว้" },
@@ -1031,11 +999,11 @@ Lang.Strings = {
     Unload = { EN = "Unload hub", TH = "ปิดสคริปต์" },
     Rejoin = { EN = "Rejoin", TH = "เข้าเซิร์ฟใหม่" },
     IntroSteps = {
-        EN = { "Warming up the warp pipe...", "Collecting coins...", "Building the castle...", "Let's-a go!" },
-        TH = { "กำลังอุ่นท่อวาร์ป...", "กำลังเก็บเหรียญ...", "กำลังสร้างปราสาท...", "ลุยกันเลย!" },
+        EN = { "Warming up the engine...", "Loading icons...", "Building the interface...", "Let's go!" },
+        TH = { "กำลังอุ่นเครื่อง...", "กำลังโหลดไอคอน...", "กำลังสร้างหน้าตา...", "ไปกันเลย!" },
     },
     Ready = { EN = "Ready. Press %s to toggle the menu.", TH = "พร้อมแล้ว กด %s เพื่อเปิดปิดเมนู" },
-    ReadyTouch = { EN = "Ready. Tap the ? block to toggle the menu.", TH = "พร้อมแล้ว แตะกล่อง ? เพื่อเปิดปิดเมนู" },
+    ReadyTouch = { EN = "Ready. Tap the logo button to toggle the menu.", TH = "พร้อมแล้ว แตะปุ่มโลโก้เพื่อเปิดปิดเมนู" },
     Hidden = { EN = "Menu hidden. Press %s to open.", TH = "ซ่อนเมนูแล้ว กด %s เพื่อเปิด" },
     Session = { EN = "TIME", TH = "เวลา" },
     Empty = { EN = "Nothing here yet", TH = "ยังไม่มีรายการ" },
@@ -1189,7 +1157,7 @@ end
 function Fonts.Disable(reason)
     Fonts.Broken = true
     SafeFile(writefile, Config.FontDir .. "/disabled", tostring(reason))
-    warn("[Spidey Hub] Thai font off: " .. tostring(reason))
+    warn("[FALLENS] Thai font off: " .. tostring(reason))
 end
 
 function Fonts.LoadThai()
@@ -1362,41 +1330,16 @@ function Draw.Block(parent, faceToken, shadeToken, radius, depth)
     return holder, face, shade, depth
 end
 
-function Draw.Cloud(parent, width, token)
-    local cloud = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromOffset(width, width * 0.5), Parent = parent })
-    local puffs = { { 0, 0.35, 0.42 }, { 0.24, 0, 0.55 }, { 0.55, 0.18, 0.45 } }
-    for _, puff in ipairs(puffs) do
-        local ball = Draw.New("Frame", {
-            Position = UDim2.fromScale(puff[1], puff[2]),
-            Size = UDim2.fromScale(puff[3], puff[3] * 2),
-            Parent = cloud,
-        })
-        Draw.Corner(ball, UDim.new(1, 0))
-        Theme.Bind(ball, { BackgroundColor3 = token or "Cloud" })
-        Theme.OnRender(ball, function()
-            ball.BackgroundTransparency = Theme.Colors.CloudAlpha or 0
-        end)
-    end
-    local base = Draw.New("Frame", { Position = UDim2.fromScale(0.08, 0.6), Size = UDim2.fromScale(0.86, 0.4), Parent = cloud })
-    Draw.Corner(base, UDim.new(1, 0))
-    Theme.Bind(base, { BackgroundColor3 = token or "Cloud" })
-    Theme.OnRender(base, function()
-        base.BackgroundTransparency = Theme.Colors.CloudAlpha or 0
-    end)
-    return cloud
-end
-
--- Resolve theme logo asset or fall back to default logo / vector spider emblem
+-- Resolve logo asset or fall back to the vector F emblem
 function Draw.Emblem(parent, size)
     local holder = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromOffset(size, size), Parent = parent })
     local picture = Draw.New("ImageLabel", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(1, 1), ScaleType = Enum.ScaleType.Fit, Visible = false, Parent = holder })
     local drawn = Draw.DrawnEmblem(holder, size)
     Theme.OnRender(holder, function()
-        local content = (Theme.Colors.Logo and Assets.Resolve(Theme.Colors.Logo)) or Assets.Resolve("logo")
+        local content = Assets.Resolve("logo")
         picture.Image = content or ""
         picture.Visible = content ~= nil
         drawn.Visible = content == nil
-        picture.Size = UDim2.fromScale(Theme.Colors.Logo and 1.25 or 1, Theme.Colors.Logo and 1.25 or 1)
     end)
     Anim.Loop("Emblem", picture, { Rotation = 6 }, 1.6, "Sine", true)
     return holder
@@ -1412,32 +1355,15 @@ function Draw.DrawnEmblem(parent, size)
     })
     Draw.Corner(ring, UDim.new(1, 0))
     Theme.Bind(ring, { BackgroundColor3 = "White" })
-    local spider = Sprite.New(ring, "spidey", math.floor(size * 0.52))
-    spider.AnchorPoint = Vector2.new(0.5, 0.5)
-    spider.Position = UDim2.fromScale(0.5, 0.5)
+    local letter = Draw.Text({
+        Text = "F",
+        Size = UDim2.fromScale(1, 1),
+        TextXAlignment = Enum.TextXAlignment.Center,
+        Position = UDim2.fromOffset(0, 1),
+        Parent = ring,
+    }, "Logo", math.floor(size * 0.5), "Accent")
+    letter.TextScaled = false
     return emblem
-end
-
-function Draw.Bricks(parent, columns, token)
-    local mortar = {}
-    for row = 0, 1 do
-        local shift = row == 0 and 0 or 0.5 / columns
-        for column = 1, columns - 1 do
-            local xScale = column / columns + shift
-            if xScale > 0.02 and xScale < 0.98 then
-                table.insert(mortar, Draw.New("Frame", {
-                    Position = UDim2.new(xScale, 0, row * 0.5, 0),
-                    Size = UDim2.new(0, 2, 0.5, 0),
-                    Parent = parent,
-                }))
-            end
-        end
-    end
-    local seam = Draw.New("Frame", { Position = UDim2.new(0, 0, 0.5, -1), Size = UDim2.new(1, 0, 0, 2), Parent = parent })
-    table.insert(mortar, seam)
-    for _, line in ipairs(mortar) do
-        Theme.Bind(line, { BackgroundColor3 = token or "BrickDark" })
-    end
 end
 
 function Assets.Configure(map)
@@ -1488,626 +1414,196 @@ function Assets.Resolve(name)
     return content
 end
 
--- 8-bit pixel-art sprite data removed. Sprite.New now renders a lucide.dev
--- icon (or rbxassetid / crisp vector chrome) through Icons.Create, preserving all
--- existing call sites: tab/section icons, notifications, the intro scene, emblem
--- and float fallbacks, and coin particles.
-function Sprite.New(parent, name, size)
-    return Icons.Create(parent, name, size)
+-- FALLENS icon set: lucide.dev (ISC License) served from packed Roblox spritesheets
+-- Entry format: [icon] = { rbxassetid, rectOffsetX, rectOffsetY } on a 48x48 cell grid
+Sprite.Icons = {
+    activity = { 16898612629, 514, 771 },
+    alert_circle = { 16898612629, 869, 0 },
+    alert_octagon = { 16898612629, 820, 49 },
+    alert_triangle = { 16898612629, 771, 98 },
+    bell = { 16898612819, 820, 257 },
+    blocks = { 16898612819, 49, 820 },
+    bomb = { 16898612819, 257, 869 },
+    bot = { 16898612819, 869, 98 },
+    box = { 16898612819, 771, 196 },
+    boxes = { 16898612819, 196, 771 },
+    camera = { 16898612819, 967, 563 },
+    candy = { 16898612819, 771, 759 },
+    car = { 16898612819, 918, 147 },
+    castle = { 16898612819, 453, 869 },
+    check = { 16898612819, 710, 869 },
+    check_circle = { 16898612819, 869, 710 },
+    circle_alert = { 16898612819, 918, 808 },
+    circle_check = { 16898612819, 869, 955 },
+    circle_x = { 16898613044, 820, 306 },
+    code = { 16898613044, 355, 869 },
+    coins = { 16898613044, 869, 612 },
+    compass = { 16898613044, 514, 967 },
+    copy = { 16898613044, 918, 612 },
+    crosshair = { 16898613044, 453, 869 },
+    crown = { 16898613044, 404, 918 },
+    dices = { 16898613044, 918, 710 },
+    download = { 16898613044, 820, 906 },
+    egg = { 16898613353, 514, 771 },
+    ellipsis = { 16898613353, 771, 49 },
+    eye = { 16898613353, 771, 563 },
+    feather = { 16898613353, 771, 98 },
+    file_image = { 16898613353, 918, 257 },
+    flag = { 16898613353, 98, 918 },
+    flower = { 16898613353, 820, 710 },
+    frown = { 16898613353, 967, 196 },
+    gauge = { 16898613353, 771, 955 },
+    gem = { 16898613353, 918, 857 },
+    ghost = { 16898613353, 869, 906 },
+    gift = { 16898613353, 820, 955 },
+    globe = { 16898613509, 771, 563 },
+    grid_2x2 = { 16898613509, 771, 98 },
+    hammer = { 16898613509, 306, 820 },
+    heart = { 16898613509, 661, 771 },
+    hexagon = { 16898613509, 967, 0 },
+    home = { 16898613509, 820, 147 },
+    image = { 16898613509, 306, 918 },
+    info = { 16898613509, 612, 869 },
+    key = { 16898613509, 869, 404 },
+    laugh = { 16898613509, 869, 196 },
+    layout_dashboard = { 16898613509, 967, 355 },
+    layout_grid = { 16898613509, 918, 404 },
+    link = { 16898613509, 918, 453 },
+    locate_fixed = { 16898613509, 967, 759 },
+    magnet = { 16898613509, 967, 906 },
+    map = { 16898613613, 306, 771 },
+    map_pin = { 16898613613, 820, 257 },
+    message_circle = { 16898613613, 563, 820 },
+    moon = { 16898613613, 306, 918 },
+    moon_star = { 16898613613, 355, 869 },
+    more_horizontal = { 16898613613, 257, 967 },
+    navigation = { 16898613613, 771, 759 },
+    octagon_alert = { 16898613613, 918, 404 },
+    package = { 16898613613, 918, 196 },
+    package_open = { 16898613613, 710, 869 },
+    palette = { 16898613613, 453, 918 },
+    paw_print = { 16898613699, 771, 257 },
+    play = { 16898613699, 918, 257 },
+    power = { 16898613699, 820, 147 },
+    radar = { 16898613699, 820, 404 },
+    refresh_cw = { 16898613699, 404, 869 },
+    save = { 16898613699, 918, 453 },
+    search = { 16898613699, 918, 857 },
+    search_x = { 16898613699, 967, 808 },
+    settings = { 16898613777, 771, 257 },
+    shapes = { 16898613777, 257, 771 },
+    shell = { 16898613777, 771, 49 },
+    shield = { 16898613777, 869, 0 },
+    shield_check = { 16898613777, 820, 257 },
+    shopping_cart = { 16898613777, 869, 257 },
+    skull = { 16898613777, 49, 869 },
+    sliders_horizontal = { 16898613777, 820, 355 },
+    smile = { 16898613777, 869, 563 },
+    sparkle = { 16898613777, 967, 0 },
+    sparkles = { 16898613777, 918, 49 },
+    sprout = { 16898613777, 918, 306 },
+    square = { 16898613777, 869, 710 },
+    star = { 16898613777, 967, 147 },
+    store = { 16898613777, 404, 967 },
+    sword = { 16898613777, 710, 967 },
+    swords = { 16898613777, 967, 759 },
+    target = { 16898613869, 514, 771 },
+    terminal = { 16898613869, 820, 257 },
+    trash_2 = { 16898613869, 257, 918 },
+    triangle_alert = { 16898613869, 967, 0 },
+    trophy = { 16898613869, 820, 147 },
+    upload = { 16898613869, 612, 869 },
+    user = { 16898613869, 661, 869 },
+    users = { 16898613869, 967, 98 },
+    wand_sparkles = { 16898613869, 453, 918 },
+    wifi = { 16898613869, 869, 808 },
+    x_circle = { 16898613869, 771, 955 },
+    zap = { 16898613869, 918, 906 },
+    zap_off = { 16898613869, 967, 857 },
+}
+
+-- Map legacy sprite names and common synonyms onto lucide icons (keys are normalized: lowercase, "_" for "-")
+Sprite.Alias = {
+    mushroom = "sprout", oneup = "sprout", qblock = "box", used = "square", brick = "blocks",
+    coin = "coins", pipe = "map_pin", boo = "ghost", gear = "settings",
+    pumpkin = "ghost", bat = "moon_star", spider = "skull", lightning = "zap", chest = "gift",
+    dice = "dices", paw = "paw_print", sword = "swords", cookie = "sprout", troll = "smile",
+    main = "sprout", hub = "sparkles", general = "box", misc = "shapes",
+    house = "home", player = "user", teleport = "map_pin", warp = "map_pin",
+    visuals = "eye", esp = "eye", combat = "swords", weapon = "swords", knife = "swords",
+    aimbot = "crosshair", aim = "crosshair", sniper = "crosshair", gun = "crosshair",
+    movement = "feather", speed = "zap", bolt = "zap", fly = "feather", jump = "feather", run = "zap",
+    defense = "shield", god = "sparkles", armor = "shield", safe = "shield",
+    auto = "bot", farm = "bot", wand = "wand_sparkles",
+    money = "coins", cash = "coins", shop = "store", bag = "package", cart = "shopping_cart",
+    diamond = "gem", vip = "crown", rank = "trophy", crate = "package", airdrop = "package",
+    loot = "magnet", collect = "magnet",
+    pet = "paw_print", animal = "paw_print", mount = "paw_print",
+    hatch = "egg", roll = "dices", spin = "dices", luck = "sparkles",
+    forge = "hammer", craft = "hammer", build = "blocks", pickaxe = "hammer",
+    vehicle = "car", drive = "car", race = "flag",
+    kill = "skull", murder = "skull", danger = "alert_triangle", warning = "alert_triangle", alert = "alert_triangle",
+    health = "heart", heal = "heart", lock = "key", unlock = "key", quest = "flag",
+    cog = "settings", sliders = "sliders_horizontal", config = "settings", theme = "palette",
+    refresh = "refresh_cw", trash = "trash_2", chart = "activity", stats = "activity",
+}
+
+function Sprite.Resolve(name)
+    name = Icons.NormalizeKey(name)
+    name = Sprite.Alias[name] or name
+    if Sprite.Icons[name] then
+        return name
+    end
+    return "box"
 end
 
-Icons.Lucide = {
-    activity = 7733655755,
-    airplay = 7733655834,
-    alarm_check = 7733655912,
-    alarm_clock = 7733656100,
-    alarm_clock_off = 7733656003,
-    alarm_minus = 7733656164,
-    alarm_plus = 7733658066,
-    album = 7733658133,
-    alert_circle = 7733658271,
-    alert_octagon = 7733658335,
-    alert_triangle = 7733658504,
-    align_center = 7733909776,
-    align_center_horizontal = 8997380477,
-    align_center_vertical = 8997380737,
-    align_end_horizontal = 8997380820,
-    align_end_vertical = 8997380907,
-    align_horizonal_distribute_center = 8997381028,
-    align_horizonal_distribute_end = 8997381144,
-    align_horizonal_distribute_start = 8997381290,
-    align_horizontal_justify_center = 8997381461,
-    align_horizontal_justify_end = 8997381549,
-    align_horizontal_justify_start = 8997381652,
-    align_horizontal_space_around = 8997381738,
-    align_horizontal_space_between = 8997381854,
-    align_justify = 7733661326,
-    align_left = 7733911357,
-    align_right = 7733663582,
-    align_start_horizontal = 8997381965,
-    align_start_vertical = 8997382085,
-    align_vertical_distribute_center = 8997382212,
-    align_vertical_distribute_end = 8997382326,
-    align_vertical_distribute_start = 8997382428,
-    align_vertical_justify_center = 8997382502,
-    align_vertical_justify_end = 8997382584,
-    align_vertical_justify_start = 8997382639,
-    align_vertical_space_around = 8997382708,
-    align_vertical_space_between = 8997382793,
-    anchor = 7733911490,
-    aperture = 7733666258,
-    archive = 7733911621,
-    arrow_big_down = 7733668653,
-    arrow_big_left = 7733911731,
-    arrow_big_right = 7733671493,
-    arrow_big_up = 7733671663,
-    arrow_down = 7733672933,
-    arrow_down_circle = 7733671763,
-    arrow_down_left = 7733672282,
-    arrow_down_right = 7733672831,
-    arrow_left = 7733673136,
-    arrow_left_circle = 7733673056,
-    arrow_left_right = 8997382869,
-    arrow_right = 7733673345,
-    arrow_right_circle = 7733673229,
-    arrow_up = 7733673717,
-    arrow_up_circle = 7733673466,
-    arrow_up_left = 7733673539,
-    arrow_up_right = 7733673646,
-    asterisk = 7733673800,
-    at_sign = 7733673907,
-    award = 7733673987,
-    axe = 7733674079,
-    banknote = 7733674153,
-    bar_chart = 7733674319,
-    bar_chart_2 = 7733674239,
-    battery = 7733674820,
-    battery_charging = 7733674402,
-    battery_full = 7733674503,
-    battery_low = 7733674589,
-    battery_medium = 7733674731,
-    beaker = 7733674922,
-    bell = 7733911828,
-    bell_minus = 7733675028,
-    bell_off = 7733675107,
-    bell_plus = 7733675181,
-    bell_ring = 7733675275,
-    bike = 7733678330,
-    binary = 7733678388,
-    bluetooth = 7733687147,
-    bluetooth_connected = 7734110952,
-    bluetooth_off = 7733914252,
-    bluetooth_searching = 7733914320,
-    bold = 7733687211,
-    book = 7733914390,
-    book_open = 7733687281,
-    bookmark = 7733692043,
-    bookmark_minus = 7733689754,
-    bookmark_plus = 7734111084,
-    bot = 7733916988,
-    box = 7733917120,
-    box_select = 7733696665,
-    briefcase = 7733919017,
-    brush = 7733701455,
-    bug = 7733701545,
-    building = 7733701625,
-    bus = 7733701715,
-    calculator = 7733919105,
-    calendar = 7733919198,
-    camera = 7733708692,
-    camera_off = 7733919260,
-    car = 7733708835,
-    carrot = 8997382987,
-    cast = 7733919326,
-    cd = 7734110220,
-    charge = 8997383136,
-    check = 7733715400,
-    check_circle = 7733919427,
-    check_circle_2 = 7733710700,
-    check_square = 7733919526,
-    chevron_down = 7733717447,
-    chevron_first = 8997383275,
-    chevron_last = 8997383390,
-    chevron_left = 7733717651,
-    chevron_right = 7733717755,
-    chevron_up = 7733919605,
-    chevrons_down = 7733720604,
-    chevrons_down_up = 7733720483,
-    chevrons_left = 7733720701,
-    chevrons_right = 7733919682,
-    chevrons_up = 7733723433,
-    chevrons_up_down = 7733723321,
-    chrome = 7733919783,
-    circle = 7733919881,
-    circle_slashed = 8997383530,
-    clipboard = 7733734762,
-    clipboard_check = 7733919947,
-    clipboard_copy = 7733920037,
-    clipboard_list = 7733920117,
-    clipboard_x = 7733734668,
-    clock = 7733734848,
-    clock_1 = 8997383694,
-    clock_10 = 8997383876,
-    clock_11 = 8997384034,
-    clock_12 = 8997384150,
-    clock_2 = 8997384295,
-    clock_3 = 8997384456,
-    clock_4 = 8997384603,
-    clock_5 = 8997384798,
-    clock_6 = 8997384977,
-    clock_7 = 8997385147,
-    clock_8 = 8997385352,
-    clock_9 = 8997385485,
-    cloud = 7733746980,
-    cloud_drizzle = 7733920226,
-    cloud_fog = 7733920317,
-    cloud_hail = 7733920444,
-    cloud_lightning = 7733741741,
-    cloud_moon = 7733920519,
-    cloud_off = 7733745572,
-    cloud_rain = 7733746651,
-    cloud_rain_wind = 7733746456,
-    cloud_snow = 7733746798,
-    cloud_sun = 7733746880,
-    cloudy = 7733747106,
-    clover = 7733747233,
-    code = 7733749837,
-    code_2 = 7733920644,
-    codepen = 7733920768,
-    codesandbox = 7733752575,
-    coffee = 7733752630,
-    coins = 7743866529,
-    columns = 7733757178,
-    command = 7733924046,
-    compass = 7733924216,
-    contact = 7743866666,
-    contrast = 7733764005,
-    cookie = 8997385628,
-    copy = 7733764083,
-    copyleft = 7733764196,
-    copyright = 7733764275,
-    corner_down_left = 7733764327,
-    corner_down_right = 7733764385,
-    corner_left_down = 7733764448,
-    corner_left_up = 7733764536,
-    corner_right_down = 7733764605,
-    corner_right_up = 7733764680,
-    corner_up_left = 7733764800,
-    corner_up_right = 7733764915,
-    cpu = 7733765045,
-    crop = 7733765140,
-    cross = 7733765224,
-    crosshair = 7733765307,
-    crown = 7733765398,
-    currency = 7733765592,
-    database = 7743866778,
-    delete = 7733768142,
-    divide = 7733769365,
-    divide_circle = 7733769152,
-    divide_square = 7733769261,
-    dollar_sign = 7733770599,
-    download = 7733770755,
-    download_cloud = 7733770689,
-    dribbble = 7733770843,
-    droplet = 7733770982,
-    droplets = 7733771078,
-    drumstick = 8997385789,
-    edit = 7733771472,
-    edit_2 = 7733771217,
-    edit_3 = 7733771361,
-    egg = 8997385940,
-    electricity = 7733771628,
-    electricity_off = 7733771563,
-    equal = 7733771811,
-    equal_not = 7733771726,
-    euro = 7733771891,
-    expand = 7733771982,
-    external_link = 7743866903,
-    eye = 7733774602,
-    eye_off = 7733774495,
-    fast_forward = 7743867090,
-    feather = 7733777166,
-    figma = 7743867310,
-    file = 7733793319,
-    file_check = 7733779668,
-    file_check_2 = 7733779610,
-    file_code = 7733779730,
-    file_digit = 7733935829,
-    file_input = 7733935917,
-    file_minus = 7733936115,
-    file_minus_2 = 7733936010,
-    file_output = 7733788742,
-    file_plus = 7733788885,
-    file_plus_2 = 7733788816,
-    file_search = 7733788966,
-    file_text = 7733789088,
-    file_x = 7733938136,
-    file_x_2 = 7743867554,
-    files = 7743867811,
-    film = 7733942579,
-    filter = 7733798407,
-    flag = 7733798691,
-    flag_triangle_left = 7733798509,
-    flag_triangle_right = 7733798634,
-    flame = 7733798747,
-    flashlight = 7733798851,
-    flashlight_off = 7733798799,
-    flask_conical = 7733798901,
-    flask_round = 7733798957,
-    folder = 7733799185,
-    folder_minus = 7733799022,
-    folder_open = 8997386062,
-    folder_plus = 7733799092,
-    form_input = 7733799275,
-    forward = 7733799371,
-    framer = 7733799486,
-    frown = 7733799591,
-    function_square = 7733799682,
-    gamepad = 7733799901,
-    gamepad_2 = 7733799795,
-    gauge = 7733799969,
-    gavel = 7733800044,
-    gem = 7733942651,
-    ghost = 7743868000,
-    gift = 7733946818,
-    gift_card = 7733945018,
-    git_branch = 7733949149,
-    git_branch_plus = 7743868200,
-    git_commit = 7743868360,
-    git_merge = 7733952195,
-    git_pull_request = 7733952287,
-    github = 7733954058,
-    gitlab = 7733954246,
-    glasses = 7733954403,
-    globe = 7733954760,
-    globe_2 = 7733954611,
-    grab = 7733954884,
-    graduation_cap = 7733955058,
-    grid = 7733955179,
-    grip_horizontal = 7733955302,
-    grip_vertical = 7733955410,
-    hammer = 7733955511,
-    hand = 7733955740,
-    hand_metal = 7733955664,
-    hard_drive = 7733955793,
-    hard_hat = 7733955850,
-    hash = 7733955906,
-    haze = 7733955969,
-    headphones = 7733956063,
-    heart = 7733956134,
-    help_circle = 7733956210,
-    hexagon = 7743868527,
-    highlighter = 7743868648,
-    history = 7733960880,
-    home = 7733960981,
-    image = 7733964126,
-    image_minus = 7733963797,
-    image_off = 7733963907,
-    image_plus = 7733964016,
-    import = 7733964240,
-    inbox = 7733964370,
-    indent = 7733964452,
-    indian_rupee = 7733964536,
-    infinity = 7733964640,
-    info = 7733964719,
-    inspect = 7733964808,
-    italic = 7733964917,
-    jersey_pound = 7733965029,
-    key = 7733965118,
-    landmark = 7733965184,
-    languages = 7733965249,
-    laptop = 7733965386,
-    laptop_2 = 7733965313,
-    lasso = 7733967892,
-    lasso_select = 7743868832,
-    layers = 7743868936,
-    layout = 7733970543,
-    layout_dashboard = 7733970318,
-    layout_grid = 7733970390,
-    layout_list = 7733970442,
-    layout_template = 7733970494,
-    library = 7743869054,
-    life_buoy = 7733973479,
-    lightbulb = 7733975185,
-    lightbulb_off = 7733975123,
-    link = 7733978098,
-    link_2 = 7743869163,
-    link_2_off = 7733975283,
-    list = 7743869612,
-    list_checks = 7743869317,
-    list_minus = 7733980795,
-    list_ordered = 7743869411,
-    list_plus = 7733984995,
-    list_x = 7743869517,
-    loader = 7733992358,
-    loader_2 = 7733989869,
-    locate = 7733992469,
-    locate_fixed = 7733992424,
-    lock = 7733992528,
-    log_in = 7733992604,
-    log_out = 7733992677,
-    mail = 7733992732,
-    map = 7733992829,
-    map_pin = 7733992789,
-    maximize = 7733992982,
-    maximize_2 = 7733992901,
-    megaphone = 7733993049,
-    meh = 7733993147,
-    menu = 7733993211,
-    message_circle = 7733993311,
-    message_square = 7733993369,
-    mic = 7743869805,
-    mic_off = 7743869714,
-    minimize = 7733997941,
-    minimize_2 = 7733997870,
-    minus = 7734000129,
-    minus_circle = 7733998053,
-    minus_square = 7743869899,
-    monitor = 7734002839,
-    monitor_off = 7734000184,
-    monitor_speaker = 7743869988,
-    moon = 7743870134,
-    more_horizontal = 7734006080,
-    more_vertical = 7734006187,
-    mountain = 7734008868,
-    mountain_snow = 7743870286,
-    mouse_pointer = 7743870392,
-    mouse_pointer_2 = 7734010405,
-    mouse_pointer_click = 7734010488,
-    move = 7743870731,
-    move_diagonal = 7743870505,
-    move_diagonal_2 = 7734013178,
-    move_horizontal = 7734016210,
-    move_vertical = 7743870608,
-    music = 7734020554,
-    navigation = 7734020989,
-    navigation_2 = 7734020942,
-    network = 7734021047,
-    no_entry = 7734021118,
-    octagon = 7734021165,
-    on_charge = 7734021231,
-    option = 7734021300,
-    outdent = 7734021384,
-    package = 7734021469,
-    package_check = 8997386143,
-    package_minus = 8997386266,
-    package_plus = 8997386355,
-    package_search = 8997386448,
-    package_x = 8997386545,
-    palette = 7734021595,
-    paperclip = 7734021680,
-    pause = 7734021897,
-    pause_circle = 7734021767,
-    pause_octagon = 7734021827,
-    pen_tool = 7734022041,
-    pencil = 7734022107,
-    percent = 7743870852,
-    person_standing = 7743871002,
-    phone = 7734032056,
-    phone_call = 7734027264,
-    phone_forwarded = 7734027345,
-    phone_incoming = 7743871120,
-    phone_missed = 7734029465,
-    phone_off = 7734029534,
-    phone_outgoing = 7743871253,
-    pie_chart = 7734034378,
-    piggy_bank = 7734034513,
-    pin = 8997386648,
-    pipette = 7743871384,
-    plane = 7734037723,
-    play = 7743871480,
-    play_circle = 7734037784,
-    plus = 7734042071,
-    plus_circle = 7734040271,
-    plus_square = 7734040369,
-    pocket = 7734042139,
-    podcast = 7734042234,
-    pointer = 7734042307,
-    pound_sterling = 7734042354,
-    power = 7734042493,
-    power_off = 7734042423,
-    printer = 7734042580,
-    qr_code = 7743871575,
-    quote = 7734045100,
-    radio = 7743871662,
-    radio_receiver = 7734045155,
-    redo = 7743871739,
-    refresh_ccw = 7734050715,
-    refresh_cw = 7734051052,
-    regex = 7734051188,
-    repeat = 7734051454,
-    repeat_1 = 7734051342,
-    reply = 7734051594,
-    reply_all = 7734051524,
-    rewind = 7734051670,
-    rocking_chair = 7734051769,
-    rotate_ccw = 7734051861,
-    rotate_cw = 7734051957,
-    rss = 7734052075,
-    ruler = 7734052157,
-    russian_ruble = 7734052248,
-    save = 7734052335,
-    scale = 7734052454,
-    scan = 8997386861,
-    scan_line = 8997386772,
-    scissors = 7734052570,
-    screen_share = 7734052814,
-    screen_share_off = 7734052653,
-    search = 7734052925,
-    send = 7734053039,
-    separator_horizontal = 7734053146,
-    separator_vertical = 7734053213,
-    server = 7734053426,
-    server_crash = 7734053281,
-    server_off = 7734053361,
-    settings = 7734053495,
-    settings_2 = 8997386997,
-    share = 7734053697,
-    share_2 = 7734053595,
-    sheet = 7743871876,
-    shield = 7734056608,
-    shield_alert = 7734056326,
-    shield_check = 7734056411,
-    shield_close = 7734056470,
-    shield_off = 7734056540,
-    shirt = 7734056672,
-    shopping_bag = 7734056747,
-    shopping_cart = 7734056813,
-    shovel = 7734056878,
-    shrink = 7734056971,
-    shuffle = 7734057059,
-    sidebar = 7734058260,
-    sidebar_close = 7734058092,
-    sidebar_open = 7734058165,
-    sigma = 7734058345,
-    signal = 8997387546,
-    signal_high = 8997387110,
-    signal_low = 8997387189,
-    signal_medium = 8997387319,
-    signal_zero = 8997387434,
-    skip_back = 7734058404,
-    skip_forward = 7734058495,
-    skull = 7734058599,
-    slash = 8997387644,
-    sliders = 7734058803,
-    smartphone = 7734058979,
-    smartphone_charging = 7734058894,
-    smile = 7734059095,
-    snowflake = 7734059180,
-    sort_asc = 7734060715,
-    sort_desc = 7743871973,
-    speaker = 7734063416,
-    sprout = 7743872071,
-    square = 7743872181,
-    star = 7734068321,
-    star_half = 7734068258,
-    stop_circle = 7734068379,
-    stretch_horizontal = 8997387754,
-    stretch_vertical = 8997387862,
-    strikethrough = 7734068425,
-    subscript = 8997387937,
-    sun = 7734068495,
-    sunrise = 7743872365,
-    sunset = 7734070982,
-    superscript = 8997388036,
-    swiss_franc = 7734071038,
-    switch_camera = 7743872492,
-    table = 7734073253,
-    tablet = 7743872620,
-    tag = 7734075797,
-    target = 7743872758,
-    tent = 7734078943,
-    terminal = 7743872929,
-    terminal_square = 7734079055,
-    text_cursor = 8997388195,
-    text_cursor_input = 8997388094,
-    thermometer = 7734084149,
-    thermometer_snowflake = 7743873074,
-    thermometer_sun = 7734084018,
-    thumbs_down = 7734084236,
-    thumbs_up = 7743873212,
-    ticket = 7734086558,
-    timer = 7743873443,
-    timer_off = 8997388325,
-    timer_reset = 7743873336,
-    toggle_left = 7734091286,
-    toggle_right = 7743873539,
-    tornado = 7743873633,
-    trash = 7743873871,
-    trash_2 = 7743873772,
-    trello = 7743873996,
-    trending_down = 7743874143,
-    trending_up = 7743874262,
-    triangle = 7743874367,
-    truck = 7743874482,
-    tv = 7743874674,
-    tv_2 = 7743874599,
-    type = 7743874740,
-    umbrella = 7743874820,
-    underline = 7743874904,
-    undo = 7743874974,
-    unlink = 7743875149,
-    unlink_2 = 7743875069,
-    unlock = 7743875263,
-    upload = 7743875428,
-    upload_cloud = 7743875358,
-    user = 7743875962,
-    user_check = 7743875503,
-    user_minus = 7743875629,
-    user_plus = 7743875759,
-    user_x = 7743875879,
-    users = 7743876054,
-    verified = 7743876142,
-    vibrate = 7743876302,
-    video = 7743876610,
-    video_off = 7743876466,
-    view = 7743876754,
-    voicemail = 7743876916,
-    volume = 7743877487,
-    volume_1 = 7743877081,
-    volume_2 = 7743877250,
-    volume_x = 7743877381,
-    wallet = 7743877573,
-    wand = 8997388430,
-    watch = 7743877668,
-    webcam = 7743877896,
-    wifi = 7743878148,
-    wifi_off = 7743878056,
-    wind = 7743878264,
-    wrap_text = 8997388548,
-    wrench = 7743878358,
-    x = 7743878857,
-    x_circle = 7743878496,
-    x_octagon = 7743878618,
-    x_square = 7743878737,
-    zoom_in = 7743878977,
-    zoom_out = 7743879082,
-}
+--@param size Width/height in px; token optional theme color token used to tint the icon strokes
+function Sprite.New(parent, name, size, token)
+    local icon = Sprite.Icons[Sprite.Resolve(name)]
+    if not icon then
+        return Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromOffset(size, size), Parent = parent })
+    end
+    local image = Draw.New("ImageLabel", {
+        Name = "Icon",
+        BackgroundTransparency = 1,
+        Image = "rbxassetid://" .. icon[1],
+        ImageRectOffset = Vector2.new(icon[2], icon[3]),
+        ImageRectSize = Vector2.new(48, 48),
+        ScaleType = Enum.ScaleType.Fit,
+        Size = UDim2.fromOffset(size, size),
+        Parent = parent,
+    })
+    Theme.Bind(image, { ImageColor3 = token or "Text" })
+    return image
+end
 
-Icons.LucideAlias = {
-    bat = "moon",
-    bomb = "alert_triangle",
-    boo = "ghost",
-    candy = "cookie",
-    chest = "package",
-    coin = "coins",
-    lightning = "cloud_lightning",
-    mushroom = "home",
-    pumpkin = "ghost",
-    qblock = "box",
-    sliders_horizontal = "sliders",
-    spidey = "bug",
-    spider = "bug",
-    trophy = "award",
-    used = "box",
-}
-
+-- Keyword rules mapping option titles onto lucide icons
 Icons.Rules = {
     { "aimbot|silent|sniper|crosshair|shoot|gun|ยิง|ปืน|เล็ง", "crosshair" },
-    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "axe" },
-    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง|เรดาร์", "ghost" },
+    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "swords" },
+    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง", "eye" },
+    { "radar|minimap|เรดาร์", "radar" },
     { "teleport|warp|island|location|place|spawn|zone|map|วาร์ป|เกาะ|สถานที่|แมพ", "map_pin" },
-    { "pet|animal|mount|ride|สัตว์|ขี่", "heart" },
+    { "pet|animal|mount|ride|สัตว์|ขี่", "paw_print" },
     { "egg|hatch|ไข่|สุ่มไข่", "egg" },
-    { "dice|roll|spin|gacha|ลูกเต๋า|ทอย|สุ่ม", "shuffle" },
+    { "dice|roll|spin|gacha|ลูกเต๋า|ทอย|สุ่ม", "dices" },
     { "forge|craft|upgrade|mine|dig|ตีบวก|หลอม|ขุด|อัพเกรด", "hammer" },
-    { "build|pyramid|brick|สร้าง|พีระมิด", "box" },
+    { "build|pyramid|brick|สร้าง|พีระมิด", "blocks" },
     { "car|vehicle|drive|race|drift|รถ|ขับ|แข่ง", "car" },
     { "shop|buy|sell|merchant|market|store|trade|coin|cash|money|ร้าน|ซื้อ|ขาย|เงิน", "coins" },
-    { "loot|magnet|collect|grab|ดูด|เก็บ", "grab" },
-    { "airdrop|crate|chest|drop|gift|กล่อง|แอร์ดรอป", "package" },
-    { "speed|dash|bolt|zap|ความเร็ว|พุ่ง", "cloud_lightning" },
+    { "loot|magnet|collect|grab|ดูด|เก็บ", "magnet" },
+    { "airdrop|crate|chest|drop|gift|กล่อง|แอร์ดรอป", "gift" },
+    { "speed|dash|bolt|zap|ความเร็ว|พุ่ง", "zap" },
     { "player|movement|walk|jump|fly|noclip|stamina|ผู้เล่น|วิ่ง|กระโดด|บิน", "feather" },
     { "defense|shield|god|anti|safe|guard|bypass|ป้องกัน|อมตะ|กันแบน", "shield" },
     { "rank|vip|king|boss|crown|ยศ", "crown" },
-    { "stat|status|leaderboard|score|trophy|สถานะ|อันดับ|คะแนน", "award" },
+    { "stat|status|leaderboard|score|trophy|สถานะ|อันดับ|คะแนน", "trophy" },
     { "quest|mission|flag|start|เควส|ภารกิจ", "flag" },
     { "theme|color|palette|style|ธีม|สี", "palette" },
     { "setting|config|ui|menu|keybind|language|ตั้งค่า|เมนู|ภาษา", "settings" },
-    { "auto|farm|grind|loop|bot|ออโต้|ฟาร์ม|บอท", "star" },
-    { "main|home|general|hub|หลัก|ทั่วไป", "home" },
+    { "auto|farm|grind|loop|bot|ออโต้|ฟาร์ม|บอท", "bot" },
+    { "main|home|general|hub|หลัก|ทั่วไป", "sprout" },
 }
-
 
 -- Crisp SVG-style geometric vector primitives for UI chrome (search, close, check, chevrons, plus, minus, grip)
 local function DrawVectorLine(parent, pos, size, rot, token)
@@ -2203,7 +1699,7 @@ function Icons.FromTitle(titleSpec, defaultSprite)
             end
         end
     end
-    return defaultSprite or "circle"
+    return defaultSprite or "box"
 end
 
 function Icons.Vector(parent, vectorName, size, colorToken)
@@ -2240,52 +1736,12 @@ function Icons.Create(parent, iconSpec, size, colorToken, fallbackTitle)
         return img
     end
     local key = Icons.NormalizeKey(iconSpec)
-    local lucideId = Icons.Lucide[key] or Icons.Lucide[Icons.LucideAlias[key]]
-    if lucideId then
-        local img = Draw.New("ImageLabel", {
-            Name = "Icon",
-            BackgroundTransparency = 1,
-            Image = "rbxassetid://" .. lucideId,
-            ScaleType = Enum.ScaleType.Fit,
-            Size = UDim2.fromOffset(size, size),
-            Parent = parent,
-        })
-        if colorToken then
-            Theme.Bind(img, { ImageColor3 = colorToken })
-        end
-        return img
-    end
     if Icons.Vectors[key] then
         return Icons.Vector(parent, key, size, colorToken)
     end
-    local titleKey = Icons.NormalizeKey(Icons.FromTitle(fallbackTitle or iconSpec, "circle"))
-    local titleLucide = Icons.Lucide[titleKey] or Icons.Lucide[Icons.LucideAlias[titleKey]]
-    if titleLucide then
-        local img = Draw.New("ImageLabel", {
-            Name = "Icon",
-            BackgroundTransparency = 1,
-            Image = "rbxassetid://" .. titleLucide,
-            ScaleType = Enum.ScaleType.Fit,
-            Size = UDim2.fromOffset(size, size),
-            Parent = parent,
-        })
-        if colorToken then
-            Theme.Bind(img, { ImageColor3 = colorToken })
-        end
-        return img
-    end
-    local fallback = Draw.New("ImageLabel", {
-        Name = "Icon",
-        BackgroundTransparency = 1,
-        Image = "rbxassetid://" .. (Icons.Lucide.circle or 7733919881),
-        ScaleType = Enum.ScaleType.Fit,
-        Size = UDim2.fromOffset(size, size),
-        Parent = parent,
-    })
-    if colorToken then
-        Theme.Bind(fallback, { ImageColor3 = colorToken })
-    end
-    return fallback
+    local spriteName = (key ~= "" and Sprite.Resolve(key)) or Icons.FromTitle(fallbackTitle or iconSpec, "box")
+    local spriteSize = math.max(12, math.floor((size + 2) / 2) * 2)
+    return Sprite.New(parent, spriteName, spriteSize, colorToken)
 end
 
 function Icons.Badge(parent, iconSpec, size, colorToken, fallbackTitle)
@@ -4036,9 +3492,6 @@ function Container:AddToggle(idx, info)
     end
     toggle.Row.Hit.Activated:Connect(function()
         toggle:SetValue(not toggle.Value)
-        if toggle.Value then
-            Anim.CoinPop(toggle.Row.Holder, UDim2.new(1, -toggle.Track.Size.X.Offset / 2, 0, 6), 18)
-        end
     end)
     Widget.Register(toggle, idx, info)
     if idx ~= nil then
@@ -6098,11 +5551,11 @@ end
 
 function Gui.ClearPrevious(parent)
     local env = type(getgenv) == "function" and getgenv() or nil
-    if env and type(env.SpideyHub) == "table" and env.SpideyHub ~= Library and not env.SpideyHub.Unloaded then
-        Util.Try(env.SpideyHub.Unload, env.SpideyHub)
+    if env and type(env.FALLENS) == "table" and env.FALLENS ~= Library and not env.FALLENS.Unloaded then
+        Util.Try(env.FALLENS.Unload, env.FALLENS)
     end
     if env then
-        env.SpideyHub = Library
+        env.FALLENS = Library
     end
     for _, child in ipairs(parent:GetChildren()) do
         if child:GetAttribute(Config.GuiAttribute) then
@@ -6118,7 +5571,7 @@ function Gui.Setup()
     local parent = Util.GuiParent()
     Gui.ClearPrevious(parent)
     State.Gui = Draw.New("ScreenGui", {
-        Name = "SpideyHub",
+        Name = "FALLENS",
         ResetOnSpawn = false,
         IgnoreGuiInset = true,
         ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
@@ -6234,7 +5687,7 @@ function Window.New(options)
         size = Vector2.new(size.X.Offset, size.Y.Offset)
     end
     local self = setmetatable({
-        Title = options.Title or "Spidey Hub",
+        Title = options.Title or "FALLENS",
         SubTitle = options.SubTitle or "",
         Desired = size,
         Size = size,
@@ -6315,16 +5768,9 @@ function Window:BuildTopbar()
     end, { right })
 end
 
--- Theme topbar decor: drifting clouds for day themes, twinkling stars/embers for night themes
+-- Theme topbar decor: twinkling glyph stars for night themes, lucide icons for Halloween
 function Window:BuildDecor(topbar)
-    self.Clouds, self.Stars = {}, {}
-    for index, spot in ipairs({ { 0.44, 8, 42 }, { 0.6, 22, 30 } }) do
-        local cloud = Draw.Cloud(topbar, spot[3])
-        cloud.Position = UDim2.new(spot[1], 0, 0, spot[2])
-        cloud.ZIndex = 2
-        Anim.Loop("DecorClouds", cloud, { Position = UDim2.new(spot[1], 14, 0, spot[2] + 2) }, 4 + index, "Sine", true)
-        table.insert(self.Clouds, cloud)
-    end
+    self.Stars = {}
     for index, spot in ipairs({ { 0.42, 10, 12 }, { 0.48, 30, 9 }, { 0.54, 14, 14 }, { 0.6, 32, 10 }, { 0.66, 8, 11 }, { 0.71, 26, 8 } }) do
         local star = Draw.Text({ AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(spot[1], 0, 0, spot[2]), Size = UDim2.fromOffset(spot[3] + 4, spot[3] + 4), TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 2, Parent = topbar }, "Glyph", spot[3], "DecorColor")
         star.TextTransparency = 0.15
@@ -6332,13 +5778,13 @@ function Window:BuildDecor(topbar)
         table.insert(self.Stars, star)
     end
     self.Spooky = {}
-    for index, spot in ipairs({ { 0.5, 10, 30, "pumpkin" }, { 0.55, 26, 20, "bat" }, { 0.6, 6, 30, "boo" }, { 0.645, 28, 18, "candy" }, { 0.69, 10, 30, "pumpkin" }, { 0.735, 20, 20, "bat" } }) do
-        local item = Sprite.New(topbar, spot[4], spot[3])
+    for index, spot in ipairs({ { 0.5, 10, 28, "ghost" }, { 0.55, 30, 18, "skull" }, { 0.6, 6, 28, "moon_star" }, { 0.645, 28, 16, "candy" }, { 0.69, 10, 28, "ghost" }, { 0.735, 22, 18, "moon_star" } }) do
+        local item = Sprite.New(topbar, spot[4], spot[3], "SidebarMuted")
         item.AnchorPoint = Vector2.new(0.5, 0)
         item.Position = UDim2.new(spot[1], 0, 0, spot[2])
         item.ZIndex = 2
-        local swing = spot[4] == "bat" and 14 or 6
-        Anim.Loop("DecorSpooky", item, { Position = UDim2.new(spot[1], 0, 0, spot[2] + (spot[4] == "bat" and 6 or 3)), Rotation = index % 2 == 0 and swing or -swing }, 1.2 + index * 0.35, "Sine", true)
+        local swing = spot[4] == "moon_star" and 10 or 5
+        Anim.Loop("DecorSpooky", item, { Position = UDim2.new(spot[1], 0, 0, spot[2] + 4), Rotation = index % 2 == 0 and swing or -swing }, 1.2 + index * 0.35, "Sine", true)
         table.insert(self.Spooky, item)
     end
     self:BuildSpookyBody()
@@ -6347,7 +5793,7 @@ function Window:BuildDecor(topbar)
     end)
 end
 
--- Halloween window accents: orange glow border, purple bottom fog, hanging spider
+-- Halloween window accents: orange glow border, purple bottom fog
 function Window:BuildSpookyBody()
     self.SpookyBody = {}
     local shadow, radius = Config.Window.Shadow, Config.Window.Radius
@@ -6370,14 +5816,6 @@ function Window:BuildSpookyBody()
     Anim.Loop("DecorSpookyBody", fogShape, { Offset = Vector2.new(0, 0.12) }, 3.2, "Sine", true)
     self.SpookyFog = fog
     table.insert(self.SpookyBody, fog)
-
-    local hanger = Draw.New("Frame", { Name = "Spider", BackgroundTransparency = 1, Position = UDim2.new(1, -16, 0, Config.Window.Topbar + 60), Size = UDim2.fromOffset(16, 16), ZIndex = 9, Parent = self.Body })
-    Draw.New("Frame", { AnchorPoint = Vector2.new(0.5, 1), Position = UDim2.new(0.5, 0, 0, 4), Size = UDim2.new(0, 1, 0, 300), BackgroundColor3 = Color3.fromRGB(200, 186, 222), BackgroundTransparency = 0.5, Parent = hanger })
-    local spider = Sprite.New(hanger, "spider", 16)
-    Anim.Loop("DecorSpookyBody", hanger, { Position = UDim2.new(1, -16, 0, Config.Window.Topbar + 150) }, 3.4, "Sine", true)
-    Anim.Loop("DecorSpookyBody", spider, { Rotation = 10 }, 0.9, "Sine", true)
-    self.SpookySpider = hanger
-    table.insert(self.SpookyBody, hanger)
 end
 
 function Window:RenderDecor()
@@ -6385,14 +5823,10 @@ function Window:RenderDecor()
     local decor = Theme.Colors.Decor
     local shown = self.Visible ~= false
     local expanded = shown and not self.Minimized
-    local showClouds = shown and wide and decor == "Clouds"
     local showStars = shown and wide and decor == "Stars"
     local showSpooky = shown and wide and decor == "Halloween"
     local showGlow = shown and decor == "Halloween"
     local showSpookyBody = expanded and decor == "Halloween"
-    for _, cloud in ipairs(self.Clouds) do
-        cloud.Visible = showClouds
-    end
     for _, star in ipairs(self.Stars) do
         star.Text = Theme.Colors.DecorGlyph or "✦"
         star.Visible = showStars
@@ -6406,11 +5840,7 @@ function Window:RenderDecor()
     if self.SpookyFog then
         self.SpookyFog.Visible = showSpookyBody
     end
-    if self.SpookySpider then
-        self.SpookySpider.Visible = showSpookyBody
-    end
     Anim.SetGroupActive("Emblem", shown)
-    Anim.SetGroupActive("DecorClouds", showClouds)
     Anim.SetGroupActive("DecorStars", showStars)
     Anim.SetGroupActive("DecorSpooky", showSpooky)
     Anim.SetGroupActive("DecorSpookyGlow", showGlow)
@@ -6553,9 +5983,9 @@ function Window:BuildMain()
     end)
     self.PageHost = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(0, header), Size = UDim2.new(1, 0, 1, -header), ClipsDescendants = true, ZIndex = 2, Parent = main })
     local emptyBox = Draw.Box("Frame", { Name = "EmptySearch", AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.45), Size = UDim2.fromOffset(200, 74), Visible = false, ZIndex = 5, Parent = self.PageHost }, "Panel", "Outline", 10, 2)
-    local booSprite = Sprite.New(emptyBox, "boo", 24)
-    booSprite.AnchorPoint = Vector2.new(0.5, 0)
-    booSprite.Position = UDim2.new(0.5, 0, 0, 10)
+    local emptyIcon = Sprite.New(emptyBox, "search_x", 24, "Muted")
+    emptyIcon.AnchorPoint = Vector2.new(0.5, 0)
+    emptyIcon.Position = UDim2.new(0.5, 0, 0, 10)
     Draw.Text({ Position = UDim2.fromOffset(8, 40), Size = UDim2.new(1, -16, 0, 24), TextXAlignment = Enum.TextXAlignment.Center, Parent = emptyBox }, "Body", Util.TextSize("Label"), "Muted", Lang.Strings.NoResults)
     self.EmptyState = emptyBox
     Particles.Build(main)
@@ -6563,13 +5993,9 @@ end
 
 function Window:BuildGround()
     local height, radius = Config.Window.Ground, Config.Window.Radius
-    local ground = Draw.Box("Frame", { Name = "Ground", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 3, Parent = self.Body }, "Brick", nil, radius)
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = ground }, "Brick")
-    local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 6), Size = UDim2.new(1, -12, 1, -8), ClipsDescendants = true, Parent = ground })
-    Draw.Bricks(bricks, 28, "BrickDark")
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 6), Parent = ground }, "Grass")
-    Draw.Box("Frame", { Position = UDim2.fromOffset(0, 6), Size = UDim2.new(1, 0, 0, 2), Parent = ground }, "GrassDark")
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 3), Parent = ground }, "Outline")
+    local ground = Draw.Box("Frame", { Name = "Ground", AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, height), ClipsDescendants = true, ZIndex = 3, Parent = self.Body }, "PanelHeader", nil, radius)
+    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, radius), Parent = ground }, "PanelHeader")
+    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 2), Parent = ground }, "Outline")
     self.Ground = ground
     local gripSize = State.Touch and 34 or 24
     local grip = Draw.New("TextButton", { Name = "Grip", Text = "", AutoButtonColor = false, BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 1), Position = UDim2.new(1, -2, 1, -2), Size = UDim2.fromOffset(gripSize, gripSize), ZIndex = 4, Parent = ground })
@@ -6758,7 +6184,6 @@ function Window:SelectTab(tab)
     tab.Page.Position = UDim2.fromOffset(0, 18)
     Anim.Tween(tab.Page, { Position = UDim2.new() }, Config.Tween.Slide)
     tab:RenderButton()
-    Anim.Bump(tab.IconSlot, 6)
     Lang.Bind(self.HeaderTitle, tab.Name)
     Lang.Bind(self.HeaderDesc, tab.Description or "")
     local titleY = self.HeaderDesc.Visible and 10 or 11
@@ -6904,7 +6329,7 @@ function Window:SetScale(scale)
 end
 
 function Tab.New(window, name, icon, description)
-    local resolvedIcon = (icon and icon ~= "") and icon or Icons.FromTitle(name, "circle")
+    local resolvedIcon = (icon and icon ~= "") and icon or Icons.FromTitle(name, "box")
     local tab = setmetatable({ Window = window, Name = name, Icon = resolvedIcon, Description = description, Groupboxes = {} }, Tab)
     tab:BuildButton()
     tab:BuildPage()
@@ -6919,7 +6344,7 @@ function Tab:BuildButton()
     local stroke = Draw.Stroke(face, "Outline", 2, true)
     stroke.Transparency = 1
     self.IconSlot = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0, 0.5), Position = UDim2.new(0, 8, 0.5, 0), Size = UDim2.fromOffset(24, 24), Parent = face })
-    Icons.Create(self.IconSlot, self.Icon, 24, nil, self.Name)
+    self.Icon = Icons.Create(self.IconSlot, self.Icon, 24, "SidebarText", self.Name)
     self.Label = Draw.Text({ Position = UDim2.fromOffset(40, 0), Size = UDim2.new(1, -44, 1, 0), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Label") + 1, "SidebarText", self.Name)
     self.Button, self.Face, self.Shade, self.Stroke = holder, face, shade, stroke
     holder.MouseEnter:Connect(function()
@@ -6950,6 +6375,9 @@ function Tab:RenderButton(instant)
     Anim.Tween(self.Shade, { BackgroundTransparency = active and 0 or 1 }, duration)
     Anim.Tween(self.Stroke, { Transparency = active and 0 or 1 }, duration)
     Theme.Bind(self.Label, { TextColor3 = active and "TabActiveText" or "SidebarText" })
+    if self.Icon and self.Icon:IsA("ImageLabel") then
+        Theme.Bind(self.Icon, { ImageColor3 = active and "TabActiveText" or "SidebarText" })
+    end
 end
 
 function Tab:Select()
@@ -7094,7 +6522,7 @@ function Groupbox:BuildHeader(card, info)
     local bar = Draw.Box("TextButton", { Name = "Header", Size = UDim2.new(1, 0, 0, height), Parent = card }, "PanelHeader", nil, radius)
     self.HeaderPatch = Draw.Box("Frame", { Position = UDim2.new(0, 0, 1, -radius), Size = UDim2.new(1, 0, 0, radius), Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "PanelHeader")
     self.HeaderDivider = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, 2), ZIndex = 2, Visible = not collapsed, BackgroundTransparency = collapsed and 1 or 0, Parent = bar }, "Outline")
-    local iconSpec = (info.Icon and info.Icon ~= "") and info.Icon or Icons.FromTitle(info.Name, "circle")
+    local iconSpec = (info.Icon and info.Icon ~= "") and info.Icon or Icons.FromTitle(info.Name, "box")
     local icon = Icons.Create(bar, iconSpec, 20, nil, info.Name)
     icon.AnchorPoint = Vector2.new(0, 0.5)
     icon.Position = UDim2.new(0, 10, 0.5, -1)
@@ -7171,32 +6599,19 @@ function Float.Build()
         if moved or not State.Window then
             return
         end
-        Anim.Bump(Float.Sprite, 10)
-        Anim.CoinPop(button, UDim2.new(0.5, 0, 0, 0), 20)
         State.Window:Toggle()
     end)
 end
 
 function Float.Render()
-    if not Float.Slot then
+    if not Float.Slot or Float.Sprite then
         return
     end
-    if not Float.Sprite then
-        local size = Float.Size or 48
-        local holder = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), Parent = Float.Slot })
-        local picture = Draw.New("ImageLabel", { Name = "Logo", BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.fromScale(1, 1), ScaleType = Enum.ScaleType.Fit, ResampleMode = Enum.ResamplerMode.Pixelated, Visible = false, Parent = holder })
-        local fallback = Sprite.New(holder, "spidey", size)
-        fallback.AnchorPoint = Vector2.new(0.5, 0.5)
-        fallback.Position = UDim2.fromScale(0.5, 0.5)
-        fallback.Visible = false
-        Theme.OnRender(holder, function()
-            local content = Assets.Resolve("logo")
-            picture.Image = content or ""
-            picture.Visible = content ~= nil
-            fallback.Visible = content == nil
-        end)
-        Float.Sprite = holder
-        Float.Sprite.Name = "Block"
+    local content = Assets.Resolve("logo")
+    if content then
+        Float.Sprite = Draw.New("ImageLabel", { Name = "Logo", BackgroundTransparency = 1, Image = content, ScaleType = Enum.ScaleType.Fit, Size = UDim2.fromScale(1, 1), Parent = Float.Slot })
+    else
+        Float.Sprite = Sprite.New(Float.Slot, "sparkles", Float.Size, "Accent")
     end
 end
 
@@ -7215,10 +6630,12 @@ function Watermark.Build(title)
     Draw.Padding(frame, 0, 12, 0, 8)
     Draw.List(frame, 10, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
     local slot = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromOffset(18, 18), LayoutOrder = 1, Parent = frame })
-    local coin = Sprite.New(slot, "coin", 18)
-    coin.AnchorPoint = Vector2.new(0.5, 0)
-    coin.Position = UDim2.fromScale(0.5, 0)
-    Anim.Loop("Watermark", coin, { Size = UDim2.fromOffset(3, 18) }, 0.45, "Sine", true)
+    local logo = Draw.New("ImageLabel", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.fromScale(0.5, 0), Size = UDim2.fromScale(1, 1), ScaleType = Enum.ScaleType.Fit, Visible = false, Parent = slot })
+    Theme.OnRender(logo, function()
+        local content = Assets.Resolve("logo")
+        logo.Image = content or ""
+        logo.Visible = content ~= nil
+    end)
     local name = Draw.Text({ Text = title:upper(), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromOffset(0, 20), LayoutOrder = 2, Parent = frame }, "Logo", Config.Text.Watermark + 1, "Coin")
     Draw.Stroke(name, "Ink", 1.5)
     Watermark.Stats = {}
@@ -7330,7 +6747,8 @@ function Particles.SetEnabled(enabled)
     end
 end
 
-Notify.Icons = { Info = "info", Success = "check_circle", Warning = "alert_triangle", Error = "alert_octagon", Coin = "coins", Power = "flame" }
+Notify.Icons = { Info = "info", Success = "check_circle", Warning = "alert_triangle", Error = "x_circle", Coin = "coins", Power = "power", Warn = "alert_triangle" }
+Notify.Colors = { Info = "Blue", Success = "Good", Warning = "Coin", Error = "Danger", Coin = "Coin", Power = "Accent", Warn = "Coin" }
 
 function Notify.Build()
     local width = State.Touch and Config.Notify.TouchWidth or Config.Notify.Width
@@ -7347,15 +6765,14 @@ function Notify.Push(title, content, duration, kind)
     local card = Draw.New("TextButton", { Text = "", AutoButtonColor = false, BackgroundTransparency = 1, Position = UDim2.fromOffset(width + 60, 0), Size = UDim2.fromOffset(width, height), Parent = holder })
     Draw.Box("Frame", { Position = UDim2.fromOffset(4, 4), Size = UDim2.fromScale(1, 1), Parent = card }, "Shadow", nil, 12)
     local face = Draw.Box("Frame", { Size = UDim2.fromScale(1, 1), ClipsDescendants = true, Parent = card }, "Panel", "Outline", 12, 2)
-    local icon = Sprite.New(face, Notify.Icons[kind or "Coin"] or "coins", 36)
+    local icon = Sprite.New(face, Notify.Icons[kind or "Coin"] or "coins", 36, Notify.Colors[kind or "Coin"] or "Accent")
     icon.Position = UDim2.fromOffset(12, 11)
-    Draw.Text({ Position = UDim2.fromOffset(58, 9), Size = UDim2.new(1, -68, 0, 18), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Group"), "Text", title or "Spidey Hub")
+    Draw.Text({ Position = UDim2.fromOffset(58, 9), Size = UDim2.new(1, -68, 0, 18), TextTruncate = Enum.TextTruncate.AtEnd, Parent = face }, "Body", Util.TextSize("Group"), "Text", title or "FALLENS")
     Draw.Text({ Text = text, TextWrapped = true, TextYAlignment = Enum.TextYAlignment.Top, Position = UDim2.fromOffset(58, 29), Size = UDim2.new(1, -68, 0, textHeight), Parent = face }, "Desc", Util.TextSize("Desc") + 1, "SubText")
     local timer = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.new(0, 0, 1, 0), Size = UDim2.new(1, 0, 0, 4), Parent = face }, "Accent")
     duration = duration or Config.Notify.Duration
     Anim.Tween(card, { Position = UDim2.fromOffset(0, 0) }, Config.Tween.Notify, "Back")
     Anim.Tween(timer, { Size = UDim2.new(0, 0, 0, 4) }, duration, "Linear")
-    Anim.Bump(icon, 6)
     local closed = false
     local function Dismiss()
         if closed then
@@ -7375,8 +6792,8 @@ function Notify.Push(title, content, duration, kind)
 end
 
 
--- Stage loader screen: mini level progress bar synced to font loading and window build
-Intro.Width, Intro.Height, Intro.Ground = 600, 320, 44
+-- Stage loader screen: clean progress card synced to font loading and window build
+Intro.Width, Intro.Height = 600, 300
 Intro.MinStep = 0.22
 Intro.StepTimeout = 15
 
@@ -7397,23 +6814,18 @@ end
 function Intro.Show(settings, screen)
     Anim.Tween(screen, { BackgroundTransparency = 0.35 }, 0.3)
     local card, scene, scale = Intro.BuildCard(screen)
-    Intro.BuildScenery(scene)
-    local block = Sprite.New(scene, "qblock", 48)
-    block.AnchorPoint = Vector2.new(0.5, 0)
-    block.Position = UDim2.new(0.5, 0, 0, -70)
+    Intro.Logo(scene)
     local letters = Intro.Letters(scene, settings.Title)
-    local pill = Intro.Pill(scene, settings.SubTitle)
+    local subtitle = Intro.Subtitle(scene, settings.SubTitle)
     local track = Intro.Track(scene)
     Anim.Tween(scale, { Scale = State.UserScale }, 0.45, "Back")
-    Anim.Tween(block, { Position = UDim2.new(0.5, 0, 0, 22) }, 0.4, "Bounce")
-    task.wait(0.42)
-    Intro.HitBlock(scene, block)
-    Intro.DropLetters(letters, pill)
+    task.wait(0.35)
+    Intro.DropLetters(letters, subtitle)
     Intro.RunSteps(settings, track)
     if Library.Unloaded then
         return
     end
-    Intro.Finale(scene, track)
+    Intro.Finale(scene)
     task.wait(0.3)
     Anim.Tween(scale, { Scale = State.UserScale * 1.06 }, 0.2, "In")
     Anim.Tween(card, { GroupTransparency = 1 }, 0.2)
@@ -7436,32 +6848,22 @@ function Intro.BuildCard(screen)
     return card, scene, scale
 end
 
-function Intro.BuildScenery(scene)
-    local ground = Intro.Ground
-    local sky = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, -ground), ClipsDescendants = true, ZIndex = 1, Parent = scene })
-    for _, hill in ipairs({ { 0.14, 150, "GrassDark" }, { 0.3, 90, "Grass" }, { 0.8, 120, "GrassDark" } }) do
-        local mound = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(hill[1], 0, 1, 0), Size = UDim2.fromOffset(hill[2], hill[2]), BackgroundTransparency = 0.35, Parent = sky }, hill[3], nil, UDim.new(1, 0))
-        mound.ZIndex = 1
+-- Logo mark at the top of the loader card; sparkles icon when the logo asset is unavailable
+function Intro.Logo(scene)
+    local holder = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 26), Size = UDim2.fromOffset(60, 60), ZIndex = 5, Parent = scene })
+    local scale = Draw.New("UIScale", { Scale = 0.6, Parent = holder })
+    local content = Assets.Resolve("logo")
+    if content then
+        Draw.New("ImageLabel", { BackgroundTransparency = 1, Image = content, ScaleType = Enum.ScaleType.Fit, Size = UDim2.fromScale(1, 1), Parent = holder })
+    else
+        Sprite.New(holder, "sparkles", 60, "Accent")
     end
-    for index, spot in ipairs({ { 0.12, 30, 64 }, { 0.62, 18, 50 }, { 0.84, 64, 40 } }) do
-        local cloud = Draw.Cloud(sky, spot[3])
-        cloud.Position = UDim2.new(spot[1], 0, 0, spot[2])
-        cloud.ZIndex = 1
-        Anim.Tween(cloud, { Position = UDim2.new(spot[1], 36, 0, spot[2]) }, 5 + index, "Sine", -1, true)
-    end
-    local floor = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.fromScale(0, 1), Size = UDim2.new(1, 0, 0, ground), ClipsDescendants = true, ZIndex = 3, Parent = scene }, "Brick", nil, 18)
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 18), ZIndex = 3, Parent = floor }, "Brick")
-    local bricks = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(6, 10), Size = UDim2.new(1, -12, 1, -14), ClipsDescendants = true, ZIndex = 3, Parent = floor })
-    Draw.Bricks(bricks, 18, "BrickDark")
-    for _, line in ipairs(bricks:GetChildren()) do
-        line.ZIndex = 3
-    end
-    Draw.Box("Frame", { Size = UDim2.new(1, 0, 0, 8), ZIndex = 4, Parent = floor }, "Grass")
-    Draw.Box("Frame", { Position = UDim2.fromOffset(0, 8), Size = UDim2.new(1, 0, 0, 2), ZIndex = 4, Parent = floor }, "GrassDark")
+    Anim.Tween(scale, { Scale = 1 }, 0.45, "Back")
+    return holder
 end
 
 function Intro.Letters(scene, title)
-    local row = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 92), Size = UDim2.fromOffset(Intro.Width, 54), ZIndex = 5, Parent = scene })
+    local row = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 108), Size = UDim2.fromOffset(Intro.Width, 54), ZIndex = 5, Parent = scene })
     Draw.List(row, 2, true, Enum.HorizontalAlignment.Center, Enum.VerticalAlignment.Center)
     local letters = {}
     local size, colorIndex = 46, 0
@@ -7476,51 +6878,32 @@ function Intro.Letters(scene, title)
     return letters
 end
 
-function Intro.Pill(scene, text)
-    local pill = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 156), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromOffset(0, 26), BackgroundTransparency = 1, ZIndex = 5, Parent = scene }, "Shadow", nil, UDim.new(1, 0))
-    Draw.Padding(pill, 0, 14, 0, 14)
-    local label = Draw.Text({ Text = "WORLD 1-1" .. ((text and text ~= "") and ("  ·  " .. text) or ""), AutomaticSize = Enum.AutomaticSize.X, Size = UDim2.fromScale(0, 1), TextTransparency = 1, ZIndex = 6, Parent = pill }, "Body", 14, "White")
-    return { Frame = pill, Label = label }
+function Intro.Subtitle(scene, text)
+    return Draw.Text({ Text = text or "", AnchorPoint = Vector2.new(0.5, 0), Position = UDim2.new(0.5, 0, 0, 172), Size = UDim2.fromOffset(420, 20), TextXAlignment = Enum.TextXAlignment.Center, TextTransparency = 1, ZIndex = 5, Parent = scene }, "Body", 14, "White")
 end
 
 function Intro.Track(scene)
-    local ground = Intro.Ground
-    local status = Draw.Text({ Position = UDim2.new(0, 22, 1, -(ground + 58)), Size = UDim2.new(1, -120, 0, 20), ZIndex = 6, Parent = scene }, "Body", 15, "White")
+    local status = Draw.Text({ Position = UDim2.new(0, 22, 1, -58), Size = UDim2.new(1, -120, 0, 20), ZIndex = 6, Parent = scene }, "Body", 15, "White")
     Draw.Stroke(status, "Ink", 1.5)
-    local percent = Draw.Text({ AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -22, 1, -(ground + 60)), Size = UDim2.fromOffset(80, 22), TextXAlignment = Enum.TextXAlignment.Right, Text = "0%", ZIndex = 6, Parent = scene }, "Logo", 20, "Coin")
+    local percent = Draw.Text({ AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -22, 1, -60), Size = UDim2.fromOffset(80, 22), TextXAlignment = Enum.TextXAlignment.Right, Text = "0%", ZIndex = 6, Parent = scene }, "Logo", 20, "Coin")
     Draw.Stroke(percent, "Ink", 2)
-    local flag = Sprite.New(scene, "flag", 36)
-    flag.AnchorPoint = Vector2.new(1, 1)
-    flag.Position = UDim2.new(1, -18, 1, -ground)
-    flag.ZIndex = 5
-    local runner = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(0, 1), Position = UDim2.new(0, 18, 1, -ground), Size = UDim2.fromOffset(28, 28), ZIndex = 6, Parent = scene })
-    local body = Sprite.New(runner, "mushroom", 24)
-    body.Position = UDim2.fromOffset(2, 4)
-    Anim.Tween(body, { Position = UDim2.fromOffset(2, 0) }, 0.16, "Sine", -1, true)
+    local bar = Draw.Box("Frame", { AnchorPoint = Vector2.new(0, 1), Position = UDim2.new(0, 22, 1, -30), Size = UDim2.new(1, -44, 0, 8), BackgroundTransparency = 0.4, ZIndex = 6, Parent = scene }, "Track", nil, UDim.new(1, 0))
+    local fill = Draw.Box("Frame", { Size = UDim2.new(0, 0, 1, 0), ZIndex = 7, Parent = bar }, "Accent", nil, UDim.new(1, 0))
     local progress = Draw.New("NumberValue", { Value = 0 })
     progress.Changed:Connect(function(value)
         percent.Text = math.floor(value * 100 + 0.5) .. "%"
-        runner.Position = UDim2.new(0, 18 + (Intro.Width - 100) * value, 1, -ground)
+        fill.Size = UDim2.new(value, 0, 1, 0)
     end)
-    return { Status = status, Progress = progress, Flag = flag, Runner = runner }
+    return { Status = status, Progress = progress }
 end
 
-function Intro.HitBlock(scene, block)
-    Anim.Bump(block, 14)
-    Anim.CoinPop(scene, UDim2.new(0.5, 0, 0, 22), 30)
-    task.delay(0.1, function()
-        local used = Sprite.New(scene, "used", 48)
-        used.AnchorPoint, used.Position, used.ZIndex = block.AnchorPoint, UDim2.new(0.5, 0, 0, 22), block.ZIndex
-        block:Destroy()
-    end)
-end
-
-function Intro.DropLetters(letters, pill)
+function Intro.DropLetters(letters, subtitle)
     for index, letter in ipairs(letters) do
         Anim.Tween(letter, { Position = UDim2.new() }, 0.55, "Bounce", 0, false, index * 0.05)
     end
-    Anim.Tween(pill.Frame, { BackgroundTransparency = 0.45 }, 0.3, "Out", 0, false, 0.4)
-    Anim.Tween(pill.Label, { TextTransparency = 0 }, 0.3, "Out", 0, false, 0.4)
+    if subtitle and subtitle.Text ~= "" then
+        Anim.Tween(subtitle, { TextTransparency = 0 }, 0.3, "Out", 0, false, 0.4)
+    end
 end
 
 ---@param track table?  nil = run the remaining steps without drawing
@@ -7551,18 +6934,17 @@ function Intro.RunSteps(settings, track)
     settings.Ran = true
 end
 
-function Intro.Finale(scene, track)
-    Anim.Bump(track.Flag, 10)
-    local origin = UDim2.new(1, -36, 1, -(Intro.Ground + 30))
+function Intro.Finale(scene)
+    local origin = UDim2.fromScale(0.5, 0.32)
     for index = 1, 8 do
         local angle = math.rad(index * 45)
-        local star = Sprite.New(scene, "star", 18)
-        star.AnchorPoint = Vector2.new(0.5, 0.5)
-        star.Position = origin
-        star.ZIndex = 7
-        local fly = Anim.Tween(star, { Position = origin + UDim2.fromOffset(math.cos(angle) * 70, math.sin(angle) * 70), Rotation = 180 }, 0.5, "Out")
+        local spark = Sprite.New(scene, "sparkle", 18, "Coin")
+        spark.AnchorPoint = Vector2.new(0.5, 0.5)
+        spark.Position = origin
+        spark.ZIndex = 7
+        local fly = Anim.Tween(spark, { Position = origin + UDim2.fromOffset(math.cos(angle) * 90, math.sin(angle) * 90), Rotation = 180 }, 0.5, "Out")
         fly.Completed:Once(function()
-            star:Destroy()
+            spark:Destroy()
         end)
     end
 end
@@ -7626,7 +7008,7 @@ function Visuals.EnsureGui()
     if Visuals.Gui and Visuals.Gui.Parent then
         return Visuals.Gui
     end
-    Visuals.Gui = Draw.New("ScreenGui", { Name = "SpideyVisuals", IgnoreGuiInset = true, ResetOnSpawn = false, DisplayOrder = 5, ZIndexBehavior = Enum.ZIndexBehavior.Sibling, Parent = Util.GuiParent() })
+    Visuals.Gui = Draw.New("ScreenGui", { Name = "FallensVisuals", IgnoreGuiInset = true, ResetOnSpawn = false, DisplayOrder = 5, ZIndexBehavior = Enum.ZIndexBehavior.Sibling, Parent = Util.GuiParent() })
     return Visuals.Gui
 end
 
@@ -7985,7 +7367,7 @@ function Visuals.PreviewModel()
             item:Destroy()
         elseif item:IsA("BasePart") then
             item.Anchored = true
-            item:SetAttribute("SpideyColor", item.Color)
+            item:SetAttribute("FallensColor", item.Color)
         end
     end
     clone:PivotTo(CFrame.new())
@@ -7998,7 +7380,7 @@ end
 function Visuals.PreviewChams(model, color, on)
     for _, part in ipairs(model:GetDescendants()) do
         if part:IsA("BasePart") and part.Transparency < 1 then
-            local base = part:GetAttribute("SpideyColor")
+            local base = part:GetAttribute("FallensColor")
             if base then
                 part.Color = on and color or base
                 part.Material = on and Enum.Material.ForceField or Enum.Material.SmoothPlastic
@@ -8026,7 +7408,6 @@ function Visuals.PreviewShow(on)
         preview.Frame.Visible = true
         preview.Pulse = 0
         Anim.Tween(preview.Frame, { Position = open }, Config.Tween.Pop, "Back")
-        Anim.Bump(preview.View, 8)
         Visuals.PreviewRender()
         return
     end
@@ -8251,33 +7632,33 @@ function Window:AddVisualsTab(options)
     Visuals:SetPreview(options.Preview == true)
 
     local main = tab:AddLeftGroupbox(T("ESP", "ESP"), "eye")
-    main:AddToggle("SpideyEsp", { Text = T("Enable ESP", "เปิด ESP"), Callback = Bind("Enabled") })
-    main:AddToggle("SpideyEspTeam", { Text = T("Team check", "เช็คทีม"), Default = true, Callback = Bind("TeamCheck") })
-    main:AddSlider("SpideyEspRange", { Text = T("Max distance", "ระยะสูงสุด"), Min = 50, Max = 5000, Default = 2000, Suffix = "m", Callback = Bind("MaxDistance") })
-    main:AddSlider("SpideyEspText", { Text = T("Text size", "ขนาดตัวอักษร"), Min = 9, Max = 20, Default = 13, Callback = Bind("TextSize") })
+    main:AddToggle("FallensEsp", { Text = T("Enable ESP", "เปิด ESP"), Callback = Bind("Enabled") })
+    main:AddToggle("FallensEspTeam", { Text = T("Team check", "เช็คทีม"), Default = true, Callback = Bind("TeamCheck") })
+    main:AddSlider("FallensEspRange", { Text = T("Max distance", "ระยะสูงสุด"), Min = 50, Max = 5000, Default = 2000, Suffix = "m", Callback = Bind("MaxDistance") })
+    main:AddSlider("FallensEspText", { Text = T("Text size", "ขนาดตัวอักษร"), Min = 9, Max = 20, Default = 13, Callback = Bind("TextSize") })
 
     local look = tab:AddRightGroupbox(T("Elements", "องค์ประกอบ"), "star")
-    look:AddToggle("SpideyEspBox", { Text = T("Box", "กล่อง"), Default = true, Callback = Bind("Box") })
-    look:AddDropdown("SpideyEspBoxStyle", { Text = T("Box style", "แบบกล่อง"), Values = { "Full", "Corner" }, Default = "Full", Callback = Bind("BoxStyle") })
-    look:AddToggle("SpideyEspFill", { Text = T("Box fill", "ถมสีกล่อง"), Callback = Bind("BoxFill") })
-    look:AddToggle("SpideyEspName", { Text = T("Name", "ชื่อ"), Default = true, Callback = Bind("Name") })
-    look:AddToggle("SpideyEspHealth", { Text = T("Health bar", "แถบเลือด"), Default = true, Callback = Bind("Health") })
-    look:AddToggle("SpideyEspHealthText", { Text = T("Health number", "ตัวเลขเลือด"), Callback = Bind("HealthText") })
-    look:AddToggle("SpideyEspDistance", { Text = T("Distance", "ระยะ"), Default = true, Callback = Bind("Distance") })
-    look:AddToggle("SpideyEspDot", { Text = T("Head dot", "จุดหัว"), Callback = Bind("HeadDot") })
-    look:AddToggle("SpideyEspTracer", { Text = T("Tracers", "เส้นนำสายตา"), Callback = Bind("Tracer") })
-    look:AddDropdown("SpideyEspTracerFrom", { Text = T("Tracer from", "เส้นเริ่มจาก"), Values = { "Bottom", "Center", "Mouse" }, Default = "Bottom", Callback = Bind("TracerOrigin") })
-    look:AddToggle("SpideyEspChams", { Text = T("Chams", "เรืองแสงทะลุกำแพง"), Callback = Bind("Chams") })
-    look:AddToggle("SpideyEspArrows", { Text = T("Off-screen arrows", "ลูกศรนอกจอ"), Callback = Bind("Arrows") })
+    look:AddToggle("FallensEspBox", { Text = T("Box", "กล่อง"), Default = true, Callback = Bind("Box") })
+    look:AddDropdown("FallensEspBoxStyle", { Text = T("Box style", "แบบกล่อง"), Values = { "Full", "Corner" }, Default = "Full", Callback = Bind("BoxStyle") })
+    look:AddToggle("FallensEspFill", { Text = T("Box fill", "ถมสีกล่อง"), Callback = Bind("BoxFill") })
+    look:AddToggle("FallensEspName", { Text = T("Name", "ชื่อ"), Default = true, Callback = Bind("Name") })
+    look:AddToggle("FallensEspHealth", { Text = T("Health bar", "แถบเลือด"), Default = true, Callback = Bind("Health") })
+    look:AddToggle("FallensEspHealthText", { Text = T("Health number", "ตัวเลขเลือด"), Callback = Bind("HealthText") })
+    look:AddToggle("FallensEspDistance", { Text = T("Distance", "ระยะ"), Default = true, Callback = Bind("Distance") })
+    look:AddToggle("FallensEspDot", { Text = T("Head dot", "จุดหัว"), Callback = Bind("HeadDot") })
+    look:AddToggle("FallensEspTracer", { Text = T("Tracers", "เส้นนำสายตา"), Callback = Bind("Tracer") })
+    look:AddDropdown("FallensEspTracerFrom", { Text = T("Tracer from", "เส้นเริ่มจาก"), Values = { "Bottom", "Center", "Mouse" }, Default = "Bottom", Callback = Bind("TracerOrigin") })
+    look:AddToggle("FallensEspChams", { Text = T("Chams", "เรืองแสงทะลุกำแพง"), Callback = Bind("Chams") })
+    look:AddToggle("FallensEspArrows", { Text = T("Off-screen arrows", "ลูกศรนอกจอ"), Callback = Bind("Arrows") })
 
     local colors = tab:AddLeftGroupbox(T("Colors", "สี"), "flower")
-    colors:AddLabel(T("Enemy", "ศัตรู")):AddColorPicker("SpideyEspEnemyColor", { Default = Visuals.Settings.EnemyColor, Callback = Bind("EnemyColor") })
-    colors:AddLabel(T("Friendly", "พวกเดียวกัน")):AddColorPicker("SpideyEspFriendColor", { Default = Visuals.Settings.FriendColor, Callback = Bind("FriendColor") })
+    colors:AddLabel(T("Enemy", "ศัตรู")):AddColorPicker("FallensEspEnemyColor", { Default = Visuals.Settings.EnemyColor, Callback = Bind("EnemyColor") })
+    colors:AddLabel(T("Friendly", "พวกเดียวกัน")):AddColorPicker("FallensEspFriendColor", { Default = Visuals.Settings.FriendColor, Callback = Bind("FriendColor") })
 
     local radar = tab:AddLeftGroupbox(T("Radar", "เรดาร์"), "target")
-    radar:AddToggle("SpideyRadar", { Text = T("Radar", "เรดาร์"), Description = T("Minimap of nearby players, drag to move", "มินิแมพผู้เล่นรอบตัว ลากย้ายได้"), Callback = Bind("Radar") })
-    radar:AddSlider("SpideyRadarRange", { Text = T("Radar range", "ระยะเรดาร์"), Min = 50, Max = 1000, Default = 250, Suffix = "m", Callback = Bind("RadarRange") })
-    radar:AddSlider("SpideyRadarSize", { Text = T("Radar size", "ขนาดเรดาร์"), Min = 100, Max = 320, Default = 180, Suffix = "px", Callback = Bind("RadarSize") })
+    radar:AddToggle("FallensRadar", { Text = T("Radar", "เรดาร์"), Description = T("Minimap of nearby players, drag to move", "มินิแมพผู้เล่นรอบตัว ลากย้ายได้"), Callback = Bind("Radar") })
+    radar:AddSlider("FallensRadarRange", { Text = T("Radar range", "ระยะเรดาร์"), Min = 50, Max = 1000, Default = 250, Suffix = "m", Callback = Bind("RadarRange") })
+    radar:AddSlider("FallensRadarSize", { Text = T("Radar size", "ขนาดเรดาร์"), Min = 100, Max = 320, Default = 180, Suffix = "px", Callback = Bind("RadarSize") })
     return tab
 end
 
@@ -8468,8 +7849,8 @@ function Compat.Probes.FileSystem()
         return false
     end
     local stamp = tostring(os.clock())
-    local wrote = pcall(writefile, "spideyhub_probe.txt", stamp)
-    local ok, read = pcall(readfile, "spideyhub_probe.txt")
+    local wrote = pcall(writefile, "fallens_probe.txt", stamp)
+    local ok, read = pcall(readfile, "fallens_probe.txt")
     return wrote and ok and read == stamp
 end
 
@@ -8530,7 +7911,7 @@ function Compat.NeedCap(option, caps)
             return true
         end
         local feature = option.Info and option.Info.Text and Lang.Resolve(option.Info.Text) or option.Idx
-        Library:Notify("Spidey Hub", Library:T(tostring(feature) .. " is not supported on this executor", tostring(feature) .. " ใช้กับ executor นี้ไม่ได้"), 4, "Warn")
+        Library:Notify("FALLENS", Library:T(tostring(feature) .. " is not supported on this executor", tostring(feature) .. " ใช้กับ executor นี้ไม่ได้"), 4, "Warn")
         task.defer(option.SetValue, option, false)
         return false
     end)
@@ -8549,7 +7930,7 @@ function Compat.Block(option, reason)
             return true
         end
         local feature = option.Info and option.Info.Text and Lang.Resolve(option.Info.Text) or option.Idx
-        Library:Notify("Spidey Hub", tostring(feature) .. ": " .. tostring(Lang.Resolve(reason) or reason), 4, "Warn")
+        Library:Notify("FALLENS", tostring(feature) .. ": " .. tostring(Lang.Resolve(reason) or reason), 4, "Warn")
         task.defer(option.SetValue, option, false)
         return false
     end)
@@ -8803,8 +8184,8 @@ function Configs.GetAutoload()
 end
 
 function Configs.BuildSection(group)
-    local nameInput = group:AddInput("SpideyConfigName", { Text = Lang.Strings.ConfigName, Placeholder = "default", NoSave = true })
-    local list = group:AddListBox("SpideyConfigList", { Text = Lang.Strings.SavedConfigs, Values = Configs.List(), Height = 4, NoSave = true })
+    local nameInput = group:AddInput("FallensConfigName", { Text = Lang.Strings.ConfigName, Placeholder = "default", NoSave = true })
+    local list = group:AddListBox("FallensConfigList", { Text = Lang.Strings.SavedConfigs, Values = Configs.List(), Height = 4, NoSave = true })
     local autoload = group:AddLabel(Lang.Format("Autoload", Configs.GetAutoload() or Lang.Get("None")))
     local function Selected()
         local typed = nameInput.Value:gsub("^%s+", ""):gsub("%s+$", "")
@@ -8845,9 +8226,9 @@ function Configs.BuildSection(group)
 end
 
 function Window:AddSettingsTab()
-    local tab = self:AddTab(Lang.Strings.Settings, "gear", Lang.Strings.SettingsDesc)
-    local interface = tab:AddLeftGroupbox(Lang.Strings.Interface, "mushroom")
-    interface:AddDropdown("SpideyLanguage", {
+    local tab = self:AddTab(Lang.Strings.Settings, "settings", Lang.Strings.SettingsDesc)
+    local interface = tab:AddLeftGroupbox(Lang.Strings.Interface, "sliders_horizontal")
+    interface:AddDropdown("FallensLanguage", {
         Text = Lang.Strings.Language,
         Values = { "English", "ไทย" },
         Default = State.Language == "TH" and "ไทย" or "English",
@@ -8855,18 +8236,18 @@ function Window:AddSettingsTab()
             Library:SetLanguage(value == "ไทย" and "TH" or "EN")
         end,
     })
-    interface:AddDropdown("SpideyTheme", { Text = Lang.Strings.ThemeName, Values = Themes.Order, Default = State.ThemeName, Callback = function(name)
+    interface:AddDropdown("FallensTheme", { Text = Lang.Strings.ThemeName, Values = Themes.Order, Default = State.ThemeName, Callback = function(name)
         Library:SetTheme(name)
     end })
-    interface:AddSlider("SpideyScale", { Text = Lang.Strings.Scale, Min = Config.ScaleRange.Min * 100, Max = Config.ScaleRange.Max * 100, Default = State.UserScale * 100, Suffix = "%", Finished = true, Callback = function(value)
+    interface:AddSlider("FallensScale", { Text = Lang.Strings.Scale, Min = Config.ScaleRange.Min * 100, Max = Config.ScaleRange.Max * 100, Default = State.UserScale * 100, Suffix = "%", Finished = true, Callback = function(value)
         self:SetScale(value / 100)
     end })
-    interface:AddKeybind("SpideyMenuKey", { Text = Lang.Strings.MenuKey, Default = State.MenuKey, Mode = "Always", ChangedCallback = function(name)
+    interface:AddKeybind("FallensMenuKey", { Text = Lang.Strings.MenuKey, Default = State.MenuKey, Mode = "Always", ChangedCallback = function(name)
         State.MenuKey = name
     end })
-    interface:AddToggle("SpideyWatermark", { Text = Lang.Strings.Watermark, Description = Lang.Strings.WatermarkDesc, Default = Watermark.Frame ~= nil and Watermark.Frame.Visible, Callback = Watermark.SetVisible })
-    interface:AddToggle("SpideyParticles", { Text = Lang.Strings.Particles, Description = Lang.Strings.ParticlesDesc, Default = Particles.Enabled, Callback = Particles.SetEnabled })
-    interface:AddToggle("SpideyFloat", { Text = Lang.Strings.FloatButton, Description = Lang.Strings.FloatDesc, Default = Float.Button ~= nil and Float.Button.Visible, Callback = Float.SetVisible })
+    interface:AddToggle("FallensWatermark", { Text = Lang.Strings.Watermark, Description = Lang.Strings.WatermarkDesc, Default = Watermark.Frame ~= nil and Watermark.Frame.Visible, Callback = Watermark.SetVisible })
+    interface:AddToggle("FallensParticles", { Text = Lang.Strings.Particles, Description = Lang.Strings.ParticlesDesc, Default = Particles.Enabled, Callback = Particles.SetEnabled })
+    interface:AddToggle("FallensFloat", { Text = Lang.Strings.FloatButton, Description = Lang.Strings.FloatDesc, Default = Float.Button ~= nil and Float.Button.Visible, Callback = Float.SetVisible })
     local about = tab:AddLeftGroupbox(Lang.Strings.About, "star")
     about:AddLabel(string.format("%s v%s - %s", self.Title, Library.Version, self.SubTitle ~= "" and self.SubTitle or tostring(game.PlaceId)))
     about:AddLabel(Lang.Format("Device", State.Touch and "Mobile" or "PC"))
@@ -8875,7 +8256,7 @@ function Window:AddSettingsTab()
     end }):AddButton({ Text = Lang.Strings.Unload, Style = "Danger", DoubleClick = true, Func = function()
         Library:Unload()
     end })
-    Configs.BuildSection(tab:AddRightGroupbox(Lang.Strings.Configs, "qblock"))
+    Configs.BuildSection(tab:AddRightGroupbox(Lang.Strings.Configs, "box"))
     return tab
 end
 
@@ -8959,7 +8340,7 @@ function Library:SetLanguage(code)
         return
     end
     Lang.Set(code)
-    local option = self.Options.SpideyLanguage
+    local option = self.Options.FallensLanguage
     if option then
         option.Value = code == "TH" and "ไทย" or "English"
         option:Render()
@@ -8976,7 +8357,7 @@ end
 
 function Library:SetTheme(name)
     Theme.Apply(name)
-    local option = self.Options.SpideyTheme
+    local option = self.Options.FallensTheme
     if option and option.Value ~= State.ThemeName then
         option.Value = State.ThemeName
         option:Render()
