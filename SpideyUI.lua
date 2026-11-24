@@ -1,5 +1,4 @@
- -- FALLENS UI · standalone build 2026-11-23
--- Mod 2026-11-24: single-accent element colours + window-style mobile button frame
+ -- FALLENS UI · REMAKE FROM MARIO UI
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
@@ -26,7 +25,7 @@ local Config = {
     AssetDir = "fallens/assets",
     ConfigRoot = "fallens/configs",
     DefaultAssets = {
-        logo = "https://cdn.discordapp.com/attachments/1557688744147034162/1574424970082394112/rn_image_picker_lib_temp_48f24650-a5a9-45d2-90b5-0a54859c29a3.png?ex=6b059904&is=6b044784&hm=0807d117c227b3d76645a13af3c015a4a83e1c5f1fa416381068d2283587416b&",
+        logo = "rbxassetid://120130155598382",
     },
     SeasonTheme = "Halloween",
     HttpTimeout = 8,
