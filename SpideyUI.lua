@@ -88,11 +88,11 @@ local Config = {
         [Enum.UserInputType.MouseButton2] = "MB2",
         [Enum.UserInputType.MouseButton3] = "MB3",
     },
-    -- Title colour tokens; each theme supplies its own harmonised set and
-    -- Theme.Apply resolves Title1..TitleN so the window title always follows
-    -- the active theme. Users may pass their own token list (or Color3 values)
-    -- via CreateWindow({ TitleColors = { ... } }).
-    TitleColors = { "Title1", "Title2", "Title3", "Title4" },
+    -- Title colour tokens; every theme supplies a single title colour taken
+    -- straight from its own Accent, so the window title, intro letters and
+    -- watermark always follow the active theme accent. Users may pass their
+    -- own token list (or Color3 values) via CreateWindow({ TitleColors = ... }).
+    TitleColors = { "Accent" },
 }
 
 local function rgb(hex)
@@ -110,12 +110,6 @@ local function Palette(spec)
             palette.ParticleGlyph, palette.ParticleGlyphs, palette.ParticleFall, palette.ParticleColor = glyphs[1], glyphs, value[2], rgb(value[3])
         elseif token == "Decor" then
             palette.Decor, palette.DecorGlyph, palette.DecorColor = value[1], value[2] or "✦", rgb(value[3] or "FFFFFF")
-        elseif token == "Title" then
-            local shades = type(value) == "table" and value or { value }
-            palette.Title = {}
-            for _, shade in ipairs(shades) do
-                table.insert(palette.Title, rgb(shade))
-            end
         elseif type(value) == "string" then
             palette[token] = rgb(value)
         else
@@ -133,7 +127,6 @@ local Themes = {
         Panel = "FAF6EE", PanelHeader = "F1E7D4", Element = "FFFCF6", Hover = "EEE2CA",
         Outline = "3E384A", Shadow = "7880A0", Text = "3A3028", SubText = "76685A", Muted = "A09484", Track = "DED4C4",
         Accent = "D64C40", AccentDark = "A0342C",
-        Title = { "D64C40", "F6D878", "FCF2E6", "3E5FA8" },
         Particle = { "✦", false, "F6D878" },
     }),
     Halloween = Palette({
@@ -142,7 +135,6 @@ local Themes = {
         Panel = "241830", PanelHeader = "301F40", Element = "2E2140", Hover = "3C2A52",
         Outline = "0B0610", Shadow = "0B0610", Text = "FFF1E2", SubText = "D7BFD9", Muted = "9C85A8", Track = "4A3460",
         Accent = "F28A2E", AccentDark = "B85E14", Decor = { "Halloween", "✦", "FFB347" },
-        Title = { "F28A2E", "FFB347", "C9A9D8", "8E5CD0" },
         Glow = "F28A2E", Fog = "8E5CD0",
         Particle = { { "✦", "✦", "•", "✧" }, false, "FFB347" },
     }),
@@ -152,7 +144,6 @@ local Themes = {
         Panel = "FFFFFF", PanelHeader = "F6F1E8", Element = "FBF9F5", Hover = "F0E8DA",
         Outline = "4A4458", Shadow = "CFC7BA", Text = "3A3028", SubText = "7C6E60", Muted = "ABA092", Track = "E6DED2",
         Accent = "D64C40", AccentDark = "A0342C",
-        Title = { "D64C40", "34528A", "3A3028", "A0342C" },
         Particle = { "•", false, "D64C40" },
     }),
     Dark = Palette({
@@ -161,7 +152,6 @@ local Themes = {
         Panel = "2A2B34", PanelHeader = "31323C", Element = "353743", Hover = "3E404D",
         Outline = "0E0E12", Shadow = "0E0E12", Text = "ECEAF4", SubText = "A9A6B8", Muted = "7B788C", Track = "454756",
         Accent = "E0584C", AccentDark = "A83A30", Decor = { "Stars", "✦", "F0C448" },
-        Title = { "E0584C", "F0C448", "ECEAF4", "A83A30" },
         Particle = { "✦", false, "F0C448" },
     }),
     Underground = Palette({
@@ -170,7 +160,6 @@ local Themes = {
         Panel = "1F2749", PanelHeader = "27305A", Element = "2C3666", Hover = "36417A",
         Outline = "05060F", Shadow = "05060F", Text = "F2F4FF", SubText = "AEB6E2", Muted = "7C86B8", Track = "3C4780",
         Accent = "5B8CF0", AccentDark = "3A62C0", Decor = { "Stars", "✦", "8FA8FF" },
-        Title = { "5B8CF0", "F0C448", "F2F4FF", "8FA8FF" },
         Particle = { "✦", false, "8FA8FF" },
     }),
     Castle = Palette({
@@ -179,7 +168,6 @@ local Themes = {
         Panel = "2B2323", PanelHeader = "352B2B", Element = "3D3232", Hover = "4A3D3D",
         Outline = "0A0707", Shadow = "0A0707", Text = "FFF1E6", SubText = "D9BFB0", Muted = "9F8579", Track = "524242",
         Accent = "E8703A", AccentDark = "B04A1E", Decor = { "Stars", "•", "FF8A3C" },
-        Title = { "E8703A", "FF8A3C", "FFF1E6", "B04A1E" },
         Particle = { "•", false, "FF8A3C" },
     }),
     ["Ghost House"] = Palette({
@@ -188,7 +176,6 @@ local Themes = {
         Panel = "242C31", PanelHeader = "2B353B", Element = "303B42", Hover = "39454D",
         Outline = "0B0E10", Shadow = "0B0E10", Text = "EAF4F1", SubText = "A3BDB6", Muted = "71898A", Track = "3E4B52",
         Accent = "4FB89C", AccentDark = "348A72", Decor = { "Stars", "•", "B8F0DC" },
-        Title = { "4FB89C", "B8F0DC", "EAF4F1", "348A72" },
         Particle = { "•", false, "9FE8D0" },
     }),
     ["Star Road"] = Palette({
@@ -197,7 +184,6 @@ local Themes = {
         Panel = "251749", PanelHeader = "2E1D5A", Element = "34225F", Hover = "412A72",
         Outline = "07030F", Shadow = "07030F", Text = "FFF7FF", SubText = "CDB9F2", Muted = "9580C4", Track = "4A3480",
         Accent = "E85CA8", AccentDark = "B03C7E", Decor = { "Stars", "★", "FFD95A" },
-        Title = { "E85CA8", "FFD95A", "FFF7FF", "B03C7E" },
         Particle = { "★", false, "FFD95A" },
     }),
     Desert = Palette({
@@ -206,7 +192,6 @@ local Themes = {
         Panel = "FFF9EE", PanelHeader = "F4E6CC", Element = "FFFCF6", Hover = "F0DFC0",
         Outline = "5A4632", Shadow = "C2A07A", Text = "4A3828", SubText = "86705A", Muted = "B09A80", Track = "E6D6BC",
         Accent = "C8643A", AccentDark = "964626",
-        Title = { "C8643A", "FFF6E8", "C9964E", "964626" },
         Particle = { "•", false, "C9964E" },
     }),
     ["Ice Land"] = Palette({
@@ -215,7 +200,6 @@ local Themes = {
         Panel = "F8FCFF", PanelHeader = "E6F0F8", Element = "FFFFFF", Hover = "DCEAF5",
         Outline = "3E4F63", Shadow = "A6BACE", Text = "2E3D4D", SubText = "62788E", Muted = "95A8BA", Track = "D4E1EC",
         Accent = "3A8AC8", AccentDark = "2A6698",
-        Title = { "3A8AC8", "FFFFFF", "2A6698", "D0E8F8" },
         Particle = { "❄", true, "FFFFFF" },
     }),
     Jungle = Palette({
@@ -224,7 +208,6 @@ local Themes = {
         Panel = "26382A", PanelHeader = "2E4332", Element = "334A37", Hover = "3D5641",
         Outline = "0C120D", Shadow = "0C120D", Text = "EEF6EA", SubText = "AFC6A8", Muted = "7E957A", Track = "445C47",
         Accent = "E08A3A", AccentDark = "A86024", Decor = { "Stars", "•", "D8F07A" },
-        Title = { "E08A3A", "F0C84A", "D8F07A", "EEF6EA" },
         Particle = { "•", false, "D8F07A" },
     }),
     ["Sky World"] = Palette({
@@ -233,7 +216,6 @@ local Themes = {
         Panel = "FFFFFF", PanelHeader = "EEF3FC", Element = "FFFFFF", Hover = "E4ECFA",
         Outline = "46506A", Shadow = "B6C2DA", Text = "333C52", SubText = "6A7590", Muted = "9AA4BC", Track = "DCE3F0",
         Accent = "4A6FB5", AccentDark = "34528A",
-        Title = { "4A6FB5", "FFFFFF", "34528A", "333C52" },
         Particle = { "✦", false, "FFFFFF" },
     }),
     Shared = Palette({
@@ -907,7 +889,7 @@ function Theme.Apply(name)
     end
     local palette = Themes[name]
     State.ThemeName = name
-    Theme.Colors.Logo, Theme.Colors.Glow, Theme.Colors.Fog, Theme.Colors.ParticleGlyphs, Theme.Colors.Title = nil, nil, nil, nil, nil
+    Theme.Colors.Logo, Theme.Colors.Glow, Theme.Colors.Fog, Theme.Colors.ParticleGlyphs = nil, nil, nil, nil
     Theme.Colors.TopbarText = Themes.Shared.White
     for token, color in pairs(Themes.Shared) do
         Theme.Colors[token] = color
@@ -915,16 +897,9 @@ function Theme.Apply(name)
     for token, color in pairs(palette) do
         Theme.Colors[token] = color
     end
-    -- Title colours follow the active theme: use the palette's harmonised set,
-    -- or derive one from its Accent when the theme does not define any.
-    local titleList = palette.Title
-    if type(titleList) ~= "table" or #titleList == 0 then
-        local accent = palette.Accent or Theme.Colors.Accent or Color3.new(1, 1, 1)
-        titleList = { accent, Util.Lighten(accent, 0.35), palette.AccentDark or accent:Lerp(Color3.new(0, 0, 0), 0.3), Theme.Colors.Text or Color3.new(1, 1, 1) }
-    end
-    for index = 1, math.max(#Config.TitleColors, 4) do
-        Theme.Colors["Title" .. index] = titleList[(index - 1) % #titleList + 1]
-    end
+    -- Title colour follows the active theme: the window title, intro letters
+    -- and watermark all bind to the single Accent token, so each theme shows
+    -- exactly one title colour — its own accent — and repaints on every switch.
     for inst, map in pairs(Theme.Bound) do
         if inst.Parent then
             Theme.Paint(inst, map)
@@ -5889,6 +5864,8 @@ function Window:BuildTitle(parent)
     Draw.List(holder, 1, true, Enum.HorizontalAlignment.Left, Enum.VerticalAlignment.Center)
     self.Letters = {}
     local size = Config.Text.Title
+    -- Single-colour palette by default: every letter binds to the theme
+    -- Accent token, so the whole title repaints with the active theme accent.
     local palette = (type(self.TitleColors) == "table" and #self.TitleColors > 0) and self.TitleColors or Config.TitleColors
     local index = 0
     for char in self.Title:upper():gmatch(utf8.charpattern) do
