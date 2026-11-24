@@ -1,4 +1,5 @@
 -- FALLENS UI · standalone build 2026-11-23
+-- Mod 2026-11-24: single-accent element colours + window-style mobile button frame
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
@@ -896,6 +897,17 @@ function Theme.Apply(name)
     end
     for token, color in pairs(palette) do
         Theme.Colors[token] = color
+    end
+    -- Unified element colour: every legacy multi-colour element token
+    -- (Blue/Good/Coin/Risky/Danger and their dark variants) now resolves to
+    -- the active theme Accent/AccentDark, so all widgets paint with exactly
+    -- one colour that follows the selected theme and repaints on every
+    -- theme switch. Toggle tracks, slider knobs, badges, button styles,
+    -- keypickers, progress fills and notify icons all share the accent.
+    local accent = Theme.Colors.Accent
+    local accentDark = Theme.Colors.AccentDark
+    for _, legacy in ipairs({ "Blue", "BlueDark", "Good", "GoodDark", "Coin", "CoinDark", "Risky", "RiskyDark", "Danger", "DangerDark" }) do
+        Theme.Colors[legacy] = legacy:find("Dark$") and accentDark or accent
     end
     -- Title colour follows the active theme: the window title, intro letters
     -- and watermark all bind to the single Accent token, so each theme shows
@@ -2848,9 +2860,9 @@ function Gui.Badge(parent, spec, token, shiny)
         Size = UDim2.fromScale(0, 1),
         TextXAlignment = Enum.TextXAlignment.Center,
         Parent = pill,
-    }, "Strong", 11, token == "Coin" and "Ink" or "OnAccent", textSpec)
+    }, "Strong", 11, "OnAccent", textSpec)
     if shiny ~= false then
-        Fx.Shimmer(label, token == "Coin" and "Ink" or "White")
+        Fx.Shimmer(label, "White")
     end
     local width = Layout.Measure(label.Text, 11, "Strong", 400).X + 14
     local badgeObj = {
@@ -2935,7 +2947,7 @@ Gui.ButtonStyles = {
     Primary = { Face = "Blue", Shade = "BlueDark", Text = "White" },
     Success = { Face = "Good", Shade = "GoodDark", Text = "White" },
     Danger = { Face = "Danger", Shade = "DangerDark", Text = "White" },
-    Warning = { Face = "Coin", Shade = "CoinDark", Text = "Ink" },
+    Warning = { Face = "Coin", Shade = "CoinDark", Text = "White" },
     Ghost = { Face = nil, Shade = nil, Text = "Text" },
 }
 
@@ -3540,7 +3552,7 @@ end
 function Toggle:BuildCheckbox()
     local size = Util.Metric("Check")
     self.Track = Draw.Box("Frame", { Size = UDim2.fromOffset(size, size) }, "Element", "Outline", 6, 2)
-    self.Mark = Icons.Vector(self.Track, "check", size - 4, "Ink")
+    self.Mark = Icons.Vector(self.Track, "check", size - 4, "OnAccent")
     self.Mark.AnchorPoint = Vector2.new(0.5, 0.5)
     self.Mark.Position = UDim2.fromScale(0.5, 0.5)
     self.MarkScale = Draw.New("UIScale", { Scale = self.Value and 1 or 0, Parent = self.Mark })
@@ -4037,7 +4049,7 @@ Button.Styles = {
     Primary = { Face = "Blue", Shade = "BlueDark", Text = "White" },
     Success = { Face = "Good", Shade = "GoodDark", Text = "White" },
     Danger = { Face = "Danger", Shade = "DangerDark", Text = "White" },
-    Warning = { Face = "Coin", Shade = "CoinDark", Text = "Ink" },
+    Warning = { Face = "Coin", Shade = "CoinDark", Text = "White" },
 }
 
 function Container:AddButton(info, callback)
@@ -5158,6 +5170,7 @@ function KeyPicker:Render()
         self.Row:RecalcRight()
     end
     Theme.Bind(self.Button, { BackgroundColor3 = State.Binding == self and "Coin" or "Element" })
+    Theme.Bind(self.Label, { TextColor3 = State.Binding == self and "OnAccent" or "Text" })
 end
 
 function KeyPicker:Listen()
@@ -5760,10 +5773,10 @@ function Window:BuildTopbar()
     local right = Draw.New("Frame", { BackgroundTransparency = 1, AnchorPoint = Vector2.new(1, 0), Position = UDim2.new(1, -14, 0, 0), Size = UDim2.new(0, 180, 1, -3), ZIndex = 4, Parent = topbar })
     Draw.List(right, 8, true, Enum.HorizontalAlignment.Right, Enum.VerticalAlignment.Center)
     self:BuildLanguagePill(right)
-    local _, minimizeFace = self:BuildTopButton(right, "Minimize", "Coin", "CoinDark", "Ink", function()
+    local _, minimizeFace = self:BuildTopButton(right, "Minimize", "Coin", "CoinDark", "White", function()
         self:SetMinimized(not self.Minimized)
     end)
-    self.ExpandBar = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.new(0, 3, 0, 0), Parent = minimizeFace }, "Ink", nil, 2)
+    self.ExpandBar = Draw.Box("Frame", { AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.fromScale(0.5, 0.5), Size = UDim2.new(0, 3, 0, 0), Parent = minimizeFace }, "White", nil, 2)
     self:BuildTopButton(right, "Close", "Accent", "AccentDark", "White", function()
         self:SetVisible(false)
         if not State.Touch then
@@ -5911,7 +5924,7 @@ function Window:BuildLanguagePill(parent)
         for code, segment in pairs(segments) do
             local active = State.Language == code
             Anim.Tween(segment.Button, { BackgroundTransparency = active and 0 or 1 }, Config.Tween.Fast)
-            Theme.Bind(segment.Label, { TextColor3 = active and "Ink" or "TopbarText" })
+            Theme.Bind(segment.Label, { TextColor3 = active and "White" or "TopbarText" })
         end
     end
     Lang.OnChange(pill, Render)
@@ -6593,9 +6606,22 @@ end
 function Float.Build()
     local size = State.Touch and 56 or 48
     local button = Draw.New("TextButton", { Name = "Float", Text = "", AutoButtonColor = false, BackgroundTransparency = 1, Position = UDim2.new(0, 18, 0.45, 0), Size = UDim2.fromOffset(size, size), ZIndex = Config.Layer.Float, Visible = State.Touch, Parent = State.Gui })
-    local slot = Draw.New("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1), ZIndex = 2, Parent = button })
-    Float.Button, Float.Slot, Float.Size = button, slot, size
-    Anim.Tween(slot, { Position = UDim2.fromOffset(0, -3) }, 0.9, "Sine", -1, true)
+    -- Window-style backdrop frame: shadow slab + outlined body carrying the
+    -- same Backdrop gradient as the main window. Every colour is theme-bound,
+    -- so the frame repaints automatically whenever the active theme changes.
+    local depth = math.max(3, math.floor(size * 0.07))
+    local radius = math.min(Config.Window.Radius, math.floor(size * 0.26))
+    Draw.Box("Frame", { Name = "Shadow", Position = UDim2.fromOffset(depth, depth), Size = UDim2.new(1, -depth, 1, -depth), ZIndex = 1, Parent = button }, "Shadow", nil, radius)
+    local card = Draw.Box("Frame", { Name = "Card", Size = UDim2.new(1, -depth, 1, -depth), BackgroundColor3 = Color3.new(1, 1, 1), BackgroundTransparency = 0, ClipsDescendants = true, ZIndex = 2, Parent = button }, nil, "Outline", radius, math.max(2, Config.Window.Stroke - 1))
+    local gradient = Draw.New("UIGradient", { Rotation = 90, Parent = card })
+    Theme.OnRender(gradient, function()
+        gradient.Color = ColorSequence.new(Theme.Colors.Backdrop, Theme.Colors.BackdropAlt)
+    end)
+    -- Logo slot inset inside the frame; the bobbing idle animation is kept.
+    local pad = math.max(5, math.floor(size * 0.11))
+    local slot = Draw.New("Frame", { BackgroundTransparency = 1, Position = UDim2.fromOffset(pad, pad), Size = UDim2.new(1, -depth - pad * 2, 1, -depth - pad * 2), ZIndex = 3, Parent = button })
+    Float.Button, Float.Slot, Float.Size, Float.Inner = button, slot, size, size - depth - pad * 2
+    Anim.Tween(slot, { Position = UDim2.fromOffset(pad, pad - 3) }, 0.9, "Sine", -1, true)
     Float.Render()
     local moved = false
     Gui.Draggable(button, function(begin, delta)
@@ -6626,7 +6652,7 @@ function Float.Render()
     if content then
         Float.Sprite = Draw.New("ImageLabel", { Name = "Logo", BackgroundTransparency = 1, Image = content, ScaleType = Enum.ScaleType.Fit, Size = UDim2.fromScale(1, 1), Parent = Float.Slot })
     else
-        Float.Sprite = Sprite.New(Float.Slot, "sparkles", Float.Size, "Accent")
+        Float.Sprite = Sprite.New(Float.Slot, "sparkles", Float.Inner or Float.Size, "Accent")
     end
 end
 
