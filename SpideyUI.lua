@@ -1,4 +1,4 @@
--- FALLENS UI · standalone build 2026-11-23
+ -- FALLENS UI · standalone build 2026-11-23
 -- Mod 2026-11-24: single-accent element colours + window-style mobile button frame
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
@@ -29,17 +29,7 @@ local Config = {
         logo = "https://cdn.discordapp.com/attachments/1557688744147034162/1574424970082394112/rn_image_picker_lib_temp_48f24650-a5a9-45d2-90b5-0a54859c29a3.png?ex=6b059904&is=6b044784&hm=0807d117c227b3d76645a13af3c015a4a83e1c5f1fa416381068d2283587416b&",
     },
     SeasonTheme = "Halloween",
-    FontDir = "fallens/fonts",
     HttpTimeout = 8,
-    FontTimeout = 20,
-    PreloadTimeout = 5,
-    ThaiFont = {
-        Family = "FallensKanit",
-        Source = "https://raw.githubusercontent.com/google/fonts/main/ofl/kanit/Kanit-%s.ttf",
-        Weights = { [400] = "Regular", [500] = "Medium", [600] = "SemiBold" },
-    },
-    -- Scale bonus for Thai glyphs to match Latin x-height
-    ThaiSizeBonus = { Body = 2, Desc = 2, Display = 1, Strong = 1 },
     Text = { Title = 26, Header = 22, Group = 16, Label = 15, Desc = 13, Small = 12, Button = 15, Watermark = 13, Section = 13 },
     Window = {
         Width = 820, Height = 560, MinWidth = 520, MinHeight = 360,
@@ -256,7 +246,7 @@ local Tailwind = {}
 local Draw = {}
 local Sprite = {}
 local Assets = { Overrides = {}, Cache = {} }
-local Fonts = { Texts = {}, Thai = nil }
+local Fonts = { Texts = {} }
 local Particles = { Pool = {}, Enabled = true }
 local Lang = { Bound = {}, Listeners = setmetatable({}, { __mode = "k" }), InstanceListeners = {} }
 local Theme = { Colors = {}, Bound = {}, Renderers = setmetatable({}, { __mode = "k" }), InstanceRenderers = {} }
@@ -717,7 +707,7 @@ function Util.EnsureFolder(path)
     return true
 end
 
--- Keep UTF-8 characters (including Thai); strip only invalid path characters
+-- Keep UTF-8 characters (including Cyrillic); strip only invalid path characters
 function Util.Sanitize(name)
     local clean = tostring(name):gsub('[%c/\\:%*%?"<>|]', ""):gsub("^%s+", ""):gsub("%s+$", "")
     return clean ~= "" and clean or "config"
@@ -986,66 +976,66 @@ function Theme.OnRender(owner, render)
 end
 
 Lang.Strings = {
-    Search = { EN = "Search...", TH = "ค้นหา..." },
-    Confirm = { EN = "Click again to confirm", TH = "กดอีกครั้งเพื่อยืนยัน" },
-    None = { EN = "None", TH = "ไม่มี" },
-    NoResults = { EN = "No matches", TH = "ไม่พบรายการ" },
-    Settings = { EN = "Settings", TH = "ตั้งค่า" },
-    SettingsDesc = { EN = "Interface, language and configs", TH = "หน้าตา ภาษา และคอนฟิก" },
-    Interface = { EN = "Interface", TH = "หน้าตา" },
-    Language = { EN = "Language", TH = "ภาษา" },
-    ThemeName = { EN = "Theme", TH = "ธีม" },
-    Scale = { EN = "UI scale", TH = "ขนาด UI" },
-    MenuKey = { EN = "Menu key", TH = "ปุ่มเปิดเมนู" },
-    Watermark = { EN = "Watermark", TH = "วอเตอร์มาร์ก" },
-    WatermarkDesc = { EN = "Hub name, FPS, ping and play time", TH = "ชื่อฮับ FPS ปิง และเวลาที่เล่น" },
-    FloatButton = { EN = "Mobile button", TH = "ปุ่มลอยมือถือ" },
-    FloatDesc = { EN = "Floating logo button that opens the menu", TH = "ปุ่มโลโก้ลอยสำหรับเปิดปิดเมนู" },
-    Configs = { EN = "Configs", TH = "คอนฟิก" },
-    ConfigName = { EN = "Config name", TH = "ชื่อคอนฟิก" },
-    SavedConfigs = { EN = "Saved configs", TH = "คอนฟิกที่บันทึกไว้" },
-    Save = { EN = "Save", TH = "บันทึก" },
-    Load = { EN = "Load", TH = "โหลด" },
-    Delete = { EN = "Delete", TH = "ลบ" },
-    Refresh = { EN = "Refresh", TH = "รีเฟรช" },
-    SetAutoload = { EN = "Load on start", TH = "โหลดอัตโนมัติ" },
-    Autoload = { EN = "Autoload: %s", TH = "โหลดอัตโนมัติ: %s" },
-    PickConfig = { EN = "Type or select a config name first", TH = "พิมพ์หรือเลือกชื่อคอนฟิกก่อน" },
-    NoFileApi = { EN = "This executor cannot save files", TH = "executor นี้บันทึกไฟล์ไม่ได้" },
-    ConfigMissing = { EN = "Config not found", TH = "ไม่พบคอนฟิก" },
-    ConfigBroken = { EN = "Config file is damaged", TH = "ไฟล์คอนฟิกเสีย" },
-    About = { EN = "About", TH = "เกี่ยวกับ" },
-    Unload = { EN = "Unload hub", TH = "ปิดสคริปต์" },
-    Rejoin = { EN = "Rejoin", TH = "เข้าเซิร์ฟใหม่" },
+    Search = { EN = "Search...", RU = "Поиск..." },
+    Confirm = { EN = "Click again to confirm", RU = "Нажмите ещё раз для подтверждения" },
+    None = { EN = "None", RU = "Нет" },
+    NoResults = { EN = "No matches", RU = "Ничего не найдено" },
+    Settings = { EN = "Settings", RU = "Настройки" },
+    SettingsDesc = { EN = "Interface, language and configs", RU = "Интерфейс, язык и конфиги" },
+    Interface = { EN = "Interface", RU = "Интерфейс" },
+    Language = { EN = "Language", RU = "Язык" },
+    ThemeName = { EN = "Theme", RU = "Тема" },
+    Scale = { EN = "UI scale", RU = "Масштаб UI" },
+    MenuKey = { EN = "Menu key", RU = "Клавиша меню" },
+    Watermark = { EN = "Watermark", RU = "Ватермарка" },
+    WatermarkDesc = { EN = "Hub name, FPS, ping and play time", RU = "Название хаба, FPS, пинг и время игры" },
+    FloatButton = { EN = "Mobile button", RU = "Мобильная кнопка" },
+    FloatDesc = { EN = "Floating logo button that opens the menu", RU = "Плавающая кнопка с логотипом для открытия меню" },
+    Configs = { EN = "Configs", RU = "Конфиги" },
+    ConfigName = { EN = "Config name", RU = "Имя конфига" },
+    SavedConfigs = { EN = "Saved configs", RU = "Сохранённые конфиги" },
+    Save = { EN = "Save", RU = "Сохранить" },
+    Load = { EN = "Load", RU = "Загрузить" },
+    Delete = { EN = "Delete", RU = "Удалить" },
+    Refresh = { EN = "Refresh", RU = "Обновить" },
+    SetAutoload = { EN = "Load on start", RU = "Загружать при старте" },
+    Autoload = { EN = "Autoload: %s", RU = "Автозагрузка: %s" },
+    PickConfig = { EN = "Type or select a config name first", RU = "Сначала введите или выберите имя конфига" },
+    NoFileApi = { EN = "This executor cannot save files", RU = "Этот executor не может сохранять файлы" },
+    ConfigMissing = { EN = "Config not found", RU = "Конфиг не найден" },
+    ConfigBroken = { EN = "Config file is damaged", RU = "Файл конфига повреждён" },
+    About = { EN = "About", RU = "Информация" },
+    Unload = { EN = "Unload hub", RU = "Выгрузить хаб" },
+    Rejoin = { EN = "Rejoin", RU = "Перезайти" },
     IntroSteps = {
         EN = { "Warming up the engine...", "Loading icons...", "Building the interface...", "Let's go!" },
-        TH = { "กำลังอุ่นเครื่อง...", "กำลังโหลดไอคอน...", "กำลังสร้างหน้าตา...", "ไปกันเลย!" },
+        RU = { "Прогреваем движок...", "Загружаем иконки...", "Строим интерфейс...", "Погнали!" },
     },
-    Ready = { EN = "Ready. Press %s to toggle the menu.", TH = "พร้อมแล้ว กด %s เพื่อเปิดปิดเมนู" },
-    ReadyTouch = { EN = "Ready. Tap the logo button to toggle the menu.", TH = "พร้อมแล้ว แตะปุ่มโลโก้เพื่อเปิดปิดเมนู" },
-    Hidden = { EN = "Menu hidden. Press %s to open.", TH = "ซ่อนเมนูแล้ว กด %s เพื่อเปิด" },
-    Session = { EN = "TIME", TH = "เวลา" },
-    Empty = { EN = "Nothing here yet", TH = "ยังไม่มีรายการ" },
-    Particles = { EN = "Ambient particles", TH = "ละอองตกแต่ง" },
-    ParticlesDesc = { EN = "Floating sparkles behind the menu", TH = "ประกายลอยด้านหลังเมนู" },
-    Device = { EN = "Device: %s", TH = "อุปกรณ์: %s" },
+    Ready = { EN = "Ready. Press %s to toggle the menu.", RU = "Готово. Нажмите %s, чтобы открыть меню." },
+    ReadyTouch = { EN = "Ready. Tap the logo button to toggle the menu.", RU = "Готово. Нажмите кнопку с логотипом, чтобы открыть меню." },
+    Hidden = { EN = "Menu hidden. Press %s to open.", RU = "Меню скрыто. Нажмите %s, чтобы открыть." },
+    Session = { EN = "TIME", RU = "ВРЕМЯ" },
+    Empty = { EN = "Nothing here yet", RU = "Здесь пока пусто" },
+    Particles = { EN = "Ambient particles", RU = "Атмосферные частицы" },
+    ParticlesDesc = { EN = "Floating sparkles behind the menu", RU = "Парящие искры на фоне меню" },
+    Device = { EN = "Device: %s", RU = "Устройство: %s" },
 }
 
-function Lang.HasThai(text)
-    return text:find("\224[\184\185]") ~= nil
+function Lang.HasCyrillic(text)
+    return text:find("[\208-\209][\128-\191]") ~= nil
 end
 
---@return string localized for active language from {EN,TH}, "English / Thai", or plain string
+--@return string localized for active language from {EN,RU}, "English / Русский", or plain string
 function Lang.Resolve(spec)
     if type(spec) == "table" then
-        return spec[State.Language] or spec.EN or spec.TH or ""
+        return spec[State.Language] or spec.EN or spec.RU or ""
     end
     if type(spec) ~= "string" then
         return spec == nil and "" or tostring(spec)
     end
-    local english, thai = spec:match("^(.-)%s+·%s+(.+)$")
-    if english and Lang.HasThai(thai) then
-        return State.Language == "TH" and thai or english
+    local english, russian = spec:match("^(.-)%s+·%s+(.+)$")
+    if english and Lang.HasCyrillic(russian) then
+        return State.Language == "RU" and russian or english
     end
     return spec
 end
@@ -1060,7 +1050,7 @@ end
 
 function Lang.SearchText(spec)
     if type(spec) == "table" then
-        return ((spec.EN or "") .. " " .. (spec.TH or "")):lower()
+        return ((spec.EN or "") .. " " .. (spec.RU or "")):lower()
     end
     return tostring(spec or ""):lower()
 end
@@ -1083,13 +1073,10 @@ function Lang.OnChange(owner, callback)
 end
 
 function Lang.Set(code)
-    if code ~= "EN" and code ~= "TH" then
+    if code ~= "EN" and code ~= "RU" then
         return
     end
     State.Language = code
-    if code == "TH" then
-        Fonts.LoadThaiAsync()
-    end
     Theme.Prune()
     for inst, binding in pairs(Lang.Bound) do
         Lang.Apply(inst, binding)
@@ -1107,32 +1094,29 @@ Fonts.Latin = {
     Display = Enum.Font.LuckiestGuy, Body = Enum.Font.FredokaOne, Desc = Enum.Font.BuilderSansMedium,
     Strong = Enum.Font.BuilderSansBold, Logo = Enum.Font.LuckiestGuy, Glyph = Enum.Font.BuilderSansBold,
 }
-Fonts.ThaiWeights = { Display = Enum.FontWeight.SemiBold, Body = Enum.FontWeight.Medium, Desc = Enum.FontWeight.Regular, Strong = Enum.FontWeight.SemiBold }
-Fonts.ThaiFallback = { Display = Enum.Font.BuilderSansBold, Body = Enum.Font.BuilderSansBold, Desc = Enum.Font.BuilderSansMedium, Strong = Enum.Font.BuilderSansBold }
+-- Cyrillic-capable family used when Russian is active (display fonts such as LuckiestGuy lack Russian glyphs)
+Fonts.Russian = {
+    Display = Enum.Font.BuilderSansBold, Body = Enum.Font.BuilderSansBold, Desc = Enum.Font.BuilderSansMedium,
+    Strong = Enum.Font.BuilderSansBold, Logo = Enum.Font.BuilderSansBold, Glyph = Enum.Font.BuilderSansBold,
+}
 Fonts.Faces = {}
 
---@return Font face for role and active language (Kanit when Thai font loaded)
+--@return Font face for role and active language (BuilderSans family for Russian, display fonts for English)
 function Fonts.Face(kind)
-    local thai = State.Language == "TH" and Fonts.ThaiWeights[kind] ~= nil
-    local key = (thai and (Fonts.Thai and "TH" or "THF") or "EN") .. kind
+    local russian = State.Language == "RU" and Fonts.Russian[kind] ~= nil
+    local key = (russian and "RU" or "EN") .. kind
     local cached = Fonts.Faces[key]
     if cached then
         return cached
     end
-    local face
-    if thai and Fonts.Thai then
-        face = Font.new(Fonts.Thai, Fonts.ThaiWeights[kind])
-    elseif thai then
-        face = Font.fromEnum(Fonts.ThaiFallback[kind])
-    else
-        face = Font.fromEnum(Fonts.Latin[kind] or Fonts.Latin.Body)
-    end
+    local face = Font.fromEnum((russian and Fonts.Russian[kind] or Fonts.Latin[kind]) or Fonts.Latin.Body)
     Fonts.Faces[key] = face
     return face
 end
 
+-- Cyrillic shares Latin metrics in BuilderSans, so no size bonus is needed
 function Fonts.Size(kind, base)
-    return base + (State.Language == "TH" and Config.ThaiSizeBonus[kind] or 0)
+    return base
 end
 
 function Fonts.Style(label, kind, base)
@@ -1147,100 +1131,6 @@ function Fonts.ApplyAll()
     for label, style in pairs(Fonts.Texts) do
         label.FontFace = Fonts.Face(style.Kind)
         label.TextSize = Fonts.Size(style.Kind, style.Base)
-    end
-end
-
-function Fonts.FetchFace(weight, name)
-    local path = Config.FontDir .. "/kanit-" .. weight .. ".ttf"
-    local cached = Util.Exists(path) and SafeFile(readfile, path)
-    if type(cached) ~= "string" or cached:sub(1, 4) ~= "\0\1\0\0" then
-        local body = Util.HttpGet(string.format(Config.ThaiFont.Source, name))
-        if type(body) ~= "string" or body:sub(1, 4) ~= "\0\1\0\0" then
-            return nil
-        end
-        SafeFile(writefile, path, body)
-        local check = SafeFile(readfile, path)
-        if type(check) ~= "string" or #check ~= #body then
-            Fonts.Disable("binary write")
-            return nil
-        end
-    end
-    local asset = Util.CustomAsset(path)
-    if not asset then
-        Fonts.Disable("getcustomasset ttf")
-        return nil
-    end
-    return string.format('{"name":"W%d","weight":%d,"style":"normal","assetId":"%s"}', weight, weight, asset)
-end
-
-function Fonts.Disable(reason)
-    Fonts.Broken = true
-    SafeFile(writefile, Config.FontDir .. "/disabled", tostring(reason))
-    warn("[FALLENS] Thai font off: " .. tostring(reason))
-end
-
-function Fonts.LoadThai()
-    if Fonts.Thai or Fonts.Broken or not Util.FileApi() or type(getcustomasset) ~= "function" then
-        return Fonts.Thai ~= nil
-    end
-    if Util.Exists(Config.FontDir .. "/disabled") then
-        Fonts.Broken = true
-        return false
-    end
-    Util.EnsureFolder(Config.FontDir)
-    local faces = {}
-    for weight, name in pairs(Config.ThaiFont.Weights) do
-        if Fonts.Broken or Library.Unloaded then
-            return false
-        end
-        table.insert(faces, Fonts.FetchFace(weight, name))
-    end
-    if #faces == 0 then
-        return false
-    end
-    local descriptor = Config.FontDir .. "/kanit.font"
-    if Util.Exists(descriptor) then
-        SafeFile(delfile, descriptor)
-    end
-    SafeFile(writefile, descriptor, '{"name":"' .. Config.ThaiFont.Family .. '","faces":[' .. table.concat(faces, ",") .. "]}")
-    local family = Util.CustomAsset(descriptor)
-    if not family then
-        Fonts.Disable("getcustomasset family")
-        return false
-    end
-    Fonts.Thai = family
-    table.clear(Fonts.Faces)
-    if State.Language == "TH" and State.Gui then
-        Fonts.ApplyAll()
-        Layout.MarkAll()
-    end
-    task.spawn(Fonts.Preload)
-    return true
-end
-
-function Fonts.LoadThaiAsync()
-    if Fonts.Thai or Fonts.Broken or Fonts.Loading then
-        return
-    end
-    Fonts.Loading = true
-    task.spawn(function()
-        local finished = Util.Await(Config.FontTimeout, Fonts.LoadThai)
-        Fonts.Loading = false
-        if not finished and not Fonts.Thai and not Fonts.Broken and not Library.Unloaded then
-            Fonts.Disable("timeout")
-        end
-    end)
-end
-
-function Fonts.Preload()
-    local provider = game:GetService("ContentProvider")
-    local probes = {}
-    for _, weight in pairs(Fonts.ThaiWeights) do
-        table.insert(probes, Draw.New("TextLabel", { Text = "ก", FontFace = Font.new(Fonts.Thai, weight) }))
-    end
-    Util.Await(Config.PreloadTimeout, provider.PreloadAsync, provider, probes)
-    for _, probe in ipairs(probes) do
-        probe:Destroy()
     end
 end
 
@@ -1602,30 +1492,30 @@ end
 
 -- Keyword rules mapping option titles onto lucide icons
 Icons.Rules = {
-    { "aimbot|silent|sniper|crosshair|shoot|gun|ยิง|ปืน|เล็ง", "crosshair" },
-    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|ต่อสู้|ฆ่า|อาวุธ|ดาบ", "swords" },
-    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|มอง|แสง", "eye" },
-    { "radar|minimap|เรดาร์", "radar" },
-    { "teleport|warp|island|location|place|spawn|zone|map|วาร์ป|เกาะ|สถานที่|แมพ", "map_pin" },
-    { "pet|animal|mount|ride|สัตว์|ขี่", "paw_print" },
-    { "egg|hatch|ไข่|สุ่มไข่", "egg" },
-    { "dice|roll|spin|gacha|ลูกเต๋า|ทอย|สุ่ม", "dices" },
-    { "forge|craft|upgrade|mine|dig|ตีบวก|หลอม|ขุด|อัพเกรด", "hammer" },
-    { "build|pyramid|brick|สร้าง|พีระมิด", "blocks" },
-    { "car|vehicle|drive|race|drift|รถ|ขับ|แข่ง", "car" },
-    { "shop|buy|sell|merchant|market|store|trade|coin|cash|money|ร้าน|ซื้อ|ขาย|เงิน", "coins" },
-    { "loot|magnet|collect|grab|ดูด|เก็บ", "magnet" },
-    { "airdrop|crate|chest|drop|gift|กล่อง|แอร์ดรอป", "gift" },
-    { "speed|dash|bolt|zap|ความเร็ว|พุ่ง", "zap" },
-    { "player|movement|walk|jump|fly|noclip|stamina|ผู้เล่น|วิ่ง|กระโดด|บิน", "feather" },
-    { "defense|shield|god|anti|safe|guard|bypass|ป้องกัน|อมตะ|กันแบน", "shield" },
-    { "rank|vip|king|boss|crown|ยศ", "crown" },
-    { "stat|status|leaderboard|score|trophy|สถานะ|อันดับ|คะแนน", "trophy" },
-    { "quest|mission|flag|start|เควส|ภารกิจ", "flag" },
-    { "theme|color|palette|style|ธีม|สี", "palette" },
-    { "setting|config|ui|menu|keybind|language|ตั้งค่า|เมนู|ภาษา", "settings" },
-    { "auto|farm|grind|loop|bot|ออโต้|ฟาร์ม|บอท", "bot" },
-    { "main|home|general|hub|หลัก|ทั่วไป", "sprout" },
+    { "aimbot|silent|sniper|crosshair|shoot|gun|[Сс]трельб|[Оо]ружи|[Пп]рицел|[Аа]им", "crosshair" },
+    { "combat|sword|weapon|knife|kill|murder|sheriff|hit|attack|fight|[Бб]ой|[Уу]бий|[Мм]еч|[Нн]ож", "swords" },
+    { "visual|esp|chams|wallhack|highlight|tracer|fov|camera|see|[Вв]изуал|[Ее]сп|[Чч]амс|[Тт]рассер|[Сс]тен", "eye" },
+    { "radar|minimap|[Рр]адар|[Мм]иникарт", "radar" },
+    { "teleport|warp|island|location|place|spawn|zone|map|[Тт]елепорт|[Вв]арп|[Оо]стров|[Мм]ест|[Кк]арт", "map_pin" },
+    { "pet|animal|mount|ride|[Пп]итом|[Жж]ивотн|[Ее]зд|[Мм]аунт", "paw_print" },
+    { "egg|hatch|[Яя]йц|[Вв]ылуп", "egg" },
+    { "dice|roll|spin|gacha|[Кк]убик|[Сс]лучай|[Рр]олл|[Гг]ача", "dices" },
+    { "forge|craft|upgrade|mine|dig|[Кк]рафт|[Кк]овк|[Аа]пгрейд|[Уу]лучш|[Кк]опат|[Шш]ахт", "hammer" },
+    { "build|pyramid|brick|[Сс]троит|[Пп]остро|[Пп]ирамид", "blocks" },
+    { "car|vehicle|drive|race|drift|[Мм]ашин|[Аа]втомобил|[Гг]онк|[Дд]риф", "car" },
+    { "shop|buy|sell|merchant|market|store|trade|coin|cash|money|[Мм]агазин|[Пп]окуп|[Пп]рода|[Дд]еньг|[Мм]онет", "coins" },
+    { "loot|magnet|collect|grab|[Мм]агнит|[Лл]ут|[Сс]бор|[Сс]обир", "magnet" },
+    { "airdrop|crate|chest|drop|gift|[Яя]щик|[Аа]ирдроп|[Сс]ундук|[Пп]одар|[Дд]роп", "gift" },
+    { "speed|dash|bolt|zap|[Сс]корост|[Рр]ывок|[Бб]ыстр", "zap" },
+    { "player|movement|walk|jump|fly|noclip|stamina|[Ии]грок|[Бб]ег|[Пп]рыж|[Пп]олет|[Пп]олёт|[Нн]оклип", "feather" },
+    { "defense|shield|god|anti|safe|guard|bypass|[Зз]ащит|[Нн]еуязвим|[Аа]нтибан|[Оо]бход|[Щщ]ит", "shield" },
+    { "rank|vip|king|boss|crown|[Рр]анг|[Кк]орол|[Кк]орона|[Бб]осс", "crown" },
+    { "stat|status|leaderboard|score|trophy|[Сс]тат|[Лл]идерборд|[Оо]чки|[Тт]рофей", "trophy" },
+    { "quest|mission|flag|start|[Кк]вест|[Зз]адан|[Мм]исси|[Фф]лаг", "flag" },
+    { "theme|color|palette|style|[Тт]ем|[Цц]вет|[Пп]алитр", "palette" },
+    { "setting|config|ui|menu|keybind|language|[Нн]астрой|[Мм]еню|[Яя]зык|[Кк]онфиг|[Кк]лавиш", "settings" },
+    { "auto|farm|grind|loop|bot|[Аа]вто|[Фф]арм|[Гг]ринд|[Бб]от", "bot" },
+    { "main|home|general|hub|[Гг]лавн|[Оо]бщ|[Хх]аб", "sprout" },
 }
 
 -- Crisp SVG-style geometric vector primitives for UI chrome (search, close, check, chevrons, plus, minus, grip)
@@ -3871,7 +3761,7 @@ end
 
 function Dropdown.FormatValue(entry)
     if type(entry) == "table" then
-        if entry.EN or entry.TH then
+        if entry.EN or entry.RU then
             return Lang.Resolve(entry)
         end
         return Lang.Resolve(entry.Text or entry.Label or entry.Value or "")
@@ -4255,7 +4145,7 @@ function Selectable.Build(text, options)
     options = options or {}
     local textSpec = text
     local iconSpec = options.Icon
-    if type(text) == "table" and not text.EN and not text.TH then
+    if type(text) == "table" and not text.EN and not text.RU then
         textSpec = text.Text or text.Label or text.Value or ""
         iconSpec = iconSpec or text.Icon
     end
@@ -5912,7 +5802,7 @@ function Window:BuildLanguagePill(parent)
     local pill = Draw.Box("Frame", { Size = UDim2.fromOffset(74, 28), LayoutOrder = 1, Parent = parent }, "Shadow", "Outline", UDim.new(1, 0), 2)
     pill.BackgroundTransparency = 0.35
     local segments = {}
-    for index, code in ipairs({ "EN", "TH" }) do
+    for index, code in ipairs({ "EN", "RU" }) do
         local segment = Draw.Box("TextButton", { Position = UDim2.new((index - 1) * 0.5, 2, 0, 2), Size = UDim2.new(0.5, -4, 1, -4), Parent = pill }, "Coin", nil, UDim.new(1, 0))
         local label = Draw.Text({ Text = code, Size = UDim2.fromScale(1, 1), TextXAlignment = Enum.TextXAlignment.Center, Parent = segment }, "Body", 13, "White")
         segment.Activated:Connect(function()
@@ -6174,7 +6064,7 @@ function Window:AddTabSection(text)
 end
 
 function Window:AddTab(name, icon, description)
-    if type(name) == "table" and not name.EN and not name.TH then
+    if type(name) == "table" and not name.EN and not name.RU then
         icon = name.Icon or icon
         description = name.Description or name.Desc or description
         name = name.Title or name.Name or name.Text or "Tab"
@@ -7376,7 +7266,7 @@ function Visuals.PreviewBuild()
         return
     end
     local panel = Draw.Box("Frame", { Name = "EspPreview", Position = UDim2.new(1, 6, 0, 0), Size = UDim2.new(0, 230, 1, -Config.Window.Shadow), BackgroundTransparency = 0, Visible = false, ClipsDescendants = true, Parent = window.Root }, "Backdrop", "Outline", Config.Window.Radius, Config.Window.Stroke)
-    local title = Draw.Text({ Position = UDim2.fromOffset(12, 8), Size = UDim2.new(1, -24, 0, 22) }, "Display", Util.TextSize("Group"), "Text", { EN = "ESP Preview", TH = "ตัวอย่าง ESP" })
+    local title = Draw.Text({ Position = UDim2.fromOffset(12, 8), Size = UDim2.new(1, -24, 0, 22) }, "Display", Util.TextSize("Group"), "Text", { EN = "ESP Preview", RU = "Предпросмотр ESP" })
     title.Parent = panel
     local view = Draw.New("ViewportFrame", { Position = UDim2.fromOffset(10, 38), Size = UDim2.new(1, -20, 1, -48), BackgroundColor3 = Color3.fromRGB(18, 18, 24), BackgroundTransparency = 0.15, Ambient = Color3.fromRGB(180, 180, 190), LightColor = Color3.new(1, 1, 1), Parent = panel })
     Draw.Corner(view, 8)
@@ -7663,44 +7553,44 @@ function Window:AddVisualsTab(options)
     if options.Provider then
         Visuals:SetProvider(options.Provider)
     end
-    local T = function(en, th) return { EN = en, TH = th } end
+    local T = function(en, ru) return { EN = en, RU = ru } end
     local function Bind(key)
         return function(value)
             Visuals:Set(key, value)
         end
     end
-    local tab = self:AddTab(options.Name or T("Visuals", "การมองเห็น"), options.Icon or "eye", options.Description or T("Player ESP", "ESP ผู้เล่น"))
+    local tab = self:AddTab(options.Name or T("Visuals", "Визуал"), options.Icon or "eye", options.Description or T("Player ESP", "ESP игроков"))
     Visuals.PreviewTab = tab
     Visuals:SetPreview(options.Preview == true)
 
     local main = tab:AddLeftGroupbox(T("ESP", "ESP"), "eye")
-    main:AddToggle("FallensEsp", { Text = T("Enable ESP", "เปิด ESP"), Callback = Bind("Enabled") })
-    main:AddToggle("FallensEspTeam", { Text = T("Team check", "เช็คทีม"), Default = true, Callback = Bind("TeamCheck") })
-    main:AddSlider("FallensEspRange", { Text = T("Max distance", "ระยะสูงสุด"), Min = 50, Max = 5000, Default = 2000, Suffix = "m", Callback = Bind("MaxDistance") })
-    main:AddSlider("FallensEspText", { Text = T("Text size", "ขนาดตัวอักษร"), Min = 9, Max = 20, Default = 13, Callback = Bind("TextSize") })
+    main:AddToggle("FallensEsp", { Text = T("Enable ESP", "Включить ESP"), Callback = Bind("Enabled") })
+    main:AddToggle("FallensEspTeam", { Text = T("Team check", "Проверка команды"), Default = true, Callback = Bind("TeamCheck") })
+    main:AddSlider("FallensEspRange", { Text = T("Max distance", "Макс. дистанция"), Min = 50, Max = 5000, Default = 2000, Suffix = "m", Callback = Bind("MaxDistance") })
+    main:AddSlider("FallensEspText", { Text = T("Text size", "Размер текста"), Min = 9, Max = 20, Default = 13, Callback = Bind("TextSize") })
 
-    local look = tab:AddRightGroupbox(T("Elements", "องค์ประกอบ"), "star")
-    look:AddToggle("FallensEspBox", { Text = T("Box", "กล่อง"), Default = true, Callback = Bind("Box") })
-    look:AddDropdown("FallensEspBoxStyle", { Text = T("Box style", "แบบกล่อง"), Values = { "Full", "Corner" }, Default = "Full", Callback = Bind("BoxStyle") })
-    look:AddToggle("FallensEspFill", { Text = T("Box fill", "ถมสีกล่อง"), Callback = Bind("BoxFill") })
-    look:AddToggle("FallensEspName", { Text = T("Name", "ชื่อ"), Default = true, Callback = Bind("Name") })
-    look:AddToggle("FallensEspHealth", { Text = T("Health bar", "แถบเลือด"), Default = true, Callback = Bind("Health") })
-    look:AddToggle("FallensEspHealthText", { Text = T("Health number", "ตัวเลขเลือด"), Callback = Bind("HealthText") })
-    look:AddToggle("FallensEspDistance", { Text = T("Distance", "ระยะ"), Default = true, Callback = Bind("Distance") })
-    look:AddToggle("FallensEspDot", { Text = T("Head dot", "จุดหัว"), Callback = Bind("HeadDot") })
-    look:AddToggle("FallensEspTracer", { Text = T("Tracers", "เส้นนำสายตา"), Callback = Bind("Tracer") })
-    look:AddDropdown("FallensEspTracerFrom", { Text = T("Tracer from", "เส้นเริ่มจาก"), Values = { "Bottom", "Center", "Mouse" }, Default = "Bottom", Callback = Bind("TracerOrigin") })
-    look:AddToggle("FallensEspChams", { Text = T("Chams", "เรืองแสงทะลุกำแพง"), Callback = Bind("Chams") })
-    look:AddToggle("FallensEspArrows", { Text = T("Off-screen arrows", "ลูกศรนอกจอ"), Callback = Bind("Arrows") })
+    local look = tab:AddRightGroupbox(T("Elements", "Элементы"), "star")
+    look:AddToggle("FallensEspBox", { Text = T("Box", "Бокс"), Default = true, Callback = Bind("Box") })
+    look:AddDropdown("FallensEspBoxStyle", { Text = T("Box style", "Стиль бокса"), Values = { "Full", "Corner" }, Default = "Full", Callback = Bind("BoxStyle") })
+    look:AddToggle("FallensEspFill", { Text = T("Box fill", "Заливка бокса"), Callback = Bind("BoxFill") })
+    look:AddToggle("FallensEspName", { Text = T("Name", "Имя"), Default = true, Callback = Bind("Name") })
+    look:AddToggle("FallensEspHealth", { Text = T("Health bar", "Полоса здоровья"), Default = true, Callback = Bind("Health") })
+    look:AddToggle("FallensEspHealthText", { Text = T("Health number", "Число здоровья"), Callback = Bind("HealthText") })
+    look:AddToggle("FallensEspDistance", { Text = T("Distance", "Дистанция"), Default = true, Callback = Bind("Distance") })
+    look:AddToggle("FallensEspDot", { Text = T("Head dot", "Точка на голове"), Callback = Bind("HeadDot") })
+    look:AddToggle("FallensEspTracer", { Text = T("Tracers", "Трассеры"), Callback = Bind("Tracer") })
+    look:AddDropdown("FallensEspTracerFrom", { Text = T("Tracer from", "Начало трассеров"), Values = { "Bottom", "Center", "Mouse" }, Default = "Bottom", Callback = Bind("TracerOrigin") })
+    look:AddToggle("FallensEspChams", { Text = T("Chams", "Чамсы (сквозь стены)"), Callback = Bind("Chams") })
+    look:AddToggle("FallensEspArrows", { Text = T("Off-screen arrows", "Стрелки за экраном"), Callback = Bind("Arrows") })
 
-    local colors = tab:AddLeftGroupbox(T("Colors", "สี"), "flower")
-    colors:AddLabel(T("Enemy", "ศัตรู")):AddColorPicker("FallensEspEnemyColor", { Default = Visuals.Settings.EnemyColor, Callback = Bind("EnemyColor") })
-    colors:AddLabel(T("Friendly", "พวกเดียวกัน")):AddColorPicker("FallensEspFriendColor", { Default = Visuals.Settings.FriendColor, Callback = Bind("FriendColor") })
+    local colors = tab:AddLeftGroupbox(T("Colors", "Цвета"), "flower")
+    colors:AddLabel(T("Enemy", "Враги")):AddColorPicker("FallensEspEnemyColor", { Default = Visuals.Settings.EnemyColor, Callback = Bind("EnemyColor") })
+    colors:AddLabel(T("Friendly", "Союзники")):AddColorPicker("FallensEspFriendColor", { Default = Visuals.Settings.FriendColor, Callback = Bind("FriendColor") })
 
-    local radar = tab:AddLeftGroupbox(T("Radar", "เรดาร์"), "target")
-    radar:AddToggle("FallensRadar", { Text = T("Radar", "เรดาร์"), Description = T("Minimap of nearby players, drag to move", "มินิแมพผู้เล่นรอบตัว ลากย้ายได้"), Callback = Bind("Radar") })
-    radar:AddSlider("FallensRadarRange", { Text = T("Radar range", "ระยะเรดาร์"), Min = 50, Max = 1000, Default = 250, Suffix = "m", Callback = Bind("RadarRange") })
-    radar:AddSlider("FallensRadarSize", { Text = T("Radar size", "ขนาดเรดาร์"), Min = 100, Max = 320, Default = 180, Suffix = "px", Callback = Bind("RadarSize") })
+    local radar = tab:AddLeftGroupbox(T("Radar", "Радар"), "target")
+    radar:AddToggle("FallensRadar", { Text = T("Radar", "Радар"), Description = T("Minimap of nearby players, drag to move", "Мини-карта игроков рядом, можно перетаскивать"), Callback = Bind("Radar") })
+    radar:AddSlider("FallensRadarRange", { Text = T("Radar range", "Радиус радара"), Min = 50, Max = 1000, Default = 250, Suffix = "m", Callback = Bind("RadarRange") })
+    radar:AddSlider("FallensRadarSize", { Text = T("Radar size", "Размер радара"), Min = 100, Max = 320, Default = 180, Suffix = "px", Callback = Bind("RadarSize") })
     return tab
 end
 
@@ -7953,14 +7843,14 @@ function Compat.NeedCap(option, caps)
             return true
         end
         local feature = option.Info and option.Info.Text and Lang.Resolve(option.Info.Text) or option.Idx
-        Library:Notify("FALLENS", Library:T(tostring(feature) .. " is not supported on this executor", tostring(feature) .. " ใช้กับ executor นี้ไม่ได้"), 4, "Warn")
+        Library:Notify("FALLENS", Library:T(tostring(feature) .. " is not supported on this executor", tostring(feature) .. " не поддерживается этим executor"), 4, "Warn")
         task.defer(option.SetValue, option, false)
         return false
     end)
 end
 
 ---V1 has no disabled state: vetoes turning `option` on and tells the player why (missing game module, unsupported executor).
----@param reason any  text spec, e.g. Library:T("Not available on this executor", "Unsupported executor")
+---@param reason any  text spec, e.g. Library:T("Not available on this executor", "Недоступно на этом executor")
 function Compat.Block(option, reason)
     option = type(option) == "string" and Library.Options[option] or option
     if type(option) ~= "table" or type(option.AddGuard) ~= "function" then
@@ -8132,13 +8022,13 @@ function Compat.Warm()
     end
 end
 
---@return {EN,TH} Formatted bilingual string from Lang.Strings
+--@return {EN,RU} Formatted bilingual string from Lang.Strings
 function Lang.Format(key, ...)
-    local spec = Lang.Strings[key] or { EN = key, TH = key }
+    local spec = Lang.Strings[key] or { EN = key, RU = key }
     local args = table.pack(...)
     return {
         EN = string.format(spec.EN, table.unpack(args, 1, args.n)),
-        TH = string.format(spec.TH or spec.EN, table.unpack(args, 1, args.n)),
+        RU = string.format(spec.RU or spec.EN, table.unpack(args, 1, args.n)),
     }
 end
 
@@ -8241,8 +8131,8 @@ function Configs.BuildSection(group)
         end
         local ok, reason = handler(name)
         local action = Lang.Strings[actionKey]
-        local message = ok and { EN = action.EN .. ": " .. name, TH = action.TH .. ": " .. name }
-            or { EN = action.EN .. " failed: " .. tostring(reason), TH = action.TH .. " ไม่สำเร็จ: " .. tostring(reason) }
+        local message = ok and { EN = action.EN .. ": " .. name, RU = action.RU .. ": " .. name }
+            or { EN = action.EN .. " failed: " .. tostring(reason), RU = action.RU .. " не удалось: " .. tostring(reason) }
         Library:Notify(Lang.Strings.Configs, message, 3, ok and "Success" or "Error")
         list:SetValues(Configs.List())
     end
@@ -8272,10 +8162,10 @@ function Window:AddSettingsTab()
     local interface = tab:AddLeftGroupbox(Lang.Strings.Interface, "sliders_horizontal")
     interface:AddDropdown("FallensLanguage", {
         Text = Lang.Strings.Language,
-        Values = { "English", "ไทย" },
-        Default = State.Language == "TH" and "ไทย" or "English",
+        Values = { "English", "Русский" },
+        Default = State.Language == "RU" and "Русский" or "English",
         Callback = function(value)
-            Library:SetLanguage(value == "ไทย" and "TH" or "EN")
+            Library:SetLanguage(value == "Русский" and "RU" or "EN")
         end,
     })
     interface:AddDropdown("FallensTheme", { Text = Lang.Strings.ThemeName, Values = Themes.Order, Default = State.ThemeName, Callback = function(name)
@@ -8292,7 +8182,7 @@ function Window:AddSettingsTab()
     interface:AddToggle("FallensFloat", { Text = Lang.Strings.FloatButton, Description = Lang.Strings.FloatDesc, Default = Float.Button ~= nil and Float.Button.Visible, Callback = Float.SetVisible })
     local about = tab:AddLeftGroupbox(Lang.Strings.About, "star")
     about:AddLabel(string.format("%s v%s - %s", self.Title, Library.Version, self.SubTitle ~= "" and self.SubTitle or tostring(game.PlaceId)))
-    about:AddLabel(Lang.Format("Device", State.Touch and "Mobile" or "PC"))
+    about:AddLabel({ EN = "Device: " .. (State.Touch and "Mobile" or "PC"), RU = "Устройство: " .. (State.Touch and "Мобильное" or "ПК") })
     about:AddButton({ Text = Lang.Strings.Rejoin, Func = function()
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
     end }):AddButton({ Text = Lang.Strings.Unload, Style = "Danger", DoubleClick = true, Func = function()
@@ -8306,9 +8196,9 @@ function Library:CreateWindow(options)
     options = options or {}
     local language = options.Language
     if language == "Auto" then
-        language = tostring(LocalPlayer.LocaleId):sub(1, 2) == "th" and "TH" or "EN"
+        language = tostring(LocalPlayer.LocaleId):sub(1, 2) == "ru" and "RU" or "EN"
     end
-    State.Language = language == "TH" and "TH" or "EN"
+    State.Language = language == "RU" and "RU" or "EN"
     State.UserScale = math.clamp(options.Scale or 1, Config.ScaleRange.Min, Config.ScaleRange.Max)
     Theme.Apply(options.Theme or Config.SeasonTheme or "Overworld")
     Assets.Configure(Config.DefaultAssets)
@@ -8317,9 +8207,6 @@ function Library:CreateWindow(options)
     Gui.Setup()
     Library:OnUnload(Compat.RestoreAll)
     task.delay(3, Compat.Warm)
-    if State.Language == "TH" then
-        Fonts.LoadThaiAsync()
-    end
     local window = Window.New(options)
     self.Window = window
     Float.Build()
@@ -8366,10 +8253,10 @@ function Library:CreateWindow(options)
             SubTitle = window.SubTitle,
             TitleColors = window.TitleColors,
             Steps = {
-                { Label = { EN = steps.EN[1], TH = steps.TH[1] } },
-                { Label = { EN = steps.EN[2], TH = steps.TH[2] } },
-                { Label = { EN = steps.EN[3], TH = steps.TH[3] }, Run = WaitBuilt },
-                { Label = { EN = steps.EN[4], TH = steps.TH[4] } },
+                { Label = { EN = steps.EN[1], RU = steps.RU[1] } },
+                { Label = { EN = steps.EN[2], RU = steps.RU[2] } },
+                { Label = { EN = steps.EN[3], RU = steps.RU[3] }, Run = WaitBuilt },
+                { Label = { EN = steps.EN[4], RU = steps.RU[4] } },
             },
             OnDone = Reveal,
         })
@@ -8379,13 +8266,13 @@ function Library:CreateWindow(options)
 end
 
 function Library:SetLanguage(code)
-    if code ~= "EN" and code ~= "TH" then
+    if code ~= "EN" and code ~= "RU" then
         return
     end
     Lang.Set(code)
     local option = self.Options.FallensLanguage
     if option then
-        option.Value = code == "TH" and "ไทย" or "English"
+        option.Value = code == "RU" and "Русский" or "English"
         option:Render()
     end
 end
@@ -8394,8 +8281,8 @@ function Library:GetLanguage()
     return State.Language
 end
 
-function Library:T(english, thai)
-    return { EN = english, TH = thai or english }
+function Library:T(english, russian)
+    return { EN = english, RU = russian or english }
 end
 
 function Library:SetTheme(name)
@@ -8445,7 +8332,7 @@ function Library:LoadAutoloadConfig()
         return
     end
     local ok, reason = Configs.Load(name)
-    local message = ok and { EN = "Autoloaded: " .. name, TH = "โหลดอัตโนมัติ: " .. name } or { EN = "Autoload failed: " .. tostring(reason), TH = "โหลดอัตโนมัติไม่สำเร็จ: " .. tostring(reason) }
+    local message = ok and { EN = "Autoloaded: " .. name, RU = "Автозагружен: " .. name } or { EN = "Autoload failed: " .. tostring(reason), RU = "Автозагрузка не удалась: " .. tostring(reason) }
     self:Notify(Lang.Strings.Configs, message, 3, ok and "Success" or "Error")
 end
 
